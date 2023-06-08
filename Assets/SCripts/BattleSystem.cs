@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -24,6 +25,8 @@ public class BattleSystem : MonoBehaviour
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
+
+    public string explorationScene;
 
 
     // Start is called before the first frame update
@@ -107,10 +110,12 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogText.text = "You won the Battle!";
+            StartCoroutine(SceneSwitchDelay());
         }
         else if(state == BattleState.LOST)
         {
             dialogText.text = "you have died";
+            StartCoroutine(SceneSwitchDelay());
         }
     }
 
@@ -131,7 +136,7 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttack());
     }
 
-    //public void OnDefend()
+    //public void OnDefendButton()
     //{
     //    if (state != BattleState.PLAYERTURN)
     //    {
@@ -141,4 +146,13 @@ public class BattleSystem : MonoBehaviour
     //    StartCoroutine(PlayerDefends());
     //}
 
+    IEnumerator SceneSwitchDelay()
+    {
+        yield return new WaitForSeconds(2);
+
+        SceneManager.LoadScene(explorationScene);
+    }
+
 }
+
+

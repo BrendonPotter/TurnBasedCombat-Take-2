@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class EncounterManager : MonoBehaviour
 {
-    public string myScene;
+    public string battleScene1;
+    public string battleScene2;
+
     public GameObject encounterText; 
 
     // Update is called once per frame
@@ -21,14 +23,24 @@ public class EncounterManager : MonoBehaviour
 
         int ecounterCheck = Random.Range(1, 10);
 
-        if(ecounterCheck < 3)
+        if(ecounterCheck < 2)
         {
             GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
             encounterText.SetActive(true);
 
             yield return new WaitForSeconds(2);
 
-            SceneManager.LoadScene(myScene);
+            SceneManager.LoadScene(battleScene1);
+        }
+
+        if(ecounterCheck >= 3 && ecounterCheck <= 4)
+        {
+            GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+            encounterText.SetActive(true);
+
+            yield return new WaitForSeconds(2);
+
+            SceneManager.LoadScene(battleScene2);
         }
     }
 }
