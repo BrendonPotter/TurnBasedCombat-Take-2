@@ -33,14 +33,14 @@ public class EncounterManager : MonoBehaviour
             SceneManager.LoadScene(battleScene1);
         }
 
-        if(ecounterCheck >= 3 && ecounterCheck <= 4)
-        {
-            GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
-            encounterText.SetActive(true);
+        //if(ecounterCheck >= 3 && ecounterCheck <= 4)
+        //{
+        //    GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+        //    encounterText.SetActive(true);
 
-            yield return new WaitForSeconds(2);
+        //    yield return new WaitForSeconds(2);
 
-            SceneManager.LoadScene(battleScene2);
-        }
+        //    SceneManager.LoadScene(battleScene2);
+        //}
     }
 }

@@ -75,13 +75,13 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {   
-        if(enemyUnit == null && enemyUnitTwo == null)
+        if(enemyPosition1obj == null && enemyPosition2obj == null)
         {
             state = BattleStateTwo.WON;
             EndBattle();
         }
 
-        if(enemyUnit  == null)
+        if(enemyPosition1obj  == null)
         {
             enemyUnitTwo.TakeDamage(playerUnit.damage);
 
@@ -241,7 +241,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     {
         if(enemyUnit.currentHP <= 0)
         {
-            enemyPosition1obj.SetActive(false);
+            Destroy(enemyPosition1obj);
         }
     }
 
@@ -249,7 +249,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     {
         if(enemyUnitTwo.currentHP <= 0)
         {
-            enemyPosition2obj.SetActive(false);
+            Destroy(enemyPosition2obj);
         }
     }
 
