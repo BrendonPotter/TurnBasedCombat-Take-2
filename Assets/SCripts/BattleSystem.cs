@@ -13,6 +13,8 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
     public GameObject playerPrefab;
+    public GameObject fireballPrefab;
+    public GameObject arrowPrefab;
     public GameObject enemyPrefab;
 
     public Transform playerPosition;
@@ -80,6 +82,77 @@ public class BattleSystem : MonoBehaviour
         //Change State Based on what happened
     }
 
+    IEnumerator PlayerAttackFireball()
+    {
+        // Spawn a fireball prefab
+        GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
+        Fireball fireball = fireballGO.GetComponent<Fireball>();
+        fireball.SetTarget(enemyPosition.position);
+
+        // Wait for the fireball to reach the enemy
+        yield return new WaitForSeconds(fireball.travelTime);
+
+        // Damage the enemy
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogText.text = "You cast a fireball!";
+
+        // Destroy the fireball
+        Destroy(fireballGO);
+
+        yield return new WaitForSeconds(2f);
+
+        // Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    IEnumerator PlayerAttackTripleArrow()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            // Spawn an arrow prefab
+            GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
+            Arrow arrow = arrowGO.GetComponent<Arrow>();
+            arrow.SetTarget(enemyPosition.position);
+
+            // Wait for the arrow to reach the enemy
+            yield return new WaitForSeconds(arrow.travelTime);
+
+            // Damage the enemy
+            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You shot an arrow!";
+
+            // Destroy the arrow
+            Destroy(arrowGO);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // Check if enemy is dead
+        if (enemyUnit.currentHP <= 0)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
     IEnumerator EnemyTurn()
     {
         dialogText.text = enemyUnit.unitName + "attacks";
@@ -134,6 +207,26 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(PlayerAttack());
+    }
+
+    public void OnFireballButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackFireball());
+    }
+
+    public void OnTripleArrowButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackTripleArrow());
     }
 
     //public void OnDefendButton()
