@@ -10,6 +10,8 @@ public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
 public class BattleSystem : MonoBehaviour
 {
 
+    public GameObject[] enemyPrefabs;
+
     public BattleState state;
 
     public GameObject playerPrefab;
@@ -39,10 +41,13 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+
+        int enemyChoice1 = Random.Range(0, enemyPrefabs.Length);
+
         GameObject playerGO = Instantiate(playerPrefab, playerPosition);
         playerUnit = playerGO.GetComponent<Unit>();
 
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyPosition);
+        GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPosition);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has attacked";
