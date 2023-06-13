@@ -65,12 +65,8 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         
-        GameObject enemyGOTwo = Instantiate(enemyPrefab, enemyPositionTwo);
-        enemyUnit = enemyGO.GetComponent<Unit>();
-       
-
         GameObject enemyGOTwo = Instantiate(enemyPrefabs[enemyChoice2], enemyPositionTwo);
-        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();
+        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();    
 
     
 
