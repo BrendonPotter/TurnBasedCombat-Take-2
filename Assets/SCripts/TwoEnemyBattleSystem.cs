@@ -10,6 +10,8 @@ public enum BattleStateTwo { START, PLAYERTURN, ENEMYONETURN, ENEMYTWOTURN, WON,
 public class TwoEnemyBattleSystem : MonoBehaviour
 {
 
+    public GameObject[] enemyPrefabs;
+
     public BattleStateTwo state;
 
     public GameObject playerPrefab;
@@ -52,14 +54,18 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     IEnumerator SetupBattle()
     {
+
+        int enemyChoice1 = Random.Range(0, enemyPrefabs.Length);
+        int enemyChoice2 = Random.Range(0, enemyPrefabs.Length);
+
         GameObject playerGO = Instantiate(playerPrefab, playerPosition);
         playerUnit = playerGO.GetComponent<Unit>();
 
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyPositionOne);
+        GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPositionOne);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
-        GameObject enemyGOTwo = Instantiate(enemyPrefab, enemyPositionTwo);
-        enemyUnit = enemyGOTwo.GetComponent<Unit>();
+        GameObject enemyGOTwo = Instantiate(enemyPrefabs[enemyChoice2], enemyPositionTwo);
+        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has attacked";
 
