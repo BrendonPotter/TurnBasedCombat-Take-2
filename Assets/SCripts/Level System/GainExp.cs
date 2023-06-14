@@ -11,20 +11,25 @@ public class GainExp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        levelWindow.SetLevelSystem(leveling);
+        GainEXP();
+        GainEvenMoreEXP();
+    }
+
+    public void GainEXP()
+    {
         if (Input.GetKeyDown(KeyCode.G))
         {
             leveling.AddExperience(50);
             Debug.Log("Gain EXP");
         }
+    }
+
+    public void GainEvenMoreEXP()
+    {
         if (Input.GetKeyDown(KeyCode.H))
         {
             leveling.AddExperience(500);
             Debug.Log("Gain even MORE EXP");
-        }
-        else
-        {
-            Debug.Log("The Hell?");
         }
     }
 }

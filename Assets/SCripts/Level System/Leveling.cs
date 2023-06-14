@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class Leveling : MonoBehaviour
 {
-    public event EventHandler OnExperienceChanged;
     public event EventHandler OnLevelChanged;
     public int experience;
     public int experienceThreshHold;
 
+    //UI for the EXP Gap
     [SerializeField] private int level;
     [SerializeField] private Image experienceBarImage;
 
@@ -32,7 +32,7 @@ public class Leveling : MonoBehaviour
         experience+= amount;
         if(experience >= experienceThreshHold)
         {
-            //If gain enough amount of XP, level up
+            //If gain enough amount of XP, level up. Increase the XP gap by certain amount
             level++;
             experience -= experienceThreshHold;
             OnLevelChanged(this, EventArgs.Empty);
@@ -49,6 +49,8 @@ public class Leveling : MonoBehaviour
     {
         return experienceThreshHold += 500;
     }
+
+    //Constant update the EXP bar
     public void SetExperienceBarSize()
     {
         float fillAmount = (float)experience / (float)experienceThreshHold;
