@@ -1,59 +1,68 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Leveling : MonoBehaviour
 {
-    public event EventHandler OnLevelChanged;
     public int experience;
     public int experienceThreshHold;
 
-    //UI for the EXP Gap
-    [SerializeField] private int level;
-    [SerializeField] private Image experienceBarImage;
+    [SerializeField] private int level = 1;
+    public SaveSystem levelSave;
+    public SaveSystem expThreshSave;
 
 
     public void Start()
     {
-        level = 0;
-        experience = 0;
         experienceThreshHold = 100;
     }
 
     public void Update()
     {
-        SetExperienceBarSize();
+        //Click to gain XP
+        GainEXP();
+        GainEvenMoreEXP();
+
+        experienceThreshHold = expThreshSave._expThreshVar;
     }
 
     public void AddExperience(int amount)
     {
-        experience+= amount;
-        if(experience >= experienceThreshHold)
+        experience += amount;
+        if(experience >= expThreshSave._expThreshVar)
         {
             //If gain enough amount of XP, level up. Increase the XP gap by certain amount
-            level++;
-            experience -= experienceThreshHold;
-            OnLevelChanged(this, EventArgs.Empty);
+            levelSave.Value++;
+            experience -= expThreshSave._expThreshVar;
             IncreaseExperienceThreshHold();
+            return;
         }
     }
 
-    public int GetLevelNumber()
+    public void IncreaseExperienceThreshHold()
     {
-        return level;
+        expThreshSave._expThreshVar += 100;
     }
 
-    public float IncreaseExperienceThreshHold()
+    //Earn XP
+    public void GainEXP()
     {
-        return experienceThreshHold += 500;
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            AddExperience(50);
+            Debug.Log("Gain EXP");
+        }
     }
 
-    //Constant update the EXP bar
-    public void SetExperienceBarSize()
+    public void GainEvenMoreEXP()
     {
-        float fillAmount = (float)experience / (float)experienceThreshHold;
-        experienceBarImage.fillAmount = fillAmount;
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            AddExperience(500);
+            Debug.Log("Gain even MORE EXP");
+        }
     }
 }

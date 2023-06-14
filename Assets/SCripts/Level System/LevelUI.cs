@@ -6,29 +6,32 @@ using UnityEngine.UI;
 
 public class LevelUI : MonoBehaviour
 {
+    private Leveling level;
+
+    //UI for the EXP Gap
+    [SerializeField] private Image experienceBarImage;
     [SerializeField] private TextMeshProUGUI levelText;
-    private Leveling levelSystem;
-
-    private void Awake()
+    // Start is called before the first frame update
+    void Awake()
     {
-
+        level= GetComponent<Leveling>();
     }
 
-    private void SetLevelNumber(int levelNumber)
+    private void Update()
     {
-        levelText.text = "Level: " + (levelNumber + 1);
+        SetExperienceBarSize();
+        SetLevelNumber();
     }
 
-    public void SetLevelSystem(Leveling levelSystem)
+    //Constant update the EXP barslide in UI
+    public void SetExperienceBarSize()
     {
-        this.levelSystem = levelSystem;
-
-        SetLevelNumber(levelSystem.GetLevelNumber());
-        levelSystem.OnLevelChanged += Leveling_OnLevelChanged;
+        float fillAmount = (float)level.experience / (float)level.experienceThreshHold;
+        experienceBarImage.fillAmount = fillAmount;
     }
 
-    private void Leveling_OnLevelChanged(object sender, System.EventArgs e)
+    public void SetLevelNumber()
     {
-        SetLevelNumber(levelSystem.GetLevelNumber());
+        levelText.text = "Level: " + (level.levelSave.Value);
     }
 }
