@@ -17,15 +17,13 @@ public class Leveling : MonoBehaviour
 
     public void Start()
     {
-        experienceThreshHold = 100;
+        
     }
 
     public void Update()
     {
         //Click to gain XP
         GainEvenMoreEXP();
-
-        experienceThreshHold = expThreshSave._expThreshVar;
     }
 
     public void AddExperience(int amount)
@@ -53,6 +51,8 @@ public class Leveling : MonoBehaviour
         Debug.Log("Gain 100 EXP");
     }
 
+
+    //This method use for experiment only...
     public void GainEvenMoreEXP()
     {
         if (Input.GetKeyDown(KeyCode.H))
