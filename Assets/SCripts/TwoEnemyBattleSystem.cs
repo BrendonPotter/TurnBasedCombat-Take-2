@@ -322,41 +322,101 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackMeteorShower()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            // Calculate the position for the meteor
-            Vector3 meteorPosition = GetMeteorPosition(i);
-
-            // Spawn a meteor prefab
-            GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
-            Meteor meteor = meteorGO.GetComponent<Meteor>();
-            meteor.SetTarget(enemyPositionOne.position);
-
-            yield return null;
-        }
-
-        // Wait for all meteors to reach the enemy
-        yield return new WaitForSeconds(Meteor.travelTime);
-
-        // Damage the enemy
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogText.text = "You summoned meteors!";
-
-
-
-        // Check if enemy is dead
-        if (isDead)
+        if (enemyPosition1obj == null && enemyPosition2obj == null)
         {
             state = BattleStateTwo.WON;
             EndBattle();
         }
+        else if(enemyPosition1obj == null)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                // Calculate the position for the meteor
+                Vector3 meteorPosition = GetMeteorPosition(i);
+
+                // Spawn a meteor prefab
+                GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+                Meteor meteor = meteorGO.GetComponent<Meteor>();
+                meteor.SetTarget(enemyPositionOne.position);
+
+                yield return null;
+            }
+
+            // Wait for all meteors to reach the enemy
+            yield return new WaitForSeconds(Meteor.travelTime);
+
+            // Damage the enemy
+            enemyUnitTwo.TakeDamage(playerUnit.damage);
+
+            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You summoned meteors!";
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
+        }
         else
         {
+            for (int i = 0; i < 5; i++)
+            {
+                // Calculate the position for the meteor
+                Vector3 meteorPosition = GetMeteorPosition(i);
+
+                // Spawn a meteor prefab
+                GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+                Meteor meteor = meteorGO.GetComponent<Meteor>();
+                meteor.SetTarget(enemyPositionOne.position);
+
+                yield return null;
+            }
+
+            // Wait for all meteors to reach the enemy
+            yield return new WaitForSeconds(Meteor.travelTime);
+
+            // Damage the enemy
+            enemyUnitTwo.TakeDamage(playerUnit.damage);
+
+            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You summoned meteors!";
+
             state = BattleStateTwo.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
+
         }
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    // Calculate the position for the meteor
+        //    Vector3 meteorPosition = GetMeteorPosition(i);
+
+        //    // Spawn a meteor prefab
+        //    GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+        //    Meteor meteor = meteorGO.GetComponent<Meteor>();
+        //    meteor.SetTarget(enemyPositionOne.position);
+
+        //    yield return null;
+        //}
+
+        //// Wait for all meteors to reach the enemy
+        //yield return new WaitForSeconds(Meteor.travelTime);
+
+        //// Damage the enemy
+        //enemyUnitTwo.TakeDamage(playerUnit.damage);
+
+        //enemyTwoHUD.SetHP(enemyUnit.currentHP);
+        //dialogText.text = "You summoned meteors!";
+
+
+
+        //// Check if enemy is dead
+        //if (isDead)
+        //{
+        //    state = BattleStateTwo.WON;
+        //    EndBattle();
+        //}
+        //else
+        //{
+        //    state = BattleStateTwo.ENEMYONETURN;
+        //    StartCoroutine(EnemyTurnOne());
+        //}
     }
 
     private Vector3 GetMeteorPosition(int index)
@@ -375,61 +435,168 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackLightning()
     {
-        GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionOne.position + Vector3.up * 10f, Quaternion.identity);
-
-        yield return new WaitForSeconds(1f);
-
-        GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionOne.position, Quaternion.identity);
-        LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
-        float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
-
-        yield return new WaitForSeconds(strikeTime);
-
-        // Damage the enemy
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
-
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogText.text = "Lightning Strike!";
-
-        // Check if enemy is dead
-        if (isDead)
+        if (enemyPosition1obj == null && enemyPosition2obj == null)
         {
             state = BattleStateTwo.WON;
             EndBattle();
         }
+
+        else if(enemyPosition1obj == null)
+        {
+            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionOne.position + Vector3.up * 10f, Quaternion.identity);
+
+            yield return new WaitForSeconds(1f);
+
+            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionOne.position, Quaternion.identity);
+            LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+            float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+            yield return new WaitForSeconds(strikeTime);
+
+
+            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "Lightning Strike!";
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
+        }
         else
         {
+            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionOne.position + Vector3.up * 10f, Quaternion.identity);
+
+            yield return new WaitForSeconds(1f);
+
+            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionOne.position, Quaternion.identity);
+            LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+            float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+            yield return new WaitForSeconds(strikeTime);
+
+            // Damage the enemy
+            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "Lightning Strike!";
+
+
             state = BattleStateTwo.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
+
         }
+
+        //GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionOne.position + Vector3.up * 10f, Quaternion.identity);
+
+        //yield return new WaitForSeconds(1f);
+
+        //GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionOne.position, Quaternion.identity);
+        //LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+        //float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+        //yield return new WaitForSeconds(strikeTime);
+
+        //// Damage the enemy
+        //bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        //enemyHUD.SetHP(enemyUnit.currentHP);
+        //dialogText.text = "Lightning Strike!";
+
+        //// Check if enemy is dead
+        //if (isDead)
+        //{
+        //    state = BattleStateTwo.WON;
+        //    EndBattle();
+        //}
+        //else
+        //{
+        //    state = BattleStateTwo.ENEMYONETURN;
+        //    StartCoroutine(EnemyTurnOne());
+        //}
     }
 
     IEnumerator HealPlayer()
     {
-        // Add 25 to the player's currentHP
-        playerUnit.currentHP += 25;
 
-        // Ensure the player's currentHP doesn't exceed the maximumHP
-        if (playerUnit.currentHP > playerUnit.maxHP)
+
+        if(enemyPosition1obj == null)
         {
-            playerUnit.currentHP = playerUnit.maxHP;
+
+            // Add 25 to the player's currentHP
+            playerUnit.currentHP += 25;
+
+            // Ensure the player's currentHP doesn't exceed the maximumHP
+            if (playerUnit.currentHP > playerUnit.maxHP)
+            {
+                playerUnit.currentHP = playerUnit.maxHP;
+            }
+
+            playerHUD.SetHP(playerUnit.currentHP);
+            dialogText.text = "You have been healed!";
+
+            // Spawn a healing particle system on the player for 3 seconds
+            GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+            ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+            particleSystem.Play();
+
+            yield return new WaitForSeconds(3f);
+
+            // Destroy the healing particle system
+            Destroy(particleSystemGO);
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
+        }
+        else
+        {
+            // Add 25 to the player's currentHP
+            playerUnit.currentHP += 25;
+
+            // Ensure the player's currentHP doesn't exceed the maximumHP
+            if (playerUnit.currentHP > playerUnit.maxHP)
+            {
+                playerUnit.currentHP = playerUnit.maxHP;
+            }
+
+            playerHUD.SetHP(playerUnit.currentHP);
+            dialogText.text = "You have been healed!";
+
+            // Spawn a healing particle system on the player for 3 seconds
+            GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+            ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+            particleSystem.Play();
+
+            yield return new WaitForSeconds(3f);
+
+            // Destroy the healing particle system
+            Destroy(particleSystemGO);
+
+            state = BattleStateTwo.ENEMYONETURN;
+            StartCoroutine(EnemyTurnOne());
         }
 
-        playerHUD.SetHP(playerUnit.currentHP);
-        dialogText.text = "You have been healed!";
+        //// Add 25 to the player's currentHP
+        //playerUnit.currentHP += 25;
 
-        // Spawn a healing particle system on the player for 3 seconds
-        GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
-        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
-        particleSystem.Play();
+        //// Ensure the player's currentHP doesn't exceed the maximumHP
+        //if (playerUnit.currentHP > playerUnit.maxHP)
+        //{
+        //    playerUnit.currentHP = playerUnit.maxHP;
+        //}
 
-        yield return new WaitForSeconds(3f);
+        //playerHUD.SetHP(playerUnit.currentHP);
+        //dialogText.text = "You have been healed!";
 
-        // Destroy the healing particle system
-        Destroy(particleSystemGO);
+        //// Spawn a healing particle system on the player for 3 seconds
+        //GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        //ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        //particleSystem.Play();
 
-        state = BattleStateTwo.ENEMYONETURN;
-        StartCoroutine(EnemyTurnOne());
+        //yield return new WaitForSeconds(3f);
+
+        //// Destroy the healing particle system
+        //Destroy(particleSystemGO);
+
+        //state = BattleStateTwo.ENEMYONETURN;
+        //StartCoroutine(EnemyTurnOne());
     }
 
     IEnumerator EnemyTurnOne()
@@ -595,16 +762,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttackLightning());
     }
 
-    //public void OnHealButton()
-    //{
-    //    if (state != BattleStateTwo+
-    //        .PLAYERTURN)
-    //    {
-    //        return;
-    //    }
+    public void OnHealButton()
+    {
+        if (state != BattleStateTwo.PLAYERTURN)
+        {
+            return;
+        }
 
-    //    StartCoroutine(HealPlayer());
-    //}
+        StartCoroutine(HealPlayer());
+    }
 
     //public void OnDefendButton()
     //{
