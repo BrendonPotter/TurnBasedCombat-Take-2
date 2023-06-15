@@ -39,6 +39,8 @@ public class BattleSystem : MonoBehaviour
     private Unit enemyUnit;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -308,6 +310,7 @@ public class BattleSystem : MonoBehaviour
         {
             dialogText.text = "You won the Battle!";
             StartCoroutine(SceneSwitchDelay());
+
         }
         else if(state == BattleState.LOST)
         {
