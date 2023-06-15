@@ -49,6 +49,11 @@ public class Leveling : MonoBehaviour
         Debug.Log("Gain 100 EXP");
     }
 
+    public void GainDoubleEXP()
+    {
+        AddExperience(200);
+        Debug.Log("Gain 200 EXP");
+    }
 
     //This method use for experiment only...
     public void GainEvenMoreEXP()

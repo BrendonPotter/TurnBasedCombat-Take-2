@@ -43,6 +43,8 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public GameObject lightningStrikePrefab;
     public GameObject healingParticleSystemPrefab;
 
+    public Leveling earnEXP;
+
 
     // Start is called before the first frame update
     void Start()
@@ -526,6 +528,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         if (state == BattleStateTwo.WON)
         {
             dialogText.text = "You won the Battle!";
+            earnEXP.GainDoubleEXP();
             StartCoroutine(SceneSwitchDelay());
         }
         else if (state == BattleStateTwo.LOST)
@@ -592,16 +595,16 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttackLightning());
     }
 
-    public void OnHealButton()
-    {
-        if (state != BattleStateTwo+
-            .PLAYERTURN)
-        {
-            return;
-        }
+    //public void OnHealButton()
+    //{
+    //    if (state != BattleStateTwo+
+    //        .PLAYERTURN)
+    //    {
+    //        return;
+    //    }
 
-        StartCoroutine(HealPlayer());
-    }
+    //    StartCoroutine(HealPlayer());
+    //}
 
     //public void OnDefendButton()
     //{
