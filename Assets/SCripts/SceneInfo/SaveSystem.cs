@@ -6,10 +6,11 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class SaveSystem : ScriptableObject
 {
-    [SerializeField]
-    private float _levelVar = 1;
+    
+    public float _levelVar = 1;
 
     public int _expThreshVar = 100;
+
 
     public float Value
 	{
