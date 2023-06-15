@@ -177,7 +177,7 @@ MonoBehaviour:
   playerPosition: {fileID: 304932994}
   enemyPositionOne: {fileID: 810608004}
   enemyPositionTwo: {fileID: 1790561234}
-  dialogText: {fileID: 0}
+  dialogText: {fileID: 68390646}
   playerHUD: {fileID: 1769843652}
   enemyHUD: {fileID: 496764632}
   enemyTwoHUD: {fileID: 1214025553}
