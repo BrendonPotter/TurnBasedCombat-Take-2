@@ -15,7 +15,14 @@ public class BattleSystem : MonoBehaviour
     public BattleState state;
 
     public GameObject playerPrefab;
+    public GameObject fireballPrefab;
+    public GameObject arrowPrefab;
+    public GameObject meteorPrefab;
     public GameObject enemyPrefab;
+    public GameObject cloudPrefab;
+    public GameObject lightningStrikePrefab;
+    public GameObject healingParticleSystemPrefab;
+
 
     public Transform playerPosition;
     public Transform enemyPosition;
@@ -86,6 +93,190 @@ public class BattleSystem : MonoBehaviour
         //Change State Based on what happened
     }
 
+    IEnumerator PlayerAttackFireball()
+    {
+        // Spawn a fireball prefab
+        GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
+        Fireball fireball = fireballGO.GetComponent<Fireball>();
+        fireball.SetTarget(enemyPosition.position);
+
+        // Wait for the fireball to reach the enemy
+        yield return new WaitForSeconds(fireball.travelTime);
+
+        // Damage the enemy
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogText.text = "You cast a fireball!";
+
+        // Destroy the fireball
+        Destroy(fireballGO);
+
+        yield return new WaitForSeconds(2f);
+
+        // Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    IEnumerator PlayerAttackTripleArrow()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            // Spawn an arrow prefab
+            GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
+            Arrow arrow = arrowGO.GetComponent<Arrow>();
+            arrow.SetTarget(enemyPosition.position);
+
+            // Wait for the arrow to reach the enemy
+            yield return new WaitForSeconds(arrow.travelTime);
+
+            // Damage the enemy
+            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You shot an arrow!";
+
+            // Destroy the arrow
+            Destroy(arrowGO);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        // Check if enemy is dead
+        if (enemyUnit.currentHP <= 0)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    IEnumerator PlayerAttackMeteorShower()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            // Calculate the position for the meteor
+            Vector3 meteorPosition = GetMeteorPosition(i);
+
+            // Spawn a meteor prefab
+            GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+            Meteor meteor = meteorGO.GetComponent<Meteor>();
+            meteor.SetTarget(enemyPosition.position);
+
+            yield return null;
+        }
+
+        // Wait for all meteors to reach the enemy
+        yield return new WaitForSeconds(Meteor.travelTime);
+
+        // Damage the enemy
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogText.text = "You summoned meteors!";
+
+        
+
+        // Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    private Vector3 GetMeteorPosition(int index)
+    {
+        float distance = Vector3.Distance(playerPosition.position, enemyPosition.position);
+        float step = distance / 8f; // Divide by 8 to get 7 intervals
+
+        Vector3 direction = (enemyPosition.position - playerPosition.position).normalized;
+        Vector3 position = playerPosition.position + direction * (step * (index + 1));
+
+        // Offset the position upwards to spawn the meteor above the battlefield
+        position.y += 10f;
+
+        return position;
+    }
+
+    IEnumerator PlayerAttackLightning()
+    {
+        GameObject cloudGO = Instantiate(cloudPrefab, enemyPosition.position + Vector3.up * 10f, Quaternion.identity);
+
+        yield return new WaitForSeconds(1f);
+
+        GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPosition.position, Quaternion.identity);
+        LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+        float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+        yield return new WaitForSeconds(strikeTime);
+
+        // Damage the enemy
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogText.text = "Lightning Strike!";
+
+        // Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+    }
+
+    IEnumerator HealPlayer()
+    {
+        // Add 25 to the player's currentHP
+        playerUnit.currentHP += 25;
+
+        // Ensure the player's currentHP doesn't exceed the maximumHP
+        if (playerUnit.currentHP > playerUnit.maxHP)
+        {
+            playerUnit.currentHP = playerUnit.maxHP;
+        }
+
+        playerHUD.SetHP(playerUnit.currentHP);
+        dialogText.text = "You have been healed!";
+
+        // Spawn a healing particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        // Destroy the healing particle system
+        Destroy(particleSystemGO);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+
     IEnumerator EnemyTurn()
     {
         dialogText.text = enemyUnit.unitName + "attacks";
@@ -142,6 +333,55 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(PlayerAttack());
     }
 
+    public void OnFireballButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackFireball());
+    }
+
+    public void OnTripleArrowButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackTripleArrow());
+    }
+
+    public void OnMeteorButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackMeteorShower());
+    }
+
+    public void OnLightningButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayerAttackLightning());
+    }
+
+    public void OnHealButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(HealPlayer());
+    }
     //public void OnDefendButton()
     //{
     //    if (state != BattleState.PLAYERTURN)
