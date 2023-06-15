@@ -180,6 +180,8 @@ public class BattleSystem : MonoBehaviour
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogText.text = "You summoned meteors!";
 
+        
+
         // Check if enemy is dead
         if (isDead)
         {
