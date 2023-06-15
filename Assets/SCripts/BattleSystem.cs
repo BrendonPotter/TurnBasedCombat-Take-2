@@ -33,13 +33,10 @@ public class BattleSystem : MonoBehaviour
     public BattleHUD enemyHUD;
 
     public string explorationScene;
-
-
     private Unit playerUnit;
     private Unit enemyUnit;
 
-
-
+    public Leveling earnEXP;
 
     // Start is called before the first frame update
     void Start()
@@ -309,6 +306,7 @@ public class BattleSystem : MonoBehaviour
         if(state == BattleState.WON)
         {
             dialogText.text = "You won the Battle!";
+            earnEXP.GainEXP();
             StartCoroutine(SceneSwitchDelay());
 
         }

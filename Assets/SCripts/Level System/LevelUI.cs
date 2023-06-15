@@ -26,7 +26,7 @@ public class LevelUI : MonoBehaviour
     //Constant update the EXP barslide in UI
     public void SetExperienceBarSize()
     {
-        float fillAmount = (float)level.experience / (float)level.expThreshSave._expThreshVar;
+        float fillAmount = (float)level.earnExpAmount._earnExpAmount / (float)level.expThreshSave._expThreshVar;
         experienceBarImage.fillAmount = fillAmount;
     }
 

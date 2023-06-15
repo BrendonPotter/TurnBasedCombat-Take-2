@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelVar: 1
   _expThreshVar: 100
+  _earnExpAmount: 0

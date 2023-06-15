@@ -7,12 +7,9 @@ using UnityEngine.UI;
 
 public class Leveling : MonoBehaviour
 {
-    public int experience;
-    public int experienceThreshHold;
-
-    [SerializeField] private int level = 1;
     public SaveSystem levelSave;
     public SaveSystem expThreshSave;
+    public SaveSystem earnExpAmount;
 
 
     public void Start()
@@ -28,13 +25,14 @@ public class Leveling : MonoBehaviour
 
     public void AddExperience(int amount)
     {
-        experience += amount;
-        if(experience >= expThreshSave._expThreshVar)
+        earnExpAmount._earnExpAmount += amount;
+        if(earnExpAmount._earnExpAmount >= expThreshSave._expThreshVar)
         {
             //If gain enough amount of XP, level up. Increase the XP gap by certain amount
             levelSave.Value++;
-            experience -= expThreshSave._expThreshVar;
+            earnExpAmount._earnExpAmount -= expThreshSave._expThreshVar;
             IncreaseExperienceThreshHold();
+            Debug.Log("Level UP!!!!");
             return;
         }
     }
@@ -57,8 +55,8 @@ public class Leveling : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
-            AddExperience(500);
-            Debug.Log("Gain even MORE EXP");
+            AddExperience(100);
+            Debug.Log("Gain 100 EXP CHEATS");
         }
     }
 }

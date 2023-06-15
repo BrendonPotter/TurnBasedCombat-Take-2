@@ -11,6 +11,7 @@ public class SaveSystem : ScriptableObject
 
     public int _expThreshVar = 100;
 
+    public int _earnExpAmount = 0;
 
     public float Value
 	{
