@@ -19,6 +19,8 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject cloudPrefab;
     public GameObject lightningStrikePrefab;
+    public GameObject healingParticleSystemPrefab;
+
 
     public Transform playerPosition;
     public Transform enemyPosition;
@@ -240,6 +242,35 @@ public class BattleSystem : MonoBehaviour
         }
     }
 
+    IEnumerator HealPlayer()
+    {
+        // Add 25 to the player's currentHP
+        playerUnit.currentHP += 25;
+
+        // Ensure the player's currentHP doesn't exceed the maximumHP
+        if (playerUnit.currentHP > playerUnit.maxHP)
+        {
+            playerUnit.currentHP = playerUnit.maxHP;
+        }
+
+        playerHUD.SetHP(playerUnit.currentHP);
+        dialogText.text = "You have been healed!";
+
+        // Spawn a healing particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        // Destroy the healing particle system
+        Destroy(particleSystemGO);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+
     IEnumerator EnemyTurn()
     {
         dialogText.text = enemyUnit.unitName + "attacks";
@@ -335,7 +366,16 @@ public class BattleSystem : MonoBehaviour
 
         StartCoroutine(PlayerAttackLightning());
     }
-    
+
+    public void OnHealButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(HealPlayer());
+    }
     //public void OnDefendButton()
     //{
     //    if (state != BattleState.PLAYERTURN)
