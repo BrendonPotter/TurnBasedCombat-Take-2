@@ -20,9 +20,6 @@ public class BattleSystem : MonoBehaviour
     public Transform playerPosition;
     public Transform enemyPosition;
 
-    private Unit playerUnit;
-    private Unit enemyUnit;
-
     public Text dialogText;
 
     public BattleHUD playerHUD;
@@ -31,12 +28,15 @@ public class BattleSystem : MonoBehaviour
     public string explorationScene;
 
 
+    private Unit playerUnit;
+    private Unit enemyUnit;
+
+
     // Start is called before the first frame update
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
-
     }
 
     IEnumerator SetupBattle()
@@ -53,6 +53,7 @@ public class BattleSystem : MonoBehaviour
         dialogText.text = "A wild " + enemyUnit.unitName + " has attacked";
 
         playerHUD.SetHUD(playerUnit);
+        playerHUD.SetLevelNum();
         enemyHUD.SetHUD(enemyUnit);
 
         yield return new WaitForSeconds(2f);
