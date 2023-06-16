@@ -13,6 +13,7 @@ public class BattleHUD : MonoBehaviour
 
     public SaveSystem levelSaving;
 
+
     public void SetHUD(Unit unit)
     {
         nameText.text = unit.unitName;
@@ -28,7 +29,7 @@ public class BattleHUD : MonoBehaviour
 
     public void SetLevelNum()
     {
-        levelText.text = "Level: " + (levelSaving.Value);
+        levelText.text = "Level: " + (levelSaving._levelVar);
     }
 
 }
