@@ -337,7 +337,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 // Spawn a meteor prefab
                 GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
                 Meteor meteor = meteorGO.GetComponent<Meteor>();
-                meteor.SetTarget(enemyPositionOne.position);
+                meteor.SetTarget(enemyPositionTwo.position);
 
                 yield return null;
             }
@@ -348,7 +348,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             // Damage the enemy
             enemyUnitTwo.TakeDamage(playerUnit.damage);
 
-            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "You summoned meteors!";
 
             state = BattleStateTwo.ENEMYTWOTURN;
@@ -373,9 +373,9 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(Meteor.travelTime);
 
             // Damage the enemy
-            enemyUnitTwo.TakeDamage(playerUnit.damage);
+            enemyUnit.TakeDamage(playerUnit.damage);
 
-            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You summoned meteors!";
 
             state = BattleStateTwo.ENEMYONETURN;
@@ -421,16 +421,43 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     private Vector3 GetMeteorPosition(int index)
     {
-        float distance = Vector3.Distance(playerPosition.position, enemyPositionOne.position);
-        float step = distance / 8f; // Divide by 8 to get 7 intervals
+        if(enemyPosition1obj == null)
+        {
+            float distance = Vector3.Distance(playerPosition.position, enemyPositionTwo.position);
+            float step = distance / 8f; // Divide by 8 to get 7 intervals
 
-        Vector3 direction = (enemyPositionOne.position - playerPosition.position).normalized;
-        Vector3 position = playerPosition.position + direction * (step * (index + 1));
+            Vector3 direction = (enemyPositionTwo.position - playerPosition.position).normalized;
+            Vector3 position = playerPosition.position + direction * (step * (index + 1));
 
         // Offset the position upwards to spawn the meteor above the battlefield
-        position.y += 10f;
+            position.y += 10f;
 
-        return position;
+            return position;
+
+        }
+        else
+        {   
+            float distance = Vector3.Distance(playerPosition.position, enemyPositionOne.position);
+            float step = distance / 8f; // Divide by 8 to get 7 intervals
+
+            Vector3 direction = (enemyPositionOne.position - playerPosition.position).normalized;
+            Vector3 position = playerPosition.position + direction * (step * (index + 1));
+
+            // Offset the position upwards to spawn the meteor above the battlefield
+            position.y += 10f;
+
+            return position;
+        }
+        //float distance = Vector3.Distance(playerPosition.position, enemyPositionOne.position);
+        //float step = distance / 8f; // Divide by 8 to get 7 intervals
+
+        //Vector3 direction = (enemyPositionOne.position - playerPosition.position).normalized;
+        //Vector3 position = playerPosition.position + direction * (step * (index + 1));
+
+        // Offset the position upwards to spawn the meteor above the battlefield
+        //position.y += 10f;
+
+        //return position;
     }
 
     IEnumerator PlayerAttackLightning()
@@ -443,18 +470,18 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         else if(enemyPosition1obj == null)
         {
-            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionOne.position + Vector3.up * 10f, Quaternion.identity);
+            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionTwo.position + Vector3.up * 10f, Quaternion.identity);
 
             yield return new WaitForSeconds(1f);
 
-            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionOne.position, Quaternion.identity);
+            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionTwo.position, Quaternion.identity);
             LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
             float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
 
             yield return new WaitForSeconds(strikeTime);
 
 
-            enemyTwoHUD.SetHP(enemyUnit.currentHP);
+            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "Lightning Strike!";
 
             state = BattleStateTwo.ENEMYTWOTURN;

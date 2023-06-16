@@ -13,11 +13,6 @@ public class BattleHUD : MonoBehaviour
 
     public SaveSystem levelSaving;
 
-    void Awake()
-    {
-        levelSaving = GetComponent<SaveSystem>();
-    }
-
     public void SetHUD(Unit unit)
     {
         nameText.text = unit.unitName;

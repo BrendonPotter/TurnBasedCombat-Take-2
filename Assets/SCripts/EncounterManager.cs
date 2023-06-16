@@ -13,15 +13,23 @@ public class EncounterManager : MonoBehaviour
 
     public GameObject encounterText;
 
+    //private var nextRoll;
+
     private void Start()
     {
         // Initialize the previous position to the player's starting position
         previousPosition = transform.position;
+        StartCoroutine(EncounterCheck());
     }
 
-    private void Update()
-    {
-        StartCoroutine(EncounterCheck());
+    //private void Update()
+    //{
+        //if (Time.time > nextFlicker)
+        //{
+            //StartCoroutine(EncounterCheck());
+            //nextRoll += 10;
+        //}
+        //StartCoroutine(EncounterCheck());
 
         //CheckMoving();
 
@@ -29,15 +37,15 @@ public class EncounterManager : MonoBehaviour
         //{
         //    StartCoroutine(EncounterCheck());
         //}
-    }
+    //}
 
     IEnumerator EncounterCheck()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
         int ecounterCheck = Random.Range(1, 10);
 
-        if (ecounterCheck < 2)
+        if (ecounterCheck <= 2)
         {
             GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
             encounterText.SetActive(true);
@@ -47,15 +55,20 @@ public class EncounterManager : MonoBehaviour
             SceneManager.LoadScene(battleScene1);
         }
 
-        //if (ecounterCheck >= 3 && ecounterCheck <= 4)
-        //{
-        //    GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
-        //    encounterText.SetActive(true);
+        else if (ecounterCheck >= 3 && ecounterCheck <= 4)
+        {
+            GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+            encounterText.SetActive(true);
 
-        //    yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2);
 
-        //    SceneManager.LoadScene(battleScene2);
-        //}
+           SceneManager.LoadScene(battleScene2);
+        }
+        else if(ecounterCheck > 4)    
+        {
+            Debug.Log("rolled high");
+            StartCoroutine(EncounterCheck());
+        }
     }
 }
 
