@@ -13,10 +13,6 @@ public class BattleHUD : MonoBehaviour
 
     public SaveSystem levelSaving;
 
-    void Awake()
-    {
-        levelSaving = GetComponent<SaveSystem>();
-    }
 
     public void SetHUD(Unit unit)
     {
@@ -33,7 +29,7 @@ public class BattleHUD : MonoBehaviour
 
     public void SetLevelNum()
     {
-        levelText.text = "Level: " + (levelSaving.Value);
+        levelText.text = "Level: " + (levelSaving._levelVar);
     }
 
 }
