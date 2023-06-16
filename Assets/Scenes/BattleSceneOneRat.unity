@@ -402,10 +402,11 @@ MonoBehaviour:
   playerPosition: {fileID: 304932994}
   enemyPosition: {fileID: 810608004}
   dialogText: {fileID: 1959777769}
-  playerHUD: {fileID: 1769843652}
+  playerHUD: {fileID: 1769843656}
   enemyHUD: {fileID: 496764632}
   explorationScene: MainScene
   earnEXP: {fileID: 879153051}
+  playerUnit: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!4 &40940196
 Transform:
   m_ObjectHideFlags: 0
@@ -1335,7 +1336,6 @@ MonoBehaviour:
   nameText: {fileID: 1833561014}
   levelText: {fileID: 1974624192}
   hpSlider: {fileID: 105309308}
-  levelSaving: {fileID: 0}
 --- !u!114 &496764633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2958,8 +2958,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3012,7 +3012,7 @@ GameObject:
   - component: {fileID: 1769843655}
   - component: {fileID: 1769843654}
   - component: {fileID: 1769843653}
-  - component: {fileID: 1769843652}
+  - component: {fileID: 1769843656}
   m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -3043,22 +3043,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.445}
   m_SizeDelta: {x: 1028.9668, y: 659.6096}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1769843652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769843650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b87afabf49f9c4a97f2b35aa0692d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 1408387349}
-  levelText: {fileID: 1536048033}
-  hpSlider: {fileID: 898189325}
-  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!114 &1769843653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3120,6 +3104,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1769843656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769843650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fbaa19073f08e4fa9a21b5f6770928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 1536048033}
+  hpSlider: {fileID: 898189325}
+  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!1 &1823791012
 GameObject:
   m_ObjectHideFlags: 0
@@ -3617,8 +3616,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 140
+  m_fontSizeBase: 140
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
