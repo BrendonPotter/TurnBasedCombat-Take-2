@@ -407,7 +407,7 @@ MonoBehaviour:
   dialogText: {fileID: 1959777769}
   playerHUD: {fileID: 1769843652}
   enemyHUD: {fileID: 496764632}
-  explorationScene: MainScene
+  explorationScene: ExploreTest
   earnEXP: {fileID: 879153051}
 --- !u!4 &40940196
 Transform:
