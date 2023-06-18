@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EncounterManager : MonoBehaviour
 {
@@ -12,6 +13,16 @@ public class EncounterManager : MonoBehaviour
     public string battleScene2;
 
     public GameObject encounterText;
+
+    public Image screenFadeImage;
+    public float fadeDuration = 1.0f;
+
+    public AudioSource encounterSound;
+    public Camera transitioncamera;
+    public Camera playercamera;
+    public GameObject uiTransitioneffect;
+    public AudioSource overworldMusic;
+
 
     //private var nextRoll;
 
@@ -47,22 +58,60 @@ public class EncounterManager : MonoBehaviour
 
         if (ecounterCheck <= 2)
         {
-            GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+            //stop music
+            overworldMusic.Stop();
+
+            //GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
             encounterText.SetActive(true);
+            
+           // yield return StartCoroutine(ScreenFadeOut());
+              
+            // Play sound effect
+            encounterSound.Play();
+
+            // Enable UI element
+            uiTransitioneffect.SetActive(true);
+
+            // Enable camera
+            transitioncamera.enabled = true;
+
+            // Disable player's camera
+            playercamera.enabled = false;
 
             yield return new WaitForSeconds(2);
+            
+          
 
             SceneManager.LoadScene(battleScene1);
         }
 
         else if (ecounterCheck >= 3 && ecounterCheck <= 4)
         {
-            GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+            //GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
             encounterText.SetActive(true);
+
+            // yield return StartCoroutine(ScreenFadeOut());
+
+            //stop music
+            overworldMusic.Stop();
+
+            // Play sound effect
+            encounterSound.Play();
+
+            // Enable UI element
+            uiTransitioneffect.SetActive(true);
+
+            // Enable camera
+            transitioncamera.enabled = true;
+
+            // Disable player's camera
+            playercamera.enabled = false;
 
             yield return new WaitForSeconds(2);
 
-           SceneManager.LoadScene(battleScene2);
+            
+
+            SceneManager.LoadScene(battleScene2);
         }
         else if(ecounterCheck > 4)    
         {
@@ -70,6 +119,25 @@ public class EncounterManager : MonoBehaviour
             StartCoroutine(EncounterCheck());
         }
     }
+
+    /*
+    IEnumerator ScreenFadeOut()
+    {
+        float elapsedTime = 0f;
+        Color originalColor = screenFadeImage.color;
+        Color targetColor = new Color(originalColor.r, originalColor.g, originalColor.b, 1f);
+
+        while (elapsedTime < fadeDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsedTime / fadeDuration);
+            screenFadeImage.color = Color.Lerp(originalColor, targetColor, normalizedTime);
+            yield return null;
+        }
+
+        screenFadeImage.color = targetColor;
+    }
+    */
 }
 
 //    void CheckMoving()
