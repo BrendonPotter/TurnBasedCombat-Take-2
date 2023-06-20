@@ -389,6 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 8988295806934248337, guid: ea32032fb21568742b3f66048880a9eb, type: 3}
+  - {fileID: 8988295806934248337, guid: 41e18649a509fb34ebd429c455b971fc, type: 3}
   - {fileID: 8988295806934248337, guid: ec8fa3f5c21e187439aad38b290996f7, type: 3}
   state: 0
   playerPrefab: {fileID: 3013973732390395648, guid: e1f4bb27eb444014da7965b975515522, type: 3}
@@ -399,8 +400,8 @@ MonoBehaviour:
   cloudPrefab: {fileID: 738284309095822918, guid: e7537036cff3f2443bf4586f3500ea4d, type: 3}
   lightningStrikePrefab: {fileID: 3493649348842779125, guid: ff38e6a6fe699a742925f3feea0e5a5a, type: 3}
   holybeamPrefab: {fileID: 0}
-  healingParticleSystemPrefab: {fileID: 8366190562156276641, guid: cdc3c07e8d48eef46a738826cc08f324, type: 3}
-  RageParticleSystemPrefab: {fileID: 8366190562156276641, guid: 1c206e4205a2b044db89547eac0f7954, type: 3}
+  healingParticleSystemPrefab: {fileID: 1399491476850481373, guid: 7e691a0229efacd4cba2922df3888456, type: 3}
+  RageParticleSystemPrefab: {fileID: 3874635022589376825, guid: ffdfb7851a968494f8fe76ee88f3791a, type: 3}
   holyParticleSystemPrefab: {fileID: 8366190562156276641, guid: 858a78301e56cac41ad017d07384f0cc, type: 3}
   playerPosition: {fileID: 304932994}
   enemyPosition: {fileID: 810608004}
@@ -3681,7 +3682,7 @@ TerrainCollider:
   m_GameObject: {fileID: 1189054421}
   m_Material: {fileID: 0}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 1934c4674f0b1784b812a4a7ac6b024c, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: ef8df1e0a71983148b1a84d4800a383e, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &1189054423
 Terrain:
