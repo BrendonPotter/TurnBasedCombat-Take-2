@@ -21,7 +21,5 @@ public class SaveSystem : ScriptableObject
 		get { return _levelVar; }
 		set { _levelVar = value; }
 	}
-
-
 }
 
