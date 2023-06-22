@@ -10,14 +10,16 @@ public class SaveSystem : ScriptableObject
     public float _levelVar = 1;
 
     public int _expThreshVar = 100;
-
     public int _earnExpAmount = 0;
+
+    public int hpAmount;
+    public int maxHPAmount = 100;
+
 
     public float Value
 	{
 		get { return _levelVar; }
 		set { _levelVar = value; }
 	}
-
 }
 

@@ -11,14 +11,12 @@ public class BattleHUD : MonoBehaviour
     public TextMeshProUGUI levelText;
     public Slider hpSlider;
 
-    public SaveSystem levelSaving;
-
-
     public void SetHUD(Unit unit)
     {
         nameText.text = unit.unitName;
         hpSlider.maxValue = unit.maxHP;
         hpSlider.value = unit.currentHP;
+        levelText.text = unit.unitLevel.ToString();
     }
 
 
@@ -26,10 +24,4 @@ public class BattleHUD : MonoBehaviour
     {
         hpSlider.value = hp;
     }
-
-    public void SetLevelNum()
-    {
-        levelText.text = "Level: " + (levelSaving._levelVar);
-    }
-
 }

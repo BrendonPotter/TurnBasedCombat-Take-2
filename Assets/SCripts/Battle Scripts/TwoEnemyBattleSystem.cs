@@ -30,13 +30,12 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public Transform enemyPositionOne;
     public Transform enemyPositionTwo;
 
-    private Unit playerUnit;
     private Unit enemyUnit;
     private Unit enemyUnitTwo;
 
     public Text dialogText;
 
-    public BattleHUD playerHUD;
+    public PlayerHUD playerHUD;
     public BattleHUD enemyHUD;
     public BattleHUD enemyTwoHUD;
 
@@ -45,29 +44,16 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public GameObject enemyPosition1obj;
     public GameObject enemyPosition2obj;
 
+    public GameObject fireballPrefab;
+    public GameObject arrowPrefab;
+    public GameObject meteorPrefab;
+    public GameObject cloudPrefab;
+    public GameObject lightningStrikePrefab;
+    public GameObject healingParticleSystemPrefab;
+
+    //Other script reference
     public Leveling earnEXP;
-
-    public GameObject attackFleePanel;
-    public GameObject abilityChoicePanel;
-
-    public Button meteorShower;
-    public Button lightingStrike;
-    public Button fireBall;
-    public Button tripleArrow;
-    public Button healing;
-
-    public TextMeshProUGUI lightingStrikeCDText;
-    public TextMeshProUGUI meteorShowerCDText;
-    public TextMeshProUGUI trippleArrowCDText;
-    public TextMeshProUGUI fireBallCDText;
-    public TextMeshProUGUI healingCDText;
-
-    public int lightingStrikeCD;
-    public int meteorShowerCD;
-    public int trippleArrowCD;
-    public int fireBallCD;
-    public int healingCD;
-
+    public SaveSystem playerUnit;
 
     // Start is called before the first frame update
     void Start()
@@ -90,7 +76,6 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         int enemyChoice2 = Random.Range(0, enemyPrefabs.Length);
 
         GameObject playerGO = Instantiate(playerPrefab, playerPosition);
-        playerUnit = playerGO.GetComponent<Unit>();
 
         GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPositionOne);
         enemyUnit = enemyGO.GetComponent<Unit>();
@@ -103,7 +88,9 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has attacked";
 
-        playerHUD.SetHUD(playerUnit);
+        playerHUD.SetHUD();
+        playerHUD.SetLevelNum();
+
         enemyHUD.SetHUD(enemyUnit);
         enemyTwoHUD.SetHUD(enemyUnitTwo);
 
@@ -123,7 +110,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         else if(enemyPosition1obj  == null)
         {
-            enemyUnitTwo.TakeDamage(playerUnit.damage);
+            enemyUnitTwo.TakeDamage(enemyUnitTwo.damage);
 
             enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "the attack is successful!";
@@ -136,7 +123,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         else
         {
-            enemyUnit.TakeDamage(playerUnit.damage);
+            enemyUnit.TakeDamage(enemyUnitTwo.damage);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "the attack is successful!";
@@ -189,7 +176,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(fireball.travelTime);
 
             // Damage the enemy
-           enemyUnitTwo.TakeDamage(playerUnit.damage);
+           enemyUnitTwo.TakeDamage(enemyUnitTwo.damage);
 
             enemyTwoHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You cast a fireball!";
@@ -279,7 +266,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(arrow.travelTime);
 
                 // Damage the enemy
-                enemyUnitTwo.TakeDamage(playerUnit.damage);
+                enemyUnitTwo.TakeDamage(enemyUnitTwo.damage);
 
                 enemyTwoHUD.SetHP(enemyUnit.currentHP);
                 dialogText.text = "You shot an arrow!";
@@ -306,7 +293,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(arrow.travelTime);
 
                 // Damage the enemy
-                bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+                bool isDead = enemyUnit.TakeDamage(enemyUnitTwo.damage);
 
                 enemyHUD.SetHP(enemyUnit.currentHP);
                 dialogText.text = "You shot an arrow!";
@@ -371,7 +358,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(Meteor.travelTime);
 
             // Damage the enemy
-            enemyUnitTwo.TakeDamage(playerUnit.damage);
+            enemyUnitTwo.TakeDamage(enemyUnitTwo.damage);
 
             enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "You summoned meteors!";
@@ -398,7 +385,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(Meteor.travelTime);
 
             // Damage the enemy
-            enemyUnit.TakeDamage(playerUnit.damage);
+            enemyUnit.TakeDamage(enemyUnitTwo.damage);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You summoned meteors!";
@@ -525,7 +512,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(strikeTime);
 
             // Damage the enemy
-            bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+            bool isDead = enemyUnit.TakeDamage(enemyUnitTwo.damage);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "Lightning Strike!";
@@ -573,15 +560,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         {
 
             // Add 25 to the player's currentHP
-            playerUnit.currentHP += 25;
+            playerUnit.hpAmount += 25;
 
             // Ensure the player's currentHP doesn't exceed the maximumHP
-            if (playerUnit.currentHP > playerUnit.maxHP)
+            if (playerUnit.hpAmount > playerUnit.maxHPAmount)
             {
-                playerUnit.currentHP = playerUnit.maxHP;
+                playerUnit.hpAmount = playerUnit.maxHPAmount;
             }
 
-            playerHUD.SetHP(playerUnit.currentHP);
+            playerHUD.SetHP(playerUnit.maxHPAmount);
             dialogText.text = "You have been healed!";
 
             // Spawn a healing particle system on the player for 3 seconds
@@ -600,15 +587,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
         else
         {
             // Add 25 to the player's currentHP
-            playerUnit.currentHP += 25;
+            playerUnit.hpAmount += 25;
 
             // Ensure the player's currentHP doesn't exceed the maximumHP
-            if (playerUnit.currentHP > playerUnit.maxHP)
+            if (playerUnit.hpAmount > playerUnit.maxHPAmount)
             {
-                playerUnit.currentHP = playerUnit.maxHP;
+                playerUnit.hpAmount = playerUnit.maxHPAmount;
             }
 
-            playerHUD.SetHP(playerUnit.currentHP);
+            playerHUD.SetHP(playerUnit.hpAmount);
             dialogText.text = "You have been healed!";
 
             // Spawn a healing particle system on the player for 3 seconds
@@ -671,9 +658,9 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            bool isDead = playerHUD.TakeDamage(enemyUnit.damage);
 
-            playerHUD.SetHP(playerUnit.currentHP);
+            playerHUD.SetHP(playerUnit.hpAmount);
 
             yield return new WaitForSeconds(1f);
 
@@ -718,9 +705,9 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+            bool isDead = playerHUD.TakeDamage(enemyUnit.damage);
 
-            playerHUD.SetHP(playerUnit.currentHP);
+            playerHUD.SetHP(playerUnit.hpAmount);
 
             yield return new WaitForSeconds(1f);
 

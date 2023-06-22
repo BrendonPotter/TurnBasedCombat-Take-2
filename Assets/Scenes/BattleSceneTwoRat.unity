@@ -315,7 +315,7 @@ MonoBehaviour:
   enemyPositionOne: {fileID: 810608004}
   enemyPositionTwo: {fileID: 1790561234}
   dialogText: {fileID: 68390646}
-  playerHUD: {fileID: 1769843652}
+  playerHUD: {fileID: 1769843656}
   enemyHUD: {fileID: 496764632}
   enemyTwoHUD: {fileID: 1214025553}
   explorationScene: ExploreTest
@@ -340,42 +340,7 @@ MonoBehaviour:
   enemyPosition1obj: {fileID: 810608003}
   enemyPosition2obj: {fileID: 1790561233}
   earnEXP: {fileID: 879153051}
-  attackFleePanel: {fileID: 1888807419}
-  abilityChoicePanel: {fileID: 1440527080}
-  meteorShower: {fileID: 1357014730}
-  lightingStrike: {fileID: 2060622777}
-  fireBall: {fileID: 1112662053}
-  tripleArrow: {fileID: 1907439318}
-  healing: {fileID: 1890467075}
-  lightingStrikeCDText: {fileID: 1254095276}
-  meteorShowerCDText: {fileID: 1095696379}
-  trippleArrowCDText: {fileID: 970768305}
-  fireBallCDText: {fileID: 489888313}
-  healingCDText: {fileID: 1812679872}
-  lightingStrikeCD: 0
-  meteorShowerCD: 0
-  trippleArrowCD: 0
-  fireBallCD: 0
-  healingCD: 0
---- !u!114 &40940198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40940194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbabf2b623b135c4395e825fd88c6d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackFleePanel: {fileID: 1888807419}
-  abilityChoicePanel: {fileID: 1440527080}
-  fleeButton: {fileID: 8990993}
-  attackButton: {fileID: 939770417}
-  succesfulFlee: {fileID: 158757810}
-  unsuccessfulFlee: {fileID: 158757810}
-  mainScene: MainScene
+  playerUnit: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!1 &48444882
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,8 +890,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1338,7 +1303,6 @@ MonoBehaviour:
   nameText: {fileID: 202082056}
   levelText: {fileID: 944377416}
   hpSlider: {fileID: 105309308}
-  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!114 &496764633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,7 +2231,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2276,8 +2240,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2294,8 +2258,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2582,7 +2546,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: Hunter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2591,8 +2555,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3223,7 +3187,6 @@ MonoBehaviour:
   nameText: {fileID: 2135255175}
   levelText: {fileID: 2020420879}
   hpSlider: {fileID: 1529813904}
-  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!114 &1214025554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,7 +3727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3773,8 +3736,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3791,14 +3754,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4226,7 +4189,7 @@ GameObject:
   - component: {fileID: 1769843655}
   - component: {fileID: 1769843654}
   - component: {fileID: 1769843653}
-  - component: {fileID: 1769843652}
+  - component: {fileID: 1769843656}
   m_Layer: 5
   m_Name: PlayerHUD
   m_TagString: Untagged
@@ -4257,22 +4220,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.445}
   m_SizeDelta: {x: 1028.9668, y: 659.6096}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1769843652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1769843650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9b87afabf49f9c4a97f2b35aa0692d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 1009616759}
-  levelText: {fileID: 1380987854}
-  hpSlider: {fileID: 898189325}
-  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!114 &1769843653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4334,6 +4281,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1769843656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769843650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fbaa19073f08e4fa9a21b5f6770928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelText: {fileID: 1380987854}
+  hpSlider: {fileID: 898189325}
+  levelSaving: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
 --- !u!1 &1790561233
 GameObject:
   m_ObjectHideFlags: 0
@@ -5144,7 +5106,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5153,8 +5115,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5171,8 +5133,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
