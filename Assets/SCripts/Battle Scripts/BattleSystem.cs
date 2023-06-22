@@ -312,7 +312,7 @@ public class BattleSystem : MonoBehaviour
     IEnumerator RageBoost()
     {
         // Add 25 to the player's Attack Stat
-        playerUnit.damage += 15;
+        playerUnit.dealDamage += 15;
 
        
         dialogText.text = "You have increased you're testostorne!";
@@ -385,15 +385,15 @@ public class BattleSystem : MonoBehaviour
         
         
         // Add to the player's currentHP
-        playerUnit.currentHP += 10;
+        playerUnit.hpAmount += 10;
 
         // Ensure the player's currentHP doesn't exceed the maximumHP
-        if (playerUnit.currentHP > playerUnit.maxHP)
+        if (playerUnit.hpAmount > playerUnit.maxHPAmount)
         {
-            playerUnit.currentHP = playerUnit.maxHP;
+            playerUnit.hpAmount = playerUnit.maxHPAmount;
         }
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        playerHUD.SetHP(playerUnit.hpAmount);
         dialogText.text = "You have swiped their life force!";
 
         // Spawn a healing particle system on the player for 3 seconds
@@ -420,10 +420,10 @@ public class BattleSystem : MonoBehaviour
     IEnumerator MightySlash()
     {
         //temperarly increase damage
-        playerUnit.damage += 35;
+        playerUnit.dealDamage += 35;
         //Damage the enemy
 
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        bool isDead = enemyUnit.TakeDamage(playerUnit.dealDamage);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogText.text = "the attack is successful!";
@@ -440,7 +440,7 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
-            playerUnit.damage = playerUnit.trueDamage;
+            playerUnit.dealDamage = playerUnit.trueDamage;
         }
        
     }
@@ -541,11 +541,11 @@ public class BattleSystem : MonoBehaviour
             healing.interactable = true;
         }
 
-        lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
-        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
-        fireBallCDText.text = "(" + fireBallCD + ")";
-        trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        healingCDText.text = "(" + healingCD + ")";
+        //lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
+        //meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+        //fireBallCDText.text = "(" + fireBallCD + ")";
+        //trippleArrowCDText.text = "(" + trippleArrowCD + ")";
+        //healingCDText.text = "(" + healingCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -596,7 +596,7 @@ public class BattleSystem : MonoBehaviour
         healing.interactable = false;
 
         trippleArrowCD = 4;
-        trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
+        //trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
 
 
         if (state != BattleState.PLAYERTURN)

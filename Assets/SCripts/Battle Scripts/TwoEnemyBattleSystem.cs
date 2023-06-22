@@ -44,16 +44,32 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public GameObject enemyPosition1obj;
     public GameObject enemyPosition2obj;
 
-    public GameObject fireballPrefab;
-    public GameObject arrowPrefab;
-    public GameObject meteorPrefab;
-    public GameObject cloudPrefab;
-    public GameObject lightningStrikePrefab;
-    public GameObject healingParticleSystemPrefab;
 
     //Other script reference
     public Leveling earnEXP;
     public SaveSystem playerUnit;
+
+    public GameObject attackFleePanel;
+    public GameObject abilityChoicePanel;
+
+    public Button meteorShower;
+    public Button lightingStrike;
+    public Button fireBall;
+    public Button tripleArrow;
+    public Button healing;
+
+    public TextMeshProUGUI lightingStrikeCDText;
+    public TextMeshProUGUI meteorShowerCDText;
+    public TextMeshProUGUI trippleArrowCDText;
+    public TextMeshProUGUI fireBallCDText;
+    public TextMeshProUGUI healingCDText;
+
+    public int lightingStrikeCD;
+    public int meteorShowerCD;
+    public int trippleArrowCD;
+    public int fireBallCD;
+    public int healingCD;
+
 
     // Start is called before the first frame update
     void Start()
@@ -200,7 +216,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             // Wait for the fireball to reach the enemy
             yield return new WaitForSeconds(fireball.travelTime);
 
-            enemyUnit.TakeDamage(playerUnit.damage);
+            enemyUnit.TakeDamage(playerUnit.dealDamage);
 
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You cast a fireball!";

@@ -8,6 +8,7 @@ public class PlayerHUD : MonoBehaviour
 {
     public TextMeshProUGUI levelText;
     public Slider hpSlider;
+    public int damage;
 
     public SaveSystem levelSaving;
 
@@ -42,4 +43,5 @@ public class PlayerHUD : MonoBehaviour
             return false;
         }
     }
+
 }

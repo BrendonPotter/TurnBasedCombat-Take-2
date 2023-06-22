@@ -15,6 +15,10 @@ public class SaveSystem : ScriptableObject
     public int hpAmount;
     public int maxHPAmount = 100;
 
+    public int dealDamage;
+
+    public int trueDamage;
+
 
     public float Value
 	{
