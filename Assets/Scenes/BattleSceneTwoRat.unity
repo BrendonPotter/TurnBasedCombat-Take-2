@@ -172,6 +172,7 @@ MonoBehaviour:
   - {fileID: 8988295806934248337, guid: ec8fa3f5c21e187439aad38b290996f7, type: 3}
   - {fileID: 8988295806934248337, guid: 41e18649a509fb34ebd429c455b971fc, type: 3}
   - {fileID: 8988295806934248337, guid: f400ca806a46982489e07ef278f7abdc, type: 3}
+  - {fileID: 8988295806934248337, guid: a6cd422e23e8f6c439d3fd1fcfcbdf56, type: 3}
   state: 0
   playerPrefab: {fileID: 3013973732390395648, guid: e1f4bb27eb444014da7965b975515522, type: 3}
   enemyPrefab: {fileID: 9177665115701132355, guid: 7db17d692e5f9564ebf7bf1652e53a85, type: 3}
@@ -3811,6 +3812,74 @@ PrefabInstance:
     - target: {fileID: 480687654738469014, guid: de395228a355d464a9dce60553d456ed, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f25a628302b2e241b89e01389f73a16, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bee32184afab76478687bfaa3d159a1, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1a32bd7a10cd75c4183bb1f3bb70f655, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ad25bb8b55e1cf44ead2d18f331167fd, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0deb37708cddd446a95ff11521c0fa9, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 27414b7ad19b9b44eb666e4332e92d93, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 507fb7151731dbb41bce7559e5523e2e, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec630e174424dd45a9462480cd5aa54, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec630e174424dd45a9462480cd5aa54, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec630e174424dd45a9462480cd5aa54, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec630e174424dd45a9462480cd5aa54, type: 3}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[6].volume
+      value: 0.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[7].volume
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[8].volume
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[9].volume
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 480687654738469015, guid: de395228a355d464a9dce60553d456ed, type: 3}
+      propertyPath: songs.Array.data[10].volume
+      value: 0.09
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de395228a355d464a9dce60553d456ed, type: 3}
