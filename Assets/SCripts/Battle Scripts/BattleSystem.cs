@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum BattleState {START, PLAYERTURN, ENEMYTURN, WON, LOST }
 
@@ -38,11 +39,34 @@ public class BattleSystem : MonoBehaviour
 
     public Leveling earnEXP;
 
+    public GameObject attackFleePanel;
+    public GameObject abilityChoicePanel;
+
+    public Button meteorShower;
+    public Button lightingStrike;
+    public Button fireBall;
+    public Button tripleArrow;
+    public Button healing;
+
+    public TextMeshProUGUI lightingStrikeCDText;
+    public TextMeshProUGUI meteorShowerCDText;
+    public TextMeshProUGUI trippleArrowCDText;
+    public TextMeshProUGUI fireBallCDText;
+    public TextMeshProUGUI healingCDText;
+
+    public int lightingStrikeCD;
+    public int meteorShowerCD;
+    public int trippleArrowCD;
+    public int fireBallCD;
+    public int healingCD;
+
+
     // Start is called before the first frame update
     void Start()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
+        
     }
 
     IEnumerator SetupBattle()
@@ -62,6 +86,7 @@ public class BattleSystem : MonoBehaviour
         playerHUD.SetLevelNum();
         enemyHUD.SetHUD(enemyUnit);
 
+
         yield return new WaitForSeconds(2f);
 
         state = BattleState.PLAYERTURN;
@@ -70,8 +95,10 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
+
         //Damage the enemy
         bool isDead =  enemyUnit.TakeDamage(playerUnit.damage);
+
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogText.text = "the attack is successful!";
@@ -319,6 +346,64 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        abilityChoicePanel.SetActive(false);
+        attackFleePanel.SetActive(true);
+
+        if(lightingStrikeCD != 0)
+        {
+            lightingStrikeCD -= 1;
+        }
+        if(meteorShowerCD != 0)
+        {
+            meteorShowerCD -= 1;
+        }
+        if (fireBallCD != 0)
+        {
+            fireBallCD -= 1;
+        }
+        if(trippleArrowCD != 0)
+        {
+            trippleArrowCD -= 1;
+        }
+        if(healingCD != 0)
+        {
+            healingCD -= 1;
+        }
+
+        if(lightingStrikeCD == 0)
+        {
+            lightingStrike.interactable = true;
+
+        }
+
+        if(meteorShowerCD == 0)
+        {
+
+            meteorShower.interactable = true;
+        }
+
+        if(trippleArrowCD == 0)
+        {
+
+            tripleArrow.interactable = true;
+        }
+        
+        if(fireBallCD == 0)
+        { 
+            fireBall.interactable = true;
+        }
+
+        if(healingCD == 0)
+        {
+            healing.interactable = true;
+        }
+
+        lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
+        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+        fireBallCDText.text = "(" + fireBallCD + ")";
+        trippleArrowCDText.text = "(" + trippleArrowCD + ")";
+        healingCDText.text = "(" + healingCD + ")";
+
         dialogText.text = "Choose an action";
     }
 
@@ -326,6 +411,12 @@ public class BattleSystem : MonoBehaviour
 
     public void OnAttackButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
         if(state != BattleState.PLAYERTURN)
         {
             return;
@@ -336,6 +427,15 @@ public class BattleSystem : MonoBehaviour
 
     public void OnFireballButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        fireBallCD = 2;
+        fireBallCDText.text = "(" + fireBallCD + ")";
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -346,6 +446,16 @@ public class BattleSystem : MonoBehaviour
 
     public void OnTripleArrowButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        trippleArrowCD = 4;
+        trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
+
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -356,6 +466,15 @@ public class BattleSystem : MonoBehaviour
 
     public void OnMeteorButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        meteorShowerCD = 2;
+        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -366,21 +485,38 @@ public class BattleSystem : MonoBehaviour
 
     public void OnLightningButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
         }
+        lightingStrikeCD = 3;
+        lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
 
         StartCoroutine(PlayerAttackLightning());
     }
 
     public void OnHealButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        healingCD = 4;
+        healingCDText.text = "(" + healingCD + ")";
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
         }
-
+        //lightingButton.interatable = false;
         StartCoroutine(HealPlayer());
     }
     //public void OnDefendButton()

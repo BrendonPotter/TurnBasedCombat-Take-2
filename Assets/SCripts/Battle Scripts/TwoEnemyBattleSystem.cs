@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public enum BattleStateTwo { START, PLAYERTURN, ENEMYONETURN, ENEMYTWOTURN, WON, LOST }
 
@@ -13,6 +14,14 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public GameObject[] enemyPrefabs;
 
     public BattleStateTwo state;
+
+
+    public GameObject fireballPrefab;
+    public GameObject arrowPrefab;
+    public GameObject meteorPrefab;
+    public GameObject cloudPrefab;
+    public GameObject lightningStrikePrefab;
+    public GameObject healingParticleSystemPrefab;
 
     public GameObject playerPrefab;
     public GameObject enemyPrefab;
@@ -36,14 +45,28 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public GameObject enemyPosition1obj;
     public GameObject enemyPosition2obj;
 
-    public GameObject fireballPrefab;
-    public GameObject arrowPrefab;
-    public GameObject meteorPrefab;
-    public GameObject cloudPrefab;
-    public GameObject lightningStrikePrefab;
-    public GameObject healingParticleSystemPrefab;
-
     public Leveling earnEXP;
+
+    public GameObject attackFleePanel;
+    public GameObject abilityChoicePanel;
+
+    public Button meteorShower;
+    public Button lightingStrike;
+    public Button fireBall;
+    public Button tripleArrow;
+    public Button healing;
+
+    public TextMeshProUGUI lightingStrikeCDText;
+    public TextMeshProUGUI meteorShowerCDText;
+    public TextMeshProUGUI trippleArrowCDText;
+    public TextMeshProUGUI fireBallCDText;
+    public TextMeshProUGUI healingCDText;
+
+    public int lightingStrikeCD;
+    public int meteorShowerCD;
+    public int trippleArrowCD;
+    public int fireBallCD;
+    public int healingCD;
 
 
     // Start is called before the first frame update
@@ -190,6 +213,8 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             // Wait for the fireball to reach the enemy
             yield return new WaitForSeconds(fireball.travelTime);
 
+            enemyUnit.TakeDamage(playerUnit.damage);
+
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You cast a fireball!";
 
@@ -263,10 +288,10 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateTwo.ENEMYTWOTURN;
-                StartCoroutine(EnemyTurnTwo());
             }
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
         }
         else
         {
@@ -290,10 +315,10 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateTwo.ENEMYONETURN;
-                StartCoroutine(EnemyTurnOne());
             }
+
+            state = BattleStateTwo.ENEMYONETURN;
+            StartCoroutine(EnemyTurnOne());
         }
         //for (int i = 0; i < 3; i++)
         //{
@@ -734,6 +759,64 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
+        abilityChoicePanel.SetActive(false);
+        attackFleePanel.SetActive(true);
+
+        if (lightingStrikeCD != 0)
+        {
+            lightingStrikeCD -= 1;
+        }
+        if (meteorShowerCD != 0)
+        {
+            meteorShowerCD -= 1;
+        }
+        if (fireBallCD != 0)
+        {
+            fireBallCD -= 1;
+        }
+        if (trippleArrowCD != 0)
+        {
+            trippleArrowCD -= 1;
+        }
+        if (healingCD != 0)
+        {
+            healingCD -= 1;
+        }
+
+        if (lightingStrikeCD == 0)
+        {
+            lightingStrike.interactable = true;
+
+        }
+
+        if (meteorShowerCD == 0)
+        {
+
+            meteorShower.interactable = true;
+        }
+
+        if (trippleArrowCD == 0)
+        {
+
+            tripleArrow.interactable = true;
+        }
+
+        if (fireBallCD == 0)
+        {
+            fireBall.interactable = true;
+        }
+
+        if (healingCD == 0)
+        {
+            healing.interactable = true;
+        }
+
+        lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
+        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+        fireBallCDText.text = "(" + fireBallCD + ")";
+        trippleArrowCDText.text = "(" + trippleArrowCD + ")";
+        healingCDText.text = "(" + healingCD + ")";
+
         dialogText.text = "Choose an action";
     }
 
@@ -741,6 +824,12 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnAttackButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
@@ -751,6 +840,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnFireballButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        fireBallCD = 2;
+        fireBallCDText.text = "(" + fireBallCD + ")";
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
@@ -761,6 +859,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnTripleArrowButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        trippleArrowCD = 4;
+        trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
@@ -771,6 +878,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnMeteorButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        meteorShowerCD = 2;
+        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
@@ -781,6 +897,12 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnLightningButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
@@ -791,6 +913,15 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     public void OnHealButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        healing.interactable = false;
+
+        healingCD = 4;
+        healingCDText.text = "(" + healingCD + ")";
+
         if (state != BattleStateTwo.PLAYERTURN)
         {
             return;
