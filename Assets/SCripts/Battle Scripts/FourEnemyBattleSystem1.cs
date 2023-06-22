@@ -5,15 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public enum BattleStateTwo { START, PLAYERTURN, ENEMYONETURN, ENEMYTWOTURN, WON, LOST }
+public enum BattleStateFour { START, PLAYERTURN, ENEMYONETURN, ENEMYTWOTURN, ENEMYTHREETURN, ENEMYFOURTURN, WON, LOST }
 
 
-public class TwoEnemyBattleSystem : MonoBehaviour
+public class FourEnemyBattleSystem : MonoBehaviour
 {
 
     public GameObject[] enemyPrefabs;
 
-    public BattleStateTwo state;
+    public BattleStateFour state;
 
 
     public GameObject fireballPrefab;
@@ -29,21 +29,29 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     public Transform playerPosition;
     public Transform enemyPositionOne;
     public Transform enemyPositionTwo;
+    public Transform enemyPositionThree;
+    public Transform enemyPositionFour;
 
     private Unit playerUnit;
     private Unit enemyUnit;
     private Unit enemyUnitTwo;
+    private Unit enemyUnitThree;
+    private Unit enemyUnitFour;
 
     public Text dialogText;
 
     public BattleHUD playerHUD;
     public BattleHUD enemyHUD;
     public BattleHUD enemyTwoHUD;
+    public BattleHUD enemyThreeHUD;
+    public BattleHUD enemyFourHUD;
 
     public string explorationScene;
 
     public GameObject enemyPosition1obj;
     public GameObject enemyPosition2obj;
+    public GameObject enemyPosition3obj;
+    public GameObject enemyPosition4obj;
 
     public Leveling earnEXP;
 
@@ -72,7 +80,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = BattleStateTwo.START;
+        state = BattleStateFour.START;
         StartCoroutine(SetupBattle());
 
     }
@@ -88,6 +96,8 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         int enemyChoice1 = Random.Range(0, enemyPrefabs.Length);
         int enemyChoice2 = Random.Range(0, enemyPrefabs.Length);
+        int enemyChoice3 = Random.Range(0, enemyPrefabs.Length);
+        int enemyChoice4 = Random.Range(0, enemyPrefabs.Length);
 
         GameObject playerGO = Instantiate(playerPrefab, playerPosition);
         playerUnit = playerGO.GetComponent<Unit>();
@@ -97,31 +107,64 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
         
         GameObject enemyGOTwo = Instantiate(enemyPrefabs[enemyChoice2], enemyPositionTwo);
-        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();    
+        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();
 
-    
+        GameObject enemyGOThree = Instantiate(enemyPrefabs[enemyChoice3], enemyPositionThree);
+        enemyUnitThree = enemyGOTwo.GetComponent<Unit>();
+
+        GameObject enemyGOFour = Instantiate(enemyPrefabs[enemyChoice3], enemyPositionFour);
+        enemyUnitFour = enemyGOTwo.GetComponent<Unit>();
+
+
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has attacked";
 
         playerHUD.SetHUD(playerUnit);
         enemyHUD.SetHUD(enemyUnit);
         enemyTwoHUD.SetHUD(enemyUnitTwo);
+        enemyThreeHUD.SetHUD(enemyUnitThree);
+        enemyFourHUD.SetHUD(enemyUnitFour);
+
 
         yield return new WaitForSeconds(2f);
 
-        state = BattleStateTwo.PLAYERTURN;
+        state = BattleStateFour.PLAYERTURN;
         PlayerTurn();
     }
 
     IEnumerator PlayerAttack()
-    {   
-        if(enemyPosition1obj == null && enemyPosition2obj == null)
+    {
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
 
-        else if(enemyPosition1obj  == null)
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            enemyUnitFour.TakeDamage(playerUnit.damage);
+
+            enemyFourHUD.SetHP(enemyUnitFour.currentHP);
+            dialogText.text = "the attack is successful!";
+
+            yield return new WaitForSeconds(2f);
+
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+        }
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            enemyUnitThree.TakeDamage(playerUnit.damage);
+
+            enemyThreeHUD.SetHP(enemyUnitThree.currentHP);
+            dialogText.text = "the attack is successful!";
+
+            yield return new WaitForSeconds(2f);
+
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
+        }
+        else if(enemyPosition1obj == null)
         {
             enemyUnitTwo.TakeDamage(playerUnit.damage);
 
@@ -130,10 +173,9 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
         }
-
         else
         {
             enemyUnit.TakeDamage(playerUnit.damage);
@@ -143,7 +185,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            state = BattleStateTwo.ENEMYONETURN;
+            state = BattleStateFour.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
         }
 
@@ -172,12 +214,64 @@ public class TwoEnemyBattleSystem : MonoBehaviour
     IEnumerator PlayerAttackFireball()
     {
 
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
-        
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            // Spawn a fireball prefab
+            GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
+            Fireball fireball = fireballGO.GetComponent<Fireball>();
+            fireball.SetTarget(enemyPositionFour.position);
+
+            // Wait for the fireball to reach the enemy
+            yield return new WaitForSeconds(fireball.travelTime);
+
+            // Damage the enemy
+            enemyUnitFour.TakeDamage(playerUnit.damage);
+
+            enemyFourHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You cast a fireball!";
+
+            // Destroy the fireball
+            Destroy(fireballGO);
+
+            yield return new WaitForSeconds(2f);
+
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+
+        }
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            // Spawn a fireball prefab
+            GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
+            Fireball fireball = fireballGO.GetComponent<Fireball>();
+            fireball.SetTarget(enemyPositionThree.position);
+
+            // Wait for the fireball to reach the enemy
+            yield return new WaitForSeconds(fireball.travelTime);
+
+            // Damage the enemy
+            enemyUnitThree.TakeDamage(playerUnit.damage);
+
+            enemyThreeHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "You cast a fireball!";
+
+            // Destroy the fireball
+            Destroy(fireballGO);
+
+            yield return new WaitForSeconds(2f);
+
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnThree());
+
+        }
+
         else if(enemyPosition1obj == null)
         {
             // Spawn a fireball prefab
@@ -199,7 +293,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
 
         }
@@ -221,7 +315,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(2f);
 
-            state = BattleStateTwo.ENEMYONETURN;
+            state = BattleStateFour.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
         }
         //// Spawn a fireball prefab
@@ -258,13 +352,69 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackTripleArrow()
     {
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
 
-        else if(enemyPosition1obj == null)
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                // Spawn an arrow prefab
+                GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
+                Arrow arrow = arrowGO.GetComponent<Arrow>();
+                arrow.SetTarget(enemyPositionFour.position);
+
+                // Wait for the arrow to reach the enemy
+                yield return new WaitForSeconds(arrow.travelTime);
+
+                // Damage the enemy
+                enemyUnitFour.TakeDamage(playerUnit.damage);
+
+                enemyFourHUD.SetHP(enemyUnit.currentHP);
+                dialogText.text = "You shot an arrow!";
+
+                // Destroy the arrow
+                Destroy(arrowGO);
+
+                yield return new WaitForSeconds(0.5f);
+
+                state = BattleStateFour.ENEMYTWOTURN;
+                StartCoroutine(EnemyTurnFour());
+            }
+        }
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                // Spawn an arrow prefab
+                GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
+                Arrow arrow = arrowGO.GetComponent<Arrow>();
+                arrow.SetTarget(enemyPositionThree.position);
+
+                // Wait for the arrow to reach the enemy
+                yield return new WaitForSeconds(arrow.travelTime);
+
+                // Damage the enemy
+                enemyUnitThree.TakeDamage(playerUnit.damage);
+
+                enemyThreeHUD.SetHP(enemyUnit.currentHP);
+                dialogText.text = "You shot an arrow!";
+
+                // Destroy the arrow
+                Destroy(arrowGO);
+
+                yield return new WaitForSeconds(0.5f);
+
+                state = BattleStateFour.ENEMYTWOTURN;
+                StartCoroutine(EnemyTurnThree());
+            }
+        }
+
+        else if (enemyPosition1obj == null)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -287,7 +437,7 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
                 yield return new WaitForSeconds(0.5f);
 
-                state = BattleStateTwo.ENEMYTWOTURN;
+                state = BattleStateFour.ENEMYTWOTURN;
                 StartCoroutine(EnemyTurnTwo());
             }
         }
@@ -314,42 +464,99 @@ public class TwoEnemyBattleSystem : MonoBehaviour
 
                 yield return new WaitForSeconds(0.5f);
 
-                state = BattleStateTwo.ENEMYONETURN;
+                state = BattleStateFour.ENEMYONETURN;
                 StartCoroutine(EnemyTurnOne());
             }
         }
-        //for (int i = 0; i < 3; i++)
-        //{
-        //    // Spawn an arrow prefab
-        //    GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
-        //    Arrow arrow = arrowGO.GetComponent<Arrow>();
-        //    arrow.SetTarget(enemyPositionOne.position);
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    // Spawn an arrow prefab
+            //    GameObject arrowGO = Instantiate(arrowPrefab, playerPosition.position, Quaternion.identity);
+            //    Arrow arrow = arrowGO.GetComponent<Arrow>();
+            //    arrow.SetTarget(enemyPositionOne.position);
 
-        //    // Wait for the arrow to reach the enemy
-        //    yield return new WaitForSeconds(arrow.travelTime);
+            //    // Wait for the arrow to reach the enemy
+            //    yield return new WaitForSeconds(arrow.travelTime);
 
-        //    // Damage the enemy
-        //    bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+            //    // Damage the enemy
+            //    bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
 
-        //    enemyHUD.SetHP(enemyUnit.currentHP);
-        //    dialogText.text = "You shot an arrow!";
+            //    enemyHUD.SetHP(enemyUnit.currentHP);
+            //    dialogText.text = "You shot an arrow!";
 
-        //    // Destroy the arrow
-        //    Destroy(arrowGO);
+            //    // Destroy the arrow
+            //    Destroy(arrowGO);
 
-        //    yield return new WaitForSeconds(0.5f);
-        //}
+            //    yield return new WaitForSeconds(0.5f);
+            //}
 
-        // Check if enemy is dead
-    }
+            // Check if enemy is dead
+        }
 
     IEnumerator PlayerAttackMeteorShower()
     {
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
+
+        else if (enemyPosition1obj == null)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                // Calculate the position for the meteor
+                Vector3 meteorPosition = GetMeteorPosition(i);
+
+                // Spawn a meteor prefab
+                GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+                Meteor meteor = meteorGO.GetComponent<Meteor>();
+                meteor.SetTarget(enemyPositionTwo.position);
+
+                yield return null;
+            }
+
+            // Wait for all meteors to reach the enemy
+            yield return new WaitForSeconds(Meteor.travelTime);
+
+            // Damage the enemy
+            enemyUnitTwo.TakeDamage(playerUnit.damage);
+
+            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
+            dialogText.text = "You summoned meteors!";
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
+        }
+
+        else if (enemyPosition1obj == null)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                // Calculate the position for the meteor
+                Vector3 meteorPosition = GetMeteorPosition(i);
+
+                // Spawn a meteor prefab
+                GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
+                Meteor meteor = meteorGO.GetComponent<Meteor>();
+                meteor.SetTarget(enemyPositionTwo.position);
+
+                yield return null;
+            }
+
+            // Wait for all meteors to reach the enemy
+            yield return new WaitForSeconds(Meteor.travelTime);
+
+            // Damage the enemy
+            enemyUnitTwo.TakeDamage(playerUnit.damage);
+
+            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
+            dialogText.text = "You summoned meteors!";
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
+        }
+
         else if(enemyPosition1obj == null)
         {
             for (int i = 0; i < 5; i++)
