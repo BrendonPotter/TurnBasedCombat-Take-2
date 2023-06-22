@@ -463,7 +463,7 @@ MonoBehaviour:
   attackButton: {fileID: 295581447}
   succesfulFlee: {fileID: 1959777769}
   unsuccessfulFlee: {fileID: 1959777769}
-  mainScene: MainScene
+  mainScene: ExploreTest
 --- !u!1 &48444882
 GameObject:
   m_ObjectHideFlags: 0
