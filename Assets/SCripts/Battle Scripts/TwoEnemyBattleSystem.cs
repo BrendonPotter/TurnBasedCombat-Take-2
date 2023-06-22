@@ -213,6 +213,8 @@ public class TwoEnemyBattleSystem : MonoBehaviour
             // Wait for the fireball to reach the enemy
             yield return new WaitForSeconds(fireball.travelTime);
 
+            enemyUnit.TakeDamage(playerUnit.damage);
+
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You cast a fireball!";
 
@@ -286,10 +288,10 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateTwo.ENEMYTWOTURN;
-                StartCoroutine(EnemyTurnTwo());
             }
+
+            state = BattleStateTwo.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
         }
         else
         {
@@ -313,10 +315,10 @@ public class TwoEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateTwo.ENEMYONETURN;
-                StartCoroutine(EnemyTurnOne());
             }
+
+            state = BattleStateTwo.ENEMYONETURN;
+            StartCoroutine(EnemyTurnOne());
         }
         //for (int i = 0; i < 3; i++)
         //{

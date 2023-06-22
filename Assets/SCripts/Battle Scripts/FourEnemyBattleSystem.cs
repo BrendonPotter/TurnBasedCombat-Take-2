@@ -307,6 +307,8 @@ public class FourEnemyBattleSystem : MonoBehaviour
             // Wait for the fireball to reach the enemy
             yield return new WaitForSeconds(fireball.travelTime);
 
+            enemyUnit.TakeDamage(playerUnit.damage);
+
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You cast a fireball!";
 
@@ -381,9 +383,10 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
                 yield return new WaitForSeconds(0.5f);
 
-                state = BattleStateFour.ENEMYTWOTURN;
-                StartCoroutine(EnemyTurnFour());
             }
+
+            state = BattleStateFour.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnFour());
         }
 
         else if (enemyPosition1obj == null && enemyPosition2obj == null)
@@ -408,10 +411,10 @@ public class FourEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateFour.ENEMYTWOTURN;
-                StartCoroutine(EnemyTurnThree());
             }
+
+            state = BattleStateFour.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnThree());
         }
 
         else if (enemyPosition1obj == null)
@@ -437,9 +440,10 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
                 yield return new WaitForSeconds(0.5f);
 
-                state = BattleStateFour.ENEMYTWOTURN;
-                StartCoroutine(EnemyTurnTwo());
             }
+
+            state = BattleStateFour.ENEMYTWOTURN;
+            StartCoroutine(EnemyTurnTwo());
         }
         else
         {
@@ -463,10 +467,10 @@ public class FourEnemyBattleSystem : MonoBehaviour
                 Destroy(arrowGO);
 
                 yield return new WaitForSeconds(0.5f);
-
-                state = BattleStateFour.ENEMYONETURN;
-                StartCoroutine(EnemyTurnOne());
             }
+
+            state = BattleStateFour.ENEMYONETURN;
+            StartCoroutine(EnemyTurnOne());
         }
             //for (int i = 0; i < 3; i++)
             //{
@@ -501,7 +505,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             EndBattle();
         }
 
-        else if (enemyPosition1obj == null)
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -511,7 +515,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
                 // Spawn a meteor prefab
                 GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
                 Meteor meteor = meteorGO.GetComponent<Meteor>();
-                meteor.SetTarget(enemyPositionTwo.position);
+                meteor.SetTarget(enemyPositionFour.position);
 
                 yield return null;
             }
@@ -520,16 +524,16 @@ public class FourEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(Meteor.travelTime);
 
             // Damage the enemy
-            enemyUnitTwo.TakeDamage(playerUnit.damage);
+            enemyUnitFour.TakeDamage(playerUnit.damage);
 
-            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
+            enemyFourHUD.SetHP(enemyUnitFour.currentHP);
             dialogText.text = "You summoned meteors!";
 
-            state = BattleStateTwo.ENEMYTWOTURN;
-            StartCoroutine(EnemyTurnTwo());
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
         }
 
-        else if (enemyPosition1obj == null)
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -539,7 +543,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
                 // Spawn a meteor prefab
                 GameObject meteorGO = Instantiate(meteorPrefab, meteorPosition, Quaternion.identity);
                 Meteor meteor = meteorGO.GetComponent<Meteor>();
-                meteor.SetTarget(enemyPositionTwo.position);
+                meteor.SetTarget(enemyPositionThree.position);
 
                 yield return null;
             }
@@ -548,13 +552,13 @@ public class FourEnemyBattleSystem : MonoBehaviour
             yield return new WaitForSeconds(Meteor.travelTime);
 
             // Damage the enemy
-            enemyUnitTwo.TakeDamage(playerUnit.damage);
+            enemyUnitThree.TakeDamage(playerUnit.damage);
 
-            enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
+            enemyThreeHUD.SetHP(enemyUnitThree.currentHP);
             dialogText.text = "You summoned meteors!";
 
-            state = BattleStateTwo.ENEMYTWOTURN;
-            StartCoroutine(EnemyTurnTwo());
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
         }
 
         else if(enemyPosition1obj == null)
@@ -581,7 +585,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "You summoned meteors!";
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
         }
         else
@@ -608,7 +612,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             enemyHUD.SetHP(enemyUnit.currentHP);
             dialogText.text = "You summoned meteors!";
 
-            state = BattleStateTwo.ENEMYONETURN;
+            state = BattleStateFour.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
 
         }
@@ -651,7 +655,36 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     private Vector3 GetMeteorPosition(int index)
     {
-        if(enemyPosition1obj == null)
+        if(enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            float distance = Vector3.Distance(playerPosition.position, enemyPositionFour.position);
+            float step = distance / 8f; // Divide by 8 to get 7 intervals
+
+            Vector3 direction = (enemyPositionFour.position - playerPosition.position).normalized;
+            Vector3 position = playerPosition.position + direction * (step * (index + 1));
+
+            // Offset the position upwards to spawn the meteor above the battlefield
+            position.y += 10f;
+
+            return position;
+        }
+
+        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            float distance = Vector3.Distance(playerPosition.position, enemyPositionThree.position);
+            float step = distance / 8f; // Divide by 8 to get 7 intervals
+
+            Vector3 direction = (enemyPositionThree.position - playerPosition.position).normalized;
+            Vector3 position = playerPosition.position + direction * (step * (index + 1));
+
+            // Offset the position upwards to spawn the meteor above the battlefield
+            position.y += 10f;
+
+            return position;
+        }
+
+
+        if (enemyPosition1obj == null)
         {
             float distance = Vector3.Distance(playerPosition.position, enemyPositionTwo.position);
             float step = distance / 8f; // Divide by 8 to get 7 intervals
@@ -692,13 +725,55 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackLightning()
     {
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
 
-        else if(enemyPosition1obj == null)
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionFour.position + Vector3.up * 10f, Quaternion.identity);
+
+            yield return new WaitForSeconds(1f);
+
+            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionFour.position, Quaternion.identity);
+            LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+            float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+            yield return new WaitForSeconds(strikeTime);
+
+
+            enemyFourHUD.SetHP(enemyUnitFour.currentHP);
+            dialogText.text = "Lightning Strike!";
+
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+        }
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionThree.position + Vector3.up * 10f, Quaternion.identity);
+
+            yield return new WaitForSeconds(1f);
+
+            GameObject lightningStrikeGO = Instantiate(lightningStrikePrefab, enemyPositionThree.position, Quaternion.identity);
+            LightningStrike lightningStrike = lightningStrikeGO.GetComponent<LightningStrike>();
+            float strikeTime = lightningStrike.strikeTime; // Access strikeTime property through the instance
+
+            yield return new WaitForSeconds(strikeTime);
+
+
+            enemyThreeHUD.SetHP(enemyUnitThree.currentHP);
+            dialogText.text = "Lightning Strike!";
+
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
+        }
+
+
+
+        else if (enemyPosition1obj == null)
         {
             GameObject cloudGO = Instantiate(cloudPrefab, enemyPositionTwo.position + Vector3.up * 10f, Quaternion.identity);
 
@@ -714,7 +789,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             enemyTwoHUD.SetHP(enemyUnitTwo.currentHP);
             dialogText.text = "Lightning Strike!";
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
         }
         else
@@ -736,7 +811,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             dialogText.text = "Lightning Strike!";
 
 
-            state = BattleStateTwo.ENEMYONETURN;
+            state = BattleStateFour.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
 
         }
@@ -772,9 +847,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     IEnumerator HealPlayer()
     {
-
-
-        if(enemyPosition1obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
         {
 
             // Add 25 to the player's currentHP
@@ -799,7 +872,65 @@ public class FourEnemyBattleSystem : MonoBehaviour
             // Destroy the healing particle system
             Destroy(particleSystemGO);
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+        }
+
+        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+
+            // Add 25 to the player's currentHP
+            playerUnit.currentHP += 25;
+
+            // Ensure the player's currentHP doesn't exceed the maximumHP
+            if (playerUnit.currentHP > playerUnit.maxHP)
+            {
+                playerUnit.currentHP = playerUnit.maxHP;
+            }
+
+            playerHUD.SetHP(playerUnit.currentHP);
+            dialogText.text = "You have been healed!";
+
+            // Spawn a healing particle system on the player for 3 seconds
+            GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+            ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+            particleSystem.Play();
+
+            yield return new WaitForSeconds(3f);
+
+            // Destroy the healing particle system
+            Destroy(particleSystemGO);
+
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
+        }
+
+        if (enemyPosition1obj == null)
+        {
+
+            // Add 25 to the player's currentHP
+            playerUnit.currentHP += 25;
+
+            // Ensure the player's currentHP doesn't exceed the maximumHP
+            if (playerUnit.currentHP > playerUnit.maxHP)
+            {
+                playerUnit.currentHP = playerUnit.maxHP;
+            }
+
+            playerHUD.SetHP(playerUnit.currentHP);
+            dialogText.text = "You have been healed!";
+
+            // Spawn a healing particle system on the player for 3 seconds
+            GameObject particleSystemGO = Instantiate(healingParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+            ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+            particleSystem.Play();
+
+            yield return new WaitForSeconds(3f);
+
+            // Destroy the healing particle system
+            Destroy(particleSystemGO);
+
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
         }
         else
@@ -826,7 +957,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
             // Destroy the healing particle system
             Destroy(particleSystemGO);
 
-            state = BattleStateTwo.ENEMYONETURN;
+            state = BattleStateFour.ENEMYONETURN;
             StartCoroutine(EnemyTurnOne());
         }
 
@@ -858,21 +989,33 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurnOne()
     {
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
+        }
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null)
+        {
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+        }
+
+        else if (enemyPosition1obj == null && enemyPosition2obj == null)
+        {
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
         }
 
         else if (enemyPosition1obj == null)
         {
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
         }
 
         else
         {
-            dialogText.text = enemyUnit.unitName + " 1 attacks";
+            dialogText.text = " " + enemyUnit.unitName + " ";
 
             yield return new WaitForSeconds(1f);
 
@@ -884,7 +1027,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
             Debug.Log("this is working");
 
-            state = BattleStateTwo.ENEMYTWOTURN;
+            state = BattleStateFour.ENEMYTWOTURN;
             StartCoroutine(EnemyTurnTwo());
 
         }
@@ -909,9 +1052,9 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurnTwo()
     {
-        if (enemyPosition1obj == null && enemyPosition2obj == null)
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
         {
-            state = BattleStateTwo.WON;
+            state = BattleStateFour.WON;
             EndBattle();
         }
         else
@@ -919,7 +1062,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
             Debug.Log("EnemyTwoTurn working");
 
-            dialogText.text = enemyUnit.unitName + " 2 attacks";
+            dialogText.text = " " + enemyUnit.unitName + " ";
 
             yield return new WaitForSeconds(1f);
 
@@ -929,7 +1072,85 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
             yield return new WaitForSeconds(1f);
 
-            state = BattleStateTwo.PLAYERTURN;
+            state = BattleStateFour.ENEMYTHREETURN;
+            StartCoroutine(EnemyTurnThree());
+
+            //if (isDead)
+            //{
+            //    state = BattleStateTwo.LOST;
+            //    EndBattle();
+            //}
+            //else
+            //{
+            //    state = BattleStateTwo.PLAYERTURN;
+            //    PlayerTurn();
+            //}
+
+        }
+    }
+
+    IEnumerator EnemyTurnThree()
+    {
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
+        {
+            state = BattleStateFour.WON;
+            EndBattle();
+        }
+        else
+        {
+
+            Debug.Log("EnemyTwoTurn working");
+
+            dialogText.text = " " + enemyUnitThree.unitName + " ";
+
+            yield return new WaitForSeconds(1f);
+
+            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+
+            playerHUD.SetHP(playerUnit.currentHP);
+
+            yield return new WaitForSeconds(1f);
+
+            state = BattleStateFour.ENEMYFOURTURN;
+            StartCoroutine(EnemyTurnFour());
+
+            //if (isDead)
+            //{
+            //    state = BattleStateTwo.LOST;
+            //    EndBattle();
+            //}
+            //else
+            //{
+            //    state = BattleStateTwo.PLAYERTURN;
+            //    PlayerTurn();
+            //}
+
+        }
+    }
+
+    IEnumerator EnemyTurnFour()
+    {
+        if (enemyPosition1obj == null && enemyPosition2obj == null && enemyPosition3obj == null && enemyPosition4obj == null)
+        {
+            state = BattleStateFour.WON;
+            EndBattle();
+        }
+        else
+        {
+
+            Debug.Log("EnemyTwoTurn working");
+
+            dialogText.text = " " + enemyUnitFour.unitName + " ";
+
+            yield return new WaitForSeconds(1f);
+
+            bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+
+            playerHUD.SetHP(playerUnit.currentHP);
+
+            yield return new WaitForSeconds(1f);
+
+            state = BattleStateFour.PLAYERTURN;
             PlayerTurn();
 
             //if (isDead)
@@ -949,13 +1170,13 @@ public class FourEnemyBattleSystem : MonoBehaviour
 
     void EndBattle()
     {
-        if (state == BattleStateTwo.WON)
+        if (state == BattleStateFour.WON)
         {
             dialogText.text = "You won the Battle!";
             earnEXP.GainDoubleEXP();
             StartCoroutine(SceneSwitchDelay());
         }
-        else if (state == BattleStateTwo.LOST)
+        else if (state == BattleStateFour.LOST)
         {
             dialogText.text = "you have died";
             StartCoroutine(SceneSwitchDelay());
@@ -1035,7 +1256,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         fireBall.interactable = false;
         healing.interactable = false;
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1054,7 +1275,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         fireBallCD = 2;
         fireBallCDText.text = "(" + fireBallCD + ")";
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1073,7 +1294,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         trippleArrowCD = 4;
         trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1092,7 +1313,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         meteorShowerCD = 2;
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1108,7 +1329,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         fireBall.interactable = false;
         healing.interactable = false;
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1127,7 +1348,7 @@ public class FourEnemyBattleSystem : MonoBehaviour
         healingCD = 4;
         healingCDText.text = "(" + healingCD + ")";
 
-        if (state != BattleStateTwo.PLAYERTURN)
+        if (state != BattleStateFour.PLAYERTURN)
         {
             return;
         }
@@ -1165,6 +1386,22 @@ public class FourEnemyBattleSystem : MonoBehaviour
         if(enemyUnitTwo.currentHP <= 0)
         {
             Destroy(enemyPosition2obj);
+        }
+    }
+
+    void CheckDeath3()
+    {
+        if (enemyUnitTwo.currentHP <= 0)
+        {
+            Destroy(enemyPosition3obj);
+        }
+    }
+
+    void CheckDeath4()
+    {
+        if (enemyUnitTwo.currentHP <= 0)
+        {
+            Destroy(enemyPosition4obj);
         }
     }
 
