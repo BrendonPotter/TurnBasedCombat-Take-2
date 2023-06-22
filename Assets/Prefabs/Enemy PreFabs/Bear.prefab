@@ -113,5 +113,6 @@ MonoBehaviour:
   unitName: Bear
   unitLevel: 5
   damage: 10
+  trueDamage: 10
   maxHP: 50
   currentHP: 50

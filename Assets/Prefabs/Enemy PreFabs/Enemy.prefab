@@ -113,5 +113,6 @@ MonoBehaviour:
   unitName: Rat
   unitLevel: 2
   damage: 5
+  trueDamage: 5
   maxHP: 30
   currentHP: 30

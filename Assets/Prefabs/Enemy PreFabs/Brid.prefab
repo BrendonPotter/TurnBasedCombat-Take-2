@@ -114,5 +114,6 @@ MonoBehaviour:
   unitName: Bird
   unitLevel: 2
   damage: 5
+  trueDamage: 5
   maxHP: 70
   currentHP: 70

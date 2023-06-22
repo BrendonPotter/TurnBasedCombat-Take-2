@@ -22,7 +22,12 @@ public class BattleSystem : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject cloudPrefab;
     public GameObject lightningStrikePrefab;
+    public GameObject holybeamPrefab;
+   
     public GameObject healingParticleSystemPrefab;
+    public GameObject RageParticleSystemPrefab;
+    public GameObject holyParticleSystemPrefab;
+    
 
 
     public Transform playerPosition;
@@ -302,6 +307,141 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(EnemyTurn());
     }
 
+    IEnumerator RageBoost()
+    {
+        // Add 25 to the player's Attack Stat
+        playerUnit.damage += 15;
+
+       
+        dialogText.text = "You have increased you're testostorne!";
+
+        // Spawn a particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(RageParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        // Destroy the healing particle system
+        Destroy(particleSystemGO);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator BlockAttack()
+    {
+        // Set the enemies Attack Stat to 0 to give the illusion of blocking
+       
+        enemyUnit.damage = 0;
+        //My dumbass hasn't figured out how to set it back to its previous attack stat
+
+        dialogText.text = "You have blocked the enemies attack!";
+
+        // Spawn a particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(RageParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        // Destroy the healing particle system
+        Destroy(particleSystemGO);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator Bully()
+    {
+        // Subtract 5 to the enemies Attack Stat
+        enemyUnit.damage -= 5;
+
+
+        dialogText.text = "You insulted the opposition now they feel depressed!";
+
+        // Spawn a particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(RageParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+
+        yield return new WaitForSeconds(3f);
+
+        // Destroy the healing particle system
+        Destroy(particleSystemGO);
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(EnemyTurn());
+    }
+
+    IEnumerator HealthSteal()
+    {
+        //Damage the enemy
+        bool isDead = enemyUnit.TakeDamage(enemyUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        
+        
+        // Add to the player's currentHP
+        playerUnit.currentHP += 10;
+
+        // Ensure the player's currentHP doesn't exceed the maximumHP
+        if (playerUnit.currentHP > playerUnit.maxHP)
+        {
+            playerUnit.currentHP = playerUnit.maxHP;
+        }
+
+        playerHUD.SetHP(playerUnit.currentHP);
+        dialogText.text = "You have swiped their life force!";
+
+        // Spawn a healing particle system on the player for 3 seconds
+        GameObject particleSystemGO = Instantiate(holyParticleSystemPrefab, playerPosition.position, Quaternion.identity);
+        ParticleSystem particleSystem = particleSystemGO.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+        yield return new WaitForSeconds(3f);
+         // Destroy the healing particle system
+        Destroy(particleSystemGO);
+        //Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+        }
+
+    }
+
+    IEnumerator MightySlash()
+    {
+        //temperarly increase damage
+        playerUnit.damage += 35;
+        //Damage the enemy
+
+        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogText.text = "the attack is successful!";
+
+        yield return new WaitForSeconds(2f);
+
+        //Check if enemy is dead
+        if (isDead)
+        {
+            state = BattleState.WON;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleState.ENEMYTURN;
+            StartCoroutine(EnemyTurn());
+            playerUnit.damage = playerUnit.trueDamage;
+        }
+       
+    }
 
     IEnumerator EnemyTurn()
     {
@@ -324,6 +464,7 @@ public class BattleSystem : MonoBehaviour
         {
             state = BattleState.PLAYERTURN;
             PlayerTurn();
+            enemyUnit.damage = enemyUnit.trueDamage;
         }
     }
 
@@ -518,6 +659,56 @@ public class BattleSystem : MonoBehaviour
         }
         //lightingButton.interatable = false;
         StartCoroutine(HealPlayer());
+    }
+
+    public void OnRageButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(RageBoost());
+    }
+
+    public void OnBlockButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(BlockAttack());
+    }
+
+    public void OnBullyButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(Bully());
+    }
+
+    public void OnHealthStealButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(HealthSteal());
+    }
+
+    public void OnMightySlashButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(MightySlash());
     }
     //public void OnDefendButton()
     //{
