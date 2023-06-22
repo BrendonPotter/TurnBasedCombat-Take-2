@@ -541,11 +541,11 @@ public class BattleSystem : MonoBehaviour
             healing.interactable = true;
         }
 
-        //lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
-        //meteorShowerCDText.text = "(" + meteorShowerCD + ")";
-        //fireBallCDText.text = "(" + fireBallCD + ")";
-        //trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        //healingCDText.text = "(" + healingCD + ")";
+        lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
+        meteorShowerCDText.text = "(" + meteorShowerCD + ")";
+        fireBallCDText.text = "(" + fireBallCD + ")";
+        trippleArrowCDText.text = "(" + trippleArrowCD + ")";
+        healingCDText.text = "(" + healingCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -596,7 +596,7 @@ public class BattleSystem : MonoBehaviour
         healing.interactable = false;
 
         trippleArrowCD = 4;
-        //trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
+        trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
 
 
         if (state != BattleState.PLAYERTURN)

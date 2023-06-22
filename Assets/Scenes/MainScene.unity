@@ -16250,7 +16250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1969977005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16266,6 +16266,13 @@ MonoBehaviour:
   battleScene1: BattleSceneOneRat
   battleScene2: BattleSceneTwoRat
   encounterText: {fileID: 168515189}
+  screenFadeImage: {fileID: 0}
+  fadeDuration: 1
+  encounterSound: {fileID: 0}
+  transitioncamera: {fileID: 0}
+  playercamera: {fileID: 0}
+  uiTransitioneffect: {fileID: 0}
+  overworldMusic: {fileID: 0}
 --- !u!4 &1969977007
 Transform:
   m_ObjectHideFlags: 0

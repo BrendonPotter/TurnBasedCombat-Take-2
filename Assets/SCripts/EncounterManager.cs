@@ -56,10 +56,10 @@ public class EncounterManager : MonoBehaviour
 
         int ecounterCheck = Random.Range(1, 10);
 
-        if (ecounterCheck <= 2)
+        if (ecounterCheck <= 4)
         {
             //stop music
-            overworldMusic.Stop();
+            //overworldMusic.Stop();
 
             //GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
             encounterText.SetActive(true);
@@ -67,16 +67,16 @@ public class EncounterManager : MonoBehaviour
            // yield return StartCoroutine(ScreenFadeOut());
               
             // Play sound effect
-            encounterSound.Play();
+            //encounterSound.Play();
 
-            // Enable UI element
-            uiTransitioneffect.SetActive(true);
+            //// Enable UI element
+            //uiTransitioneffect.SetActive(true);
 
-            // Enable camera
-            transitioncamera.enabled = true;
+            //// Enable camera
+            //transitioncamera.enabled = true;
 
-            // Disable player's camera
-            playercamera.enabled = false;
+            //// Disable player's camera
+            //playercamera.enabled = false;
 
             yield return new WaitForSeconds(2);
             
@@ -85,34 +85,34 @@ public class EncounterManager : MonoBehaviour
             SceneManager.LoadScene(battleScene1);
         }
 
-        else if (ecounterCheck >= 3 && ecounterCheck <= 4)
-        {
-            //GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
-            encounterText.SetActive(true);
+        //else if (ecounterCheck >= 3 && ecounterCheck <= 4)
+        //{
+        //    GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
+        //    encounterText.SetActive(true);
 
-            // yield return StartCoroutine(ScreenFadeOut());
+        //    yield return StartCoroutine(ScreenFadeOut());
 
-            //stop music
-            overworldMusic.Stop();
+        //    stop music
+        //    overworldMusic.Stop();
 
-            // Play sound effect
-            encounterSound.Play();
+        //    Play sound effect
+        //    encounterSound.Play();
 
-            // Enable UI element
-            uiTransitioneffect.SetActive(true);
+        //    Enable UI element
+        //    uiTransitioneffect.SetActive(true);
 
-            // Enable camera
-            transitioncamera.enabled = true;
+        //    Enable camera
+        //    transitioncamera.enabled = true;
 
-            // Disable player's camera
-            playercamera.enabled = false;
+        //    Disable player's camera
+        //    playercamera.enabled = false;
 
-            yield return new WaitForSeconds(2);
+        //    yield return new WaitForSeconds(2);
 
-            
 
-            SceneManager.LoadScene(battleScene2);
-        }
+
+        //    SceneManager.LoadScene(battleScene2);
+        //}
         else if(ecounterCheck > 4)    
         {
             Debug.Log("rolled high");
