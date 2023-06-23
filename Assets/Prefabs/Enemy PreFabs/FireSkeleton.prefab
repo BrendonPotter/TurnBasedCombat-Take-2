@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae0d492d6860cf647b469cc7b89dead1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: BlueFlameSkeleton
+  unitName: Spooky Skeleton
   unitLevel: 20
   damage: 15
   trueDamage: 15

@@ -17,5 +17,9 @@ MonoBehaviour:
   _earnExpAmount: 0
   hpAmount: 65
   maxHPAmount: 100
+<<<<<<< Updated upstream
   dealDamage: 285
+=======
+  dealDamage: 0
+>>>>>>> Stashed changes
   trueDamage: 0

@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 34fd1555be423734d817886a0698135a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerPrefab: {instanceID: 0}
+  - enemyPrefab: {instanceID: 0}
+  - playerPosition: {instanceID: 0}
+  - enemyPositionOne: {instanceID: 0}
+  - enemyPositionTwo: {instanceID: 0}
+  - dialogText: {instanceID: 0}
+  - playerHUD: {instanceID: 0}
+  - enemyHUD: {instanceID: 0}
+  - enemyTwoHUD: {instanceID: 0}
+  - enemyPosition1obj: {instanceID: 0}
+  - enemyPosition2obj: {instanceID: 0}
+  - fireballPrefab: {fileID: 3253221940483122130, guid: 9b17f97d0a649a843b8b5c944cb637bb, type: 3}
+  - arrowPrefab: {fileID: 3845012755160862427, guid: f40335b1f355d594d9f08943775e01d0, type: 3}
+  - meteorPrefab: {fileID: 3345008955094171817, guid: 79b4a02587e3cac45a70c1c418bfa9d6, type: 3}
+  - cloudPrefab: {fileID: 738284309095822918, guid: e7537036cff3f2443bf4586f3500ea4d, type: 3}
+  - lightningStrikePrefab: {fileID: 3493649348842779125, guid: ff38e6a6fe699a742925f3feea0e5a5a, type: 3}
+  - healingParticleSystemPrefab: {fileID: 8366190562156276641, guid: cdc3c07e8d48eef46a738826cc08f324, type: 3}
+  - earnEXP: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

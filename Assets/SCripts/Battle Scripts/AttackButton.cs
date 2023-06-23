@@ -54,7 +54,7 @@ public class AttackButton : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene(mainScene);
+        SceneManager.LoadScene("ExploreTest");
 
     }
 
