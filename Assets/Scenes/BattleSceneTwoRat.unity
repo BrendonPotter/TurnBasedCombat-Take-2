@@ -2963,9 +2963,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d542de76fe882a143ae970ba00890f15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelSave: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
-  expThreshSave: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
-  earnExpAmount: {fileID: 11400000, guid: 6602b2aaaf8b0404baeb38d0acadd9f4, type: 2}
+  levelSave: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  expThreshSave: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  earnExpAmount: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1 &898189323
 GameObject:
   m_ObjectHideFlags: 0
