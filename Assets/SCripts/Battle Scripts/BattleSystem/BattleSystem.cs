@@ -42,6 +42,10 @@ public class BattleSystem : MonoBehaviour
 
     public string explorationScene;
 
+    //cameras
+    public Camera mainCamera;
+    public Camera fireballCamera;
+
     //Other script reference
     public Leveling earnEXP;
     public SaveSystem playerUnit;
@@ -128,6 +132,18 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackFireball()
     {
+
+        // Switch to the fireball camera
+        fireballCamera.enabled = true;
+        mainCamera.enabled = false;
+
+        // Play the attack animation on the player
+        // Activate the player GameObject
+        //playerPrefab.SetActive(true);
+        Animator playerAnimator = playerPrefab.GetComponent<Animator>();
+        playerAnimator.Play("Fireball");
+        //I have no clue how to get this animation to reference properly
+
         // Spawn a fireball prefab
         GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
         Fireball fireball = fireballGO.GetComponent<Fireball>();
@@ -137,7 +153,7 @@ public class BattleSystem : MonoBehaviour
         yield return new WaitForSeconds(fireball.travelTime);
 
         // Damage the enemy
-        bool isDead = enemyUnit.TakeDamage(playerUnit.dealDamage+25);
+        bool isDead = enemyUnit.TakeDamage(playerUnit.dealDamage + 25);
 
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogText.text = "You cast a fireball!";
@@ -158,6 +174,11 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
+
+        // Switch back to the main camera
+        fireballCamera.enabled = false;
+        mainCamera.enabled = true;
+        
     }
 
     IEnumerator PlayerAttackTripleArrow()

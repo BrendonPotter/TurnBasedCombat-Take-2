@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e67e5d3dcc9b66499dc8b0cc69cffdc, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  _levelVar: 1
-  _expThreshVar: 100
-  _earnExpAmount: 0
-  hpAmount: 100
+  _levelVar: 2
+  _expThreshVar: 200
+  _earnExpAmount: 100
+  hpAmount: 85
   maxHPAmount: 100
-  dealDamage: 0
+  dealDamage: 15
   trueDamage: 0
