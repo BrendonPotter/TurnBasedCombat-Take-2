@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   items: []
-  inventorySpace: 20
+  inventorySpace: 9
