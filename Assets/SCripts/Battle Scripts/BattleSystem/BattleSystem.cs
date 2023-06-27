@@ -32,12 +32,16 @@ public class BattleSystem : MonoBehaviour
 
     //Position
     public Transform playerPosition;
+    public Transform checkPoint1HunterSpawnPosition;
+    public Transform checkPoint1MageSpawnPosition;
+
     public Transform enemyPosition;
 
     //Player and Enemy HUD
     public Text dialogText;
 
     public PlayerHUD playerHUD;
+    public PlayerHUD playerHUDTwo;
     public BattleHUD enemyHUD;
 
     public string explorationScene;
@@ -49,6 +53,9 @@ public class BattleSystem : MonoBehaviour
 
     public GameObject attackFleePanel;
     public GameObject abilityChoicePanel;
+    public GameObject playerPositionSpawn;
+    public GameObject MageSpawn;
+    public GameObject Hunter2Spawn;
 
     public Button meteorShower;
     public Button lightingStrike;
@@ -83,11 +90,29 @@ public class BattleSystem : MonoBehaviour
         int enemyChoice1 = Random.Range(0, enemyPrefabs.Length);
 
         GameObject playerGO = Instantiate(playerPrefab, playerPosition);
+        GameObject playerGOTwoHunter = Instantiate(playerPrefab, checkPoint1HunterSpawnPosition);
+        GameObject playerGOTwoMage = Instantiate(playerPrefab, checkPoint1MageSpawnPosition);
+
+
+        if(playerUnit.checkPoint == 0)
+        {
+            Debug.Log("Checking Checkpoint number");
+            playerPositionSpawn.SetActive(true); 
+        }
+        else
+        {
+            Debug.Log("reading checkPoint");
+            MageSpawn.SetActive(true);
+            Hunter2Spawn.SetActive(true);
+        }
 
         GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPosition);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
+
         dialogText.text = "A wild " + enemyUnit.unitName + " has appear";
+
+
 
         playerHUD.SetHUD();
         playerHUD.SetLevelNum();

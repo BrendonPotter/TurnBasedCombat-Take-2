@@ -19,6 +19,8 @@ public class SaveSystem : ScriptableObject
 
     public int trueDamage;
 
+    public int checkPoint;
+
 
     public float Value
 	{

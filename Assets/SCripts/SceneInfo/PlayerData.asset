@@ -19,3 +19,4 @@ MonoBehaviour:
   maxHPAmount: 100
   dealDamage: 0
   trueDamage: 0
+  checkPoint: 5
