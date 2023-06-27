@@ -11,6 +11,7 @@ public class Leveling : MonoBehaviour
     public SaveSystem expThreshSave;
     public SaveSystem earnExpAmount;
 
+    [SerializeField] bool isLevelUp;
 
     public void Start()
     {
@@ -33,6 +34,14 @@ public class Leveling : MonoBehaviour
             earnExpAmount._earnExpAmount -= expThreshSave._expThreshVar;
             IncreaseExperienceThreshHold();
             Debug.Log("Level UP!!!!");
+            isLevelUp= true;
+            if(isLevelUp)
+            {
+                levelSave.hpAmount += 100;
+                levelSave.maxHPAmount += 100;
+                levelSave.dealDamage += 20;
+                ToggleBoolean();
+            }
             return;
         }
     }
@@ -63,5 +72,11 @@ public class Leveling : MonoBehaviour
             AddExperience(100);
             Debug.Log("Gain 100 EXP CHEATS");
         }
+    }
+
+    IEnumerator ToggleBoolean()
+    {
+        yield return new WaitForSeconds(0.25f); // Wait for 2 seconds
+        isLevelUp = false;
     }
 }
