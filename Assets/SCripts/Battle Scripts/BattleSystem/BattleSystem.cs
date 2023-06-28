@@ -45,6 +45,10 @@ public class BattleSystem : MonoBehaviour
     //cameras
     public Camera mainCamera;
     public Camera fireballCamera;
+    public Camera buffCamera;
+    public Camera MeteorCamera;
+    public Camera arrowCamera;
+
 
     //Other script reference
     public Leveling earnEXP;
@@ -71,6 +75,15 @@ public class BattleSystem : MonoBehaviour
     public int trippleArrowCD;
     public int fireBallCD;
     public int healingCD;
+
+    //amimations
+    public GameObject PlayerIdle;
+    public GameObject PlayerFireball;
+    public GameObject PlayerBuff;
+    public GameObject PlayerMeteor;
+    public GameObject PlayerTripleArrow;
+
+
 
 
     // Start is called before the first frame update
@@ -132,16 +145,19 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackFireball()
     {
+        
 
         // Switch to the fireball camera
+        PlayerIdle.SetActive(false);
+        PlayerFireball.SetActive(true);
         fireballCamera.enabled = true;
         mainCamera.enabled = false;
-
+        
         // Play the attack animation on the player
         // Activate the player GameObject
         //playerPrefab.SetActive(true);
-        Animator playerAnimator = playerPrefab.GetComponent<Animator>();
-        playerAnimator.Play("Fireball");
+        //  Animator playerAnimator = playerPrefab.GetComponent<Animator>();
+        // playerAnimator.Play("Fireball");
         //I have no clue how to get this animation to reference properly
 
         // Spawn a fireball prefab
@@ -160,7 +176,7 @@ public class BattleSystem : MonoBehaviour
 
         // Destroy the fireball
         Destroy(fireballGO);
-
+        
         yield return new WaitForSeconds(2f);
 
         // Check if enemy is dead
@@ -174,15 +190,22 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
-
+        
         // Switch back to the main camera
         fireballCamera.enabled = false;
         mainCamera.enabled = true;
-        
+        PlayerIdle.SetActive(true);
+        PlayerFireball.SetActive(false);
     }
 
     IEnumerator PlayerAttackTripleArrow()
     {
+        // Switch to the  camera
+        PlayerIdle.SetActive(false);
+        PlayerTripleArrow.SetActive(true);
+        arrowCamera.enabled = true;
+        mainCamera.enabled = false;
+
         for (int i = 0; i < 3; i++)
         {
             // Spawn an arrow prefab
@@ -216,10 +239,20 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
+        
+        PlayerIdle.SetActive(true);
+        PlayerTripleArrow.SetActive(false);
+        arrowCamera.enabled = false;
+        mainCamera.enabled = true;
     }
 
     IEnumerator PlayerAttackMeteorShower()
     {
+        PlayerIdle.SetActive(false);
+        PlayerMeteor.SetActive(true);
+        MeteorCamera.enabled = true;
+        mainCamera.enabled = false;
+
         for (int i = 0; i < 5; i++)
         {
             // Calculate the position for the meteor
@@ -255,6 +288,12 @@ public class BattleSystem : MonoBehaviour
             state = BattleState.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
+
+        PlayerIdle.SetActive(true);
+        PlayerMeteor.SetActive(false);
+        MeteorCamera.enabled = false;
+        mainCamera.enabled = true;
+
     }
 
     private Vector3 GetMeteorPosition(int index)
@@ -307,6 +346,11 @@ public class BattleSystem : MonoBehaviour
         // Add 25 to the player's currentHP
         playerUnit.hpAmount += 30;
 
+        PlayerIdle.SetActive(false);
+        PlayerBuff.SetActive(true);
+        buffCamera.enabled = true;
+        mainCamera.enabled = false;
+
         // Ensure the player's currentHP doesn't exceed the maximumHP
         if (playerUnit.hpAmount > playerUnit.maxHPAmount)
         {
@@ -326,6 +370,12 @@ public class BattleSystem : MonoBehaviour
         // Destroy the healing particle system
         Destroy(particleSystemGO);
 
+        // Switch back to the main camera
+        buffCamera.enabled = false;
+        mainCamera.enabled = true;
+        PlayerIdle.SetActive(true);
+        PlayerBuff.SetActive(false);
+
         state = BattleState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
@@ -335,7 +385,11 @@ public class BattleSystem : MonoBehaviour
         // Add 25 to the player's Attack Stat
         playerUnit.dealDamage += 15;
 
-       
+        PlayerIdle.SetActive(false);
+        PlayerBuff.SetActive(true);
+        buffCamera.enabled = true;
+        mainCamera.enabled = false;
+
         dialogText.text = "You have increased you're testostorne!";
 
         // Spawn a particle system on the player for 3 seconds
@@ -347,6 +401,12 @@ public class BattleSystem : MonoBehaviour
 
         // Destroy the healing particle system
         Destroy(particleSystemGO);
+       
+        // Switch back to the main camera
+        buffCamera.enabled = false;
+        mainCamera.enabled = true;
+        PlayerIdle.SetActive(true);
+        PlayerBuff.SetActive(false);
 
         state = BattleState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
