@@ -12,16 +12,20 @@ public class Leveling : MonoBehaviour
     public SaveSystem earnExpAmount;
 
     [SerializeField] bool isLevelUp;
+    [SerializeField] GameObject levelUpCanvas;
+    [SerializeField] GameObject abilityUnlock;
+
 
     public void Start()
     {
-        
+        abilityUnlock.SetActive(false);
     }
 
     public void Update()
     {
         //Click to gain XP
         GainEvenMoreEXP();
+        CheckLevel();
     }
 
     public void AddExperience(int amount)
@@ -40,6 +44,7 @@ public class Leveling : MonoBehaviour
                 levelSave.hpAmount += 100;
                 levelSave.maxHPAmount += 100;
                 levelSave.dealDamage += 20;
+                levelUpCanvas.SetActive(true);
                 ToggleBoolean();
             }
             return;
@@ -78,5 +83,14 @@ public class Leveling : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f); // Wait for 2 seconds
         isLevelUp = false;
+        levelUpCanvas.SetActive(false);
+    }
+
+    private void CheckLevel()
+    {
+        if (levelSave._levelVar == 2)
+        {
+            abilityUnlock.SetActive(true);
+        }
     }
 }
