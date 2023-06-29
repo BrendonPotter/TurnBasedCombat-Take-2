@@ -5,14 +5,22 @@ using UnityEngine;
 public class Key : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
-    [SerializeField] private Door grabKey;
+    [SerializeField] private WorldState grabKey;
 
     public string InteractionPrompt { get => prompt; }
     public bool Interact(InteractSystem interactor)
     {
-        grabKey.haveKey= true;
+        grabKey.obtainKey= true;
         Debug.Log("Obtain key!");
         Destroy(this.gameObject);
         return true;
+    }
+
+    private void Update()
+    {
+        if (grabKey.obtainKey == true)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
