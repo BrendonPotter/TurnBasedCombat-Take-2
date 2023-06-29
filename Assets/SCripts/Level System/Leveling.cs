@@ -13,12 +13,16 @@ public class Leveling : MonoBehaviour
 
     [SerializeField] bool isLevelUp;
     [SerializeField] GameObject levelUpCanvas;
-    [SerializeField] GameObject abilityUnlock;
+
+    //Unlock Level
+    [SerializeField] GameObject meteorUnlock;
+    [SerializeField] GameObject bullyUnlock;
 
 
     public void Start()
     {
-        abilityUnlock.SetActive(false);
+        meteorUnlock.SetActive(false);
+        bullyUnlock.SetActive(false);
     }
 
     public void Update()
@@ -88,9 +92,13 @@ public class Leveling : MonoBehaviour
 
     private void CheckLevel()
     {
-        if (levelSave._levelVar == 2)
+        if (levelSave._levelVar >= 2)
         {
-            abilityUnlock.SetActive(true);
+            meteorUnlock.SetActive(true);
+        }
+        if (levelSave._levelVar >= 5)
+        {
+            bullyUnlock.SetActive(true);
         }
     }
 }

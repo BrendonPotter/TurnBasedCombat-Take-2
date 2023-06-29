@@ -5,13 +5,15 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
-    public bool haveKey;
+    [SerializeField] private WorldState grabKey;
 
+    private bool alreadyInteract;
     public string InteractionPrompt { get => prompt; }
     public bool Interact(InteractSystem interactor)
     {
-        if(haveKey == true)
+        if(grabKey.obtainKey == true)
         {
+            alreadyInteract = true;
             Debug.Log("Opening door!");
             Destroy(this.gameObject);
         }
@@ -20,5 +22,13 @@ public class Door : MonoBehaviour, IInteract
             Debug.Log("Gate Locked");
         }
         return true;
+    }
+
+    private void Update()
+    {
+        if (grabKey.obtainKey == true && alreadyInteract == true)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
