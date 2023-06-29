@@ -61,10 +61,13 @@ public class BattleSystem : MonoBehaviour
     public Leveling earnEXP;
     public SaveSystem playerUnit;
     private Unit enemyUnit;
-
+    
+    //Attack Button panals
     public GameObject attackFleePanel;
     public GameObject abilityChoicePanel;
-
+    [SerializeField] GameObject mageAbilityPanel;
+    [SerializeField] GameObject hunterAbilityPanel;
+ 
     public Button meteorShower;
     public Button lightingStrike;
     public Button fireBall;
@@ -128,7 +131,7 @@ public class BattleSystem : MonoBehaviour
         PlayerTurn();
     }
 
-    IEnumerator PlayerAttack()
+    IEnumerator SingleShot()
     {
 
         //Damage the enemy
@@ -140,18 +143,33 @@ public class BattleSystem : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        //Check if enemy is dead
-        if (isDead)
+        if (hunterSpawnSingleGO.activeSelf == true)
         {
-            state = BattleState.WON;
-            EndBattle();
+            if (isDead)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
         }
-        else
+        else if (hunterSpawnSingleGO.activeSelf == false)
         {
-            state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+
+            if (isDead)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.PLAYERTWOTURN;
+                PlayerTwo();
+            }
         }
-        //Change State Based on what happened
     }
 
     IEnumerator PlayerAttackFireball()
@@ -732,7 +750,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurn()
     {
-        abilityChoicePanel.SetActive(false);
+        mageAbilityPanel.SetActive(false);
+        hunterAbilityPanel.SetActive(false);
         attackFleePanel.SetActive(true);
 
         if(lightingStrikeCD != 0)
@@ -795,7 +814,8 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTwo()
     {
-        abilityChoicePanel.SetActive(false);
+        hunterAbilityPanel.SetActive(false);
+        mageAbilityPanel.SetActive(false);
         attackFleePanel.SetActive(true);
 
         if (lightingStrikeCD != 0)
@@ -856,23 +876,27 @@ public class BattleSystem : MonoBehaviour
         dialogText.text = "Choose an action";
     }
 
-    
 
-    public void OnAttackButton()
-    {
-        meteorShower.interactable = false;
-        lightingStrike.interactable = false;
-        tripleArrow.interactable = false;
-        fireBall.interactable = false;
-        healing.interactable = false;
 
-        if(state != BattleState.PLAYERTURN)
-        {
-            return;
-        }
+    //public void OnAttackButton()
+    //{
+    //    if (state == BattleState.PLAYERTURN)
+    //    {
+    //        tripleArrow.interactable = false;
+    //    }
+    //    meteorShower.interactable = false;
+    //    lightingStrike.interactable = false;
+    //    tripleArrow.interactable = false;
+    //    fireBall.interactable = false;
+    //    healing.interactable = false;
 
-        StartCoroutine(PlayerAttack());
-    }
+    //    if (state != BattleState.PLAYERTURN)
+    //    {
+    //        return;
+    //    }
+
+    //    StartCoroutine(PlayerAttack());
+    //}
 
     public void OnFireballButton()
     {
@@ -1046,6 +1070,16 @@ public class BattleSystem : MonoBehaviour
         }
 
         StartCoroutine(MightySlash());
+    }
+
+    public void OnSingleShot()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        StartCoroutine(SingleShot());
     }
     //public void OnDefendButton()
     //{

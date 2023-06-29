@@ -5,10 +5,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+
 public class AttackButton : MonoBehaviour
 {
+    public BattleState state;
+
+    [SerializeField] GameObject HunterSpawnSingle;
+
+    //Panels
     public GameObject attackFleePanel;
     public GameObject abilityChoicePanel;
+    [SerializeField] GameObject hunterAttackPanel;
+    [SerializeField] GameObject mageAttackPanel;
 
     public Button fleeButton;
     public Button attackButton;
@@ -17,13 +26,46 @@ public class AttackButton : MonoBehaviour
     public Text unsuccessfulFlee;
 
     public string mainScene;
+
+    private void Awake()
+    {
+        state = BattleState.PLAYERTURN;
+    }
     public void OnAttackButton()
     {
-        Debug.Log("Button is pressed");
-        abilityChoicePanel.SetActive(true);
-        Debug.Log("Panel is active");
-        attackFleePanel.SetActive(false);
-        Debug.Log("Panel is disabled");
+
+        if (state == BattleState.PLAYERTURN)
+        {
+            if (HunterSpawnSingle.activeSelf == true)
+            {
+                Debug.Log("Button is pressed");
+                hunterAttackPanel.SetActive(true);
+                Debug.Log("Panel is active");
+                attackFleePanel.SetActive(false);
+                Debug.Log("Panel is disabled");
+            }
+            else if (HunterSpawnSingle.activeSelf == false)
+            {
+                Debug.Log("Button is pressed");
+                hunterAttackPanel.SetActive(true);
+                Debug.Log("Panel is active");
+                attackFleePanel.SetActive(false);
+                Debug.Log("Panel is disabled");
+
+                state = BattleState.PLAYERTWOTURN;
+
+            }
+        }
+        else if (state == BattleState.PLAYERTWOTURN)
+        {
+            Debug.Log("Button is pressed");
+            mageAttackPanel.SetActive(true);
+            Debug.Log("Panel is active");
+            attackFleePanel.SetActive(false);
+            Debug.Log("Panel is disabled");
+
+            state = BattleState.PLAYERTURN;
+        }
     }
 
     public void OnFleeButton()
