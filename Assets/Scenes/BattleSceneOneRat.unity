@@ -3594,7 +3594,8 @@ MonoBehaviour:
   earnExpAmount: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   isLevelUp: 0
   levelUpCanvas: {fileID: 1197058276}
-  abilityUnlock: {fileID: 1476716336}
+  meteorUnlock: {fileID: 1476716336}
+  bullyUnlock: {fileID: 2083154017}
 --- !u!1 &898189323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4745,10 +4746,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1285614752}
-  - {fileID: 1190880465}
   - {fileID: 1571907196}
   - {fileID: 287010364}
-  - {fileID: 1191397415}
   m_Father: {fileID: 304932994}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8140,8 +8139,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -3.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1191939617}
+  m_Children: []
   m_Father: {fileID: 1024455940}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
