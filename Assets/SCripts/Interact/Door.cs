@@ -5,11 +5,20 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
+    public bool haveKey;
 
     public string InteractionPrompt { get => prompt; }
     public bool Interact(InteractSystem interactor)
     {
-        Debug.Log("Opening door!");
+        if(haveKey == true)
+        {
+            Debug.Log("Opening door!");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Debug.Log("Gate Locked");
+        }
         return true;
     }
 }

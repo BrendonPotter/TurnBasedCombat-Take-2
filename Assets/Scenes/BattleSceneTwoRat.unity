@@ -270,7 +270,7 @@ MonoBehaviour:
   playerHUD: {fileID: 1769843656}
   enemyHUD: {fileID: 496764632}
   enemyTwoHUD: {fileID: 1214025553}
-  explorationScene: MainScene
+  explorationScene: ExploreTest
   enemyPosition1obj: {fileID: 810608003}
   enemyPosition2obj: {fileID: 1790561233}
   earnEXP: {fileID: 879153051}
@@ -304,13 +304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbabf2b623b135c4395e825fd88c6d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackFleePanel: {fileID: 0}
-  abilityChoicePanel: {fileID: 0}
-  fleeButton: {fileID: 0}
-  attackButton: {fileID: 0}
-  succesfulFlee: {fileID: 0}
-  unsuccessfulFlee: {fileID: 0}
-  mainScene: 
+  attackFleePanel: {fileID: 2123054893}
+  abilityChoicePanel: {fileID: 470284706}
+  fleeButton: {fileID: 1229529762}
+  attackButton: {fileID: 150637653}
+  succesfulFlee: {fileID: 2119650944}
+  unsuccessfulFlee: {fileID: 2119650944}
+  mainScene: ExploreTest
 --- !u!1 &48444882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,7 +1580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &470284707
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2966,6 +2966,9 @@ MonoBehaviour:
   levelSave: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   expThreshSave: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   earnExpAmount: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  isLevelUp: 0
+  levelUpCanvas: {fileID: 0}
+  abilityUnlock: {fileID: 0}
 --- !u!1 &898189323
 GameObject:
   m_ObjectHideFlags: 0
@@ -7078,7 +7081,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2123054894
 RectTransform:
   m_ObjectHideFlags: 0
