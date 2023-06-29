@@ -83,9 +83,8 @@ public class BattleSystem : MonoBehaviour
     public int fireBallCD;
     public int healingCD;
 
-<<<<<<< HEAD
     public CheckCheckpoint playerCheck;
-=======
+
     //amimations
     public GameObject PlayerIdle;
     public GameObject PlayerFireball;
@@ -93,8 +92,6 @@ public class BattleSystem : MonoBehaviour
     public GameObject PlayerMeteor;
     public GameObject PlayerTripleArrow;
 
-
->>>>>>> be76c71cd1fdc539b7ff443400e562783750f345
 
 
     // Start is called before the first frame update
@@ -159,46 +156,21 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackFireball()
     {
-<<<<<<< HEAD
+        // Commented out from merge conflict - 2023/06/29 AG
+        //// Switch to the fireball camera
+        //PlayerIdle.SetActive(false);
+        //PlayerFireball.SetActive(true);
+        //fireballCamera.enabled = true;
+        //mainCamera.enabled = false;
+
+        //// Play the attack animation on the player
+        //// Activate the player GameObject
+        ////playerPrefab.SetActive(true);
+        ////  Animator playerAnimator = playerPrefab.GetComponent<Animator>();
+        //// playerAnimator.Play("Fireball");
+        ////I have no clue how to get this animation to reference properly
+
         if (state == BattleState.PLAYERTURN)
-=======
-        
-
-        // Switch to the fireball camera
-        PlayerIdle.SetActive(false);
-        PlayerFireball.SetActive(true);
-        fireballCamera.enabled = true;
-        mainCamera.enabled = false;
-        
-        // Play the attack animation on the player
-        // Activate the player GameObject
-        //playerPrefab.SetActive(true);
-        //  Animator playerAnimator = playerPrefab.GetComponent<Animator>();
-        // playerAnimator.Play("Fireball");
-        //I have no clue how to get this animation to reference properly
-
-        // Spawn a fireball prefab
-        GameObject fireballGO = Instantiate(fireballPrefab, playerPosition.position, Quaternion.identity);
-        Fireball fireball = fireballGO.GetComponent<Fireball>();
-        fireball.SetTarget(enemyPosition.position);
-
-        // Wait for the fireball to reach the enemy
-        yield return new WaitForSeconds(fireball.travelTime);
-
-        // Damage the enemy
-        bool isDead = enemyUnit.TakeDamage(playerUnit.dealDamage + 25);
-
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogText.text = "You cast a fireball!";
-
-        // Destroy the fireball
-        Destroy(fireballGO);
-        
-        yield return new WaitForSeconds(2f);
-
-        // Check if enemy is dead
-        if (isDead)
->>>>>>> be76c71cd1fdc539b7ff443400e562783750f345
         {
             if (hunterSpawnSingleGO.activeSelf == true)
             {
@@ -301,7 +273,7 @@ public class BattleSystem : MonoBehaviour
                 StartCoroutine(EnemyTurn());
             }
         }
-        
+
         // Switch back to the main camera
         fireballCamera.enabled = false;
         mainCamera.enabled = true;
@@ -311,17 +283,14 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator PlayerAttackTripleArrow()
     {
-<<<<<<< HEAD
-        if (state == BattleState.PLAYERTURN)
-=======
-        // Switch to the  camera
-        PlayerIdle.SetActive(false);
-        PlayerTripleArrow.SetActive(true);
-        arrowCamera.enabled = true;
-        mainCamera.enabled = false;
+        // Commented out from merge conflict - 2023/06/29 AG
+        //// Switch to the  camera
+        //PlayerIdle.SetActive(false);
+        //PlayerTripleArrow.SetActive(true);
+        //arrowCamera.enabled = true;
+        //mainCamera.enabled = false;
 
-        for (int i = 0; i < 3; i++)
->>>>>>> be76c71cd1fdc539b7ff443400e562783750f345
+        if (state == BattleState.PLAYERTURN)
         {
             if (hunterSpawnSingleGO.activeSelf == true)
             {
