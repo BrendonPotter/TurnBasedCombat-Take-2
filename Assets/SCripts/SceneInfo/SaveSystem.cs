@@ -6,6 +6,7 @@ using UnityEngine.Events;
 [CreateAssetMenu]
 public class SaveSystem : ScriptableObject
 {
+    public string characterType;
     
     public float _levelVar = 1;
 
