@@ -16,13 +16,15 @@ public class Leveling : MonoBehaviour
 
     //Unlock Level
     [SerializeField] GameObject meteorUnlock;
-    [SerializeField] GameObject bullyUnlock;
+    [SerializeField] GameObject trippleArrowUnlock;
+    [SerializeField] GameObject lightingStrikeUnlock;
+    [SerializeField] GameObject volleyUnlock;
 
 
     public void Start()
     {
         meteorUnlock.SetActive(false);
-        bullyUnlock.SetActive(false);
+        trippleArrowUnlock.SetActive(false);
     }
 
     public void Update()
@@ -95,13 +97,21 @@ public class Leveling : MonoBehaviour
         //Hunter abilities
         if (levelSave._levelVar >= 5)
         {
-            meteorUnlock.SetActive(true);
+            volleyUnlock.SetActive(true);
         }
         if (levelSave._levelVar >= 10)
         {
             //Change to tripple arrow
-            bullyUnlock.SetActive(true);
+            trippleArrowUnlock.SetActive(true);
         }
         //Mage abilities
+        if(levelSave._levelVar >= 5)
+        {
+            meteorUnlock.SetActive(true);
+        }
+        if(levelSave._levelVar >= 10)
+        {
+            lightingStrikeUnlock.SetActive(true);
+        }
     }
 }

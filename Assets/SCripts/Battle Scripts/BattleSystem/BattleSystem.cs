@@ -44,7 +44,9 @@ public class BattleSystem : MonoBehaviour
     //Player and Enemy HUD
     public Text dialogText;
 
-    public PlayerHUD playerHUD;
+    public PlayerHUD hunterSingleHUD;
+    public PlayerHUD hunterDuoHUD;
+    public PlayerHUD mageDuoHUD;
     public BattleHUD enemyHUD;
 
     public string explorationScene;
@@ -120,8 +122,12 @@ public class BattleSystem : MonoBehaviour
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has appear";
 
-        playerHUD.SetHUD();
-        playerHUD.SetLevelNum();
+        hunterSingleHUD.SetHUD();
+        hunterSingleHUD.SetLevelNum();
+        hunterDuoHUD.SetHUD();
+        hunterDuoHUD.SetLevelNum();
+        mageDuoHUD.SetHUD();
+        mageDuoHUD.SetLevelNum();
         enemyHUD.SetHUD(enemyUnit);
 
 
@@ -432,6 +438,7 @@ public class BattleSystem : MonoBehaviour
         PlayerMeteor.SetActive(true);
         MeteorCamera.enabled = true;
         mainCamera.enabled = false;
+        
 
         for (int i = 0; i < 5; i++)
         {
@@ -537,7 +544,7 @@ public class BattleSystem : MonoBehaviour
             playerUnit.hpAmount = playerUnit.maxHPAmount;
         }
 
-        playerHUD.SetHP(playerUnit.hpAmount);
+        hunterSingleHUD.SetHP(playerUnit.hpAmount);
         dialogText.text = "You have been healed!";
 
         // Spawn a healing particle system on the player for 3 seconds
@@ -654,7 +661,7 @@ public class BattleSystem : MonoBehaviour
             playerUnit.hpAmount = playerUnit.maxHPAmount;
         }
 
-        playerHUD.SetHP(playerUnit.hpAmount);
+        hunterSingleHUD.SetHP(playerUnit.hpAmount);
         dialogText.text = "You have swiped their life force!";
 
         // Spawn a healing particle system on the player for 3 seconds
@@ -708,26 +715,81 @@ public class BattleSystem : MonoBehaviour
 
     IEnumerator EnemyTurn()
     {
-        dialogText.text = enemyUnit.unitName + "attacks";
-
-        yield return new WaitForSeconds(1f);
-
-        bool isDead = playerHUD.TakeDamage(enemyUnit.damage);
-
-        playerHUD.SetHP(playerUnit.hpAmount);
-
-        yield return new WaitForSeconds(1f);
-
-        if (isDead)
+        if (hunterSpawnSingleGO.activeSelf == true)
         {
-            state = BattleState.LOST;
-            EndBattle();
+            dialogText.text = enemyUnit.unitName + "attacks";
+
+            yield return new WaitForSeconds(1f);
+
+            bool isDead = hunterSingleHUD.TakeDamage(enemyUnit.damage);
+
+            hunterSingleHUD.SetHP(playerUnit.hpAmount);
+
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+                enemyUnit.damage = enemyUnit.trueDamage;
+            }
         }
-        else
+        else if(hunterSpawnSingleGO.activeSelf == false)
         {
-            state = BattleState.PLAYERTURN;
-            PlayerTurn();
-            enemyUnit.damage = enemyUnit.trueDamage;
+            if(hunterSpawnDuoGO.activeSelf == true)
+            {
+                dialogText.text = enemyUnit.unitName + "attacks";
+
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = hunterSingleHUD.TakeDamage(enemyUnit.damage);
+
+                hunterDuoHUD.SetHP(playerUnit.hpAmount);
+
+                yield return new WaitForSeconds(1f);
+
+                if (isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                }
+                else
+                {
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                    enemyUnit.damage = enemyUnit.trueDamage;
+                }
+
+            }
+            else if(hunterSpawnDuoGO.activeSelf == false)
+            {
+                dialogText.text = enemyUnit.unitName + "attacks";
+
+                yield return new WaitForSeconds(1f);
+
+                bool isDead = mageDuoHUD.TakeDamage(enemyUnit.damage);
+
+                mageDuoHUD.SetHP(playerUnit.hpAmount);
+
+                yield return new WaitForSeconds(1f);
+
+                if (isDead)
+                {
+                    state = BattleState.LOST;
+                    EndBattle();
+                }
+                else
+                {
+                    state = BattleState.PLAYERTURN;
+                    PlayerTurn();
+                    enemyUnit.damage = enemyUnit.trueDamage;
+                }
+            }
         }
     }
 
@@ -977,7 +1039,7 @@ public class BattleSystem : MonoBehaviour
         meteorShowerCD = 2;
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
 
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleState.PLAYERTWOTURN)
         {
             return;
         }
@@ -993,7 +1055,7 @@ public class BattleSystem : MonoBehaviour
         fireBall.interactable = false;
         healing.interactable = false;
 
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleState.PLAYERTWOTURN)
         {
             return;
         }
