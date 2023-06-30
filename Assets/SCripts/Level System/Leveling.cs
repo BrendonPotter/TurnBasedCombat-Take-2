@@ -92,13 +92,16 @@ public class Leveling : MonoBehaviour
 
     private void CheckLevel()
     {
-        if (levelSave._levelVar >= 2)
+        //Hunter abilities
+        if (levelSave._levelVar >= 5)
         {
             meteorUnlock.SetActive(true);
         }
-        if (levelSave._levelVar >= 5)
+        if (levelSave._levelVar >= 10)
         {
+            //Change to tripple arrow
             bullyUnlock.SetActive(true);
         }
+        //Mage abilities
     }
 }
