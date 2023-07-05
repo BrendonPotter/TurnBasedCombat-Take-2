@@ -4543,7 +4543,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 564286709}
-  - component: {fileID: 564286708}
   m_Layer: 0
   m_Name: PlayerSpawn
   m_TagString: Untagged
@@ -4551,20 +4550,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &564286708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564286707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5c0156debf06bf4b8fef2bf9ec694ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 3893294198349660717}
-  playerSpawnPoint: {fileID: 564286709}
 --- !u!4 &564286709
 Transform:
   m_ObjectHideFlags: 0
