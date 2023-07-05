@@ -26,4 +26,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ResultsScreen.unity
     guid: bba1c6373a620014da9e46a7a2439550
+  - enabled: 1
+    path: Assets/Scenes/Minigames/VirtualInsanity.unity
+    guid: 15251ab7f7ab9624bb5c458df8989ce5
+  - enabled: 1
+    path: Assets/Scenes/BanditHideout.unity
+    guid: ac8a487bd44fd704d8b8156d0c3b827a
   m_configObjects: {}
