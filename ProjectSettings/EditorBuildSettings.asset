@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BanditHideout.unity
     guid: ac8a487bd44fd704d8b8156d0c3b827a
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: e95171261476e584a81e3e3bb573c92e
   m_configObjects: {}
