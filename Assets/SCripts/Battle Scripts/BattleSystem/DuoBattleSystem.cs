@@ -5,15 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public enum BattleState {START, PLAYERTURN,PLAYERTWOTURN, ENEMYTURN, WON, LOST }
+public enum BattleStateDuo {START, PLAYERTURN, PLAYERTWOTURN, ENEMYTURN, ENEMYTWOTURN, WON, LOST }
 
 
-public class BattleSystem : MonoBehaviour
+public class DuoBattleSystem : MonoBehaviour
 {
 
     public GameObject[] enemyPrefabs;
 
-    public BattleState state;
+    public BattleStateDuo state;
 
     //Prefab
     public GameObject playerPrefab;
@@ -35,11 +35,15 @@ public class BattleSystem : MonoBehaviour
     public Transform hunterSpawnDuo;
     public Transform mageSpawnDuo;
     public Transform enemyPosition;
+    [SerializeField] Transform enemyPositionOne;
+    [SerializeField] Transform enemyPositionTwo;
 
     //Gameobjects for transform to check if active
     [SerializeField] GameObject hunterSpawnSingleGO;
     [SerializeField] GameObject hunterSpawnDuoGO;
     [SerializeField] GameObject mageSpawnDuoGO;
+    [SerializeField] GameObject enemyPositionGO;
+    [SerializeField] GameObject enemyPosition2GO;
 
     //Player and Enemy HUD
     public Text dialogText;
@@ -48,6 +52,7 @@ public class BattleSystem : MonoBehaviour
     public PlayerHUD hunterDuoHUD;
     public PlayerHUD mageDuoHUD;
     public BattleHUD enemyHUD;
+    public BattleHUD enemyTwoHUD;
 
     public string explorationScene;
 
@@ -63,6 +68,7 @@ public class BattleSystem : MonoBehaviour
     public Leveling earnEXP;
     public SaveSystem playerUnit;
     private Unit enemyUnit;
+    private Unit enemyUnitTwo;
     
     //Attack Button panals
     public GameObject attackFleePanel;
@@ -103,22 +109,33 @@ public class BattleSystem : MonoBehaviour
     void Start()
     {
         playerCheck.CheckPlayerNumber();
-        state = BattleState.START;
+        state = BattleStateDuo.START;
         StartCoroutine(SetupBattle());
         
+    }
+
+    public void Update()
+    {
+        CheckDeath();
+        CheckDeath2();
     }
 
     IEnumerator SetupBattle()
     {
 
         int enemyChoice1 = Random.Range(0, enemyPrefabs.Length);
+        int enemyChoice2 = Random.Range(0, enemyPrefabs.Length);
 
         GameObject playerGO = Instantiate(playerPrefab, hunterSpawnSingle);
         GameObject playerGOhunterDuo = Instantiate(playerPrefab, hunterSpawnDuo);
         GameObject playerGOMageDuo = Instantiate(playerPrefab, mageSpawnDuo);
 
-        GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPosition);
+        GameObject enemyGO = Instantiate(enemyPrefabs[enemyChoice1], enemyPositionOne);
         enemyUnit = enemyGO.GetComponent<Unit>();
+
+
+        GameObject enemyGOTwo = Instantiate(enemyPrefabs[enemyChoice2], enemyPositionTwo);
+        enemyUnitTwo = enemyGOTwo.GetComponent<Unit>();
 
         dialogText.text = "A wild " + enemyUnit.unitName + " has appear";
 
@@ -129,53 +146,114 @@ public class BattleSystem : MonoBehaviour
         mageDuoHUD.SetHUD();
         mageDuoHUD.SetLevelNum();
         enemyHUD.SetHUD(enemyUnit);
+        enemyTwoHUD.SetHUD(enemyUnitTwo);
 
 
         yield return new WaitForSeconds(2f);
 
-        state = BattleState.PLAYERTURN;
+        state = BattleStateDuo.PLAYERTURN;
         PlayerTurn();
     }
 
     IEnumerator SingleShot()
     {
-
-        //Damage the enemy
-        bool isDead =  enemyUnit.TakeDamage(playerUnit.dealDamage);
-
-
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogText.text = "the attack is successful!";
-
-        yield return new WaitForSeconds(2f);
-
-        if (hunterSpawnSingleGO.activeSelf == true)
+        if (enemyPositionGO == null && enemyPosition2GO == null)
         {
-            if (isDead)
+            state = BattleStateDuo.WON;
+            EndBattle();
+        }
+
+        else if (enemyPositionGO == null)
+        {
+
+            //Damage the enemy
+            enemyUnitTwo.TakeDamage(playerUnit.dealDamage);
+
+
+            enemyHUD.SetHP(enemyUnitTwo.currentHP);
+            dialogText.text = "the attack is successful!";
+
+            yield return new WaitForSeconds(2f);
+
+            if (hunterSpawnSingleGO.activeSelf == true)
             {
-                state = BattleState.WON;
-                EndBattle();
+
+                    state = BattleStateDuo.ENEMYTURN;
+                    StartCoroutine(EnemyTurn());
+
             }
-            else
+            else if (hunterSpawnSingleGO.activeSelf == false)
             {
-                state = BattleState.ENEMYTURN;
+
+                    state = BattleStateDuo.PLAYERTWOTURN;
+                    PlayerTwo();
+            }
+
+        }
+        else
+        {
+
+            //Damage the enemy
+            enemyUnit.TakeDamage(playerUnit.dealDamage);
+
+
+            enemyHUD.SetHP(enemyUnit.currentHP);
+            dialogText.text = "the attack is successful!";
+
+            yield return new WaitForSeconds(2f);
+
+            if (hunterSpawnSingleGO.activeSelf == true)
+            {
+
+                state = BattleStateDuo.ENEMYTURN;
                 StartCoroutine(EnemyTurn());
+                
             }
-        }
-        else if (hunterSpawnSingleGO.activeSelf == false)
-        {
+            else if (hunterSpawnSingleGO.activeSelf == false)
+            {
 
-            if (isDead)
-            {
-                state = BattleState.WON;
-                EndBattle();
-            }
-            else
-            {
-                state = BattleState.PLAYERTWOTURN;
+                state = BattleStateDuo.PLAYERTWOTURN;
                 PlayerTwo();
+
             }
         }
+
+            //Damage the enemy
+        //    bool isDead =  enemyUnit.TakeDamage(playerUnit.dealDamage);
+
+
+        //enemyHUD.SetHP(enemyUnit.currentHP);
+        //dialogText.text = "the attack is successful!";
+
+        //yield return new WaitForSeconds(2f);
+
+        //if (hunterSpawnSingleGO.activeSelf == true)
+        //{
+        //    if (isDead)
+        //    {
+        //        state = BattleStateDuo.WON;
+        //        EndBattle();
+        //    }
+        //    else
+        //    {
+        //        state = BattleStateDuo.ENEMYTURN;
+        //        StartCoroutine(EnemyTurn());
+        //    }
+        //}
+        //else if (hunterSpawnSingleGO.activeSelf == false)
+        //{
+
+        //    if (isDead)
+        //    {
+        //        state = BattleStateDuo.WON;
+        //        EndBattle();
+        //    }
+        //    else
+        //    {
+        //        state = BattleStateDuo.PLAYERTWOTURN;
+        //        PlayerTwo();
+        //    }
+        //}
     }
 
     IEnumerator PlayerAttackFireball()
@@ -194,7 +272,7 @@ public class BattleSystem : MonoBehaviour
         //// playerAnimator.Play("Fireball");
         ////I have no clue how to get this animation to reference properly
 
-        if (state == BattleState.PLAYERTURN)
+        if (state == BattleStateDuo.PLAYERTURN)
         {
             if (hunterSpawnSingleGO.activeSelf == true)
             {
@@ -218,16 +296,10 @@ public class BattleSystem : MonoBehaviour
                 yield return new WaitForSeconds(2f);
 
                 // Check if enemy is dead
-                if (isDead)
-                {
-                    state = BattleState.WON;
-                    EndBattle();
-                }
-                else
-                {
-                    state = BattleState.ENEMYTURN;
-                    StartCoroutine(EnemyTurn());
-                }
+
+                state = BattleStateDuo.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+
             }
 
             else if (hunterSpawnSingleGO.activeSelf == false)
@@ -254,17 +326,17 @@ public class BattleSystem : MonoBehaviour
                 // Check if enemy is dead
                 if (isDead)
                 {
-                    state = BattleState.WON;
+                    state = BattleStateDuo.WON;
                     EndBattle();
                 }
                 else
                 {
-                    state = BattleState.PLAYERTWOTURN;
+                    state = BattleStateDuo.PLAYERTWOTURN;
                     PlayerTwo();
                 }
             }
         }
-        else if (state == BattleState.PLAYERTWOTURN)
+        else if (state == BattleStateDuo.PLAYERTWOTURN)
         {
             // Spawn a fireball prefab
             GameObject fireballGO = Instantiate(fireballPrefab, hunterSpawnDuo.position, Quaternion.identity);
@@ -288,12 +360,12 @@ public class BattleSystem : MonoBehaviour
             // Check if enemy is dead
             if (isDead)
             {
-                state = BattleState.WON;
+                state = BattleStateDuo.WON;
                 EndBattle();
             }
             else
             {
-                state = BattleState.ENEMYTURN;
+                state = BattleStateDuo.ENEMYTURN;
                 StartCoroutine(EnemyTurn());
             }
         }
@@ -314,7 +386,7 @@ public class BattleSystem : MonoBehaviour
         //arrowCamera.enabled = true;
         //mainCamera.enabled = false;
 
-        if (state == BattleState.PLAYERTURN)
+        if (state == BattleStateDuo.PLAYERTURN)
         {
             if (hunterSpawnSingleGO.activeSelf == true)
             {
@@ -343,12 +415,12 @@ public class BattleSystem : MonoBehaviour
                 // Check if enemy is dead
                 if (enemyUnit.currentHP <= 0)
                 {
-                    state = BattleState.WON;
+                    state = BattleStateDuo.WON;
                     EndBattle();
                 }
                 else
                 {
-                    state = BattleState.ENEMYTURN;
+                    state = BattleStateDuo.ENEMYTURN;
                     StartCoroutine(EnemyTurn());
                 }
             }
@@ -379,17 +451,17 @@ public class BattleSystem : MonoBehaviour
                 // Check if enemy is dead
                 if (enemyUnit.currentHP <= 0)
                 {
-                    state = BattleState.WON;
+                    state = BattleStateDuo.WON;
                     EndBattle();
                 }
                 else
                 {
-                    state = BattleState.PLAYERTWOTURN;
+                    state = BattleStateDuo.PLAYERTWOTURN;
                     PlayerTwo();
                 }
             }
         }
-        else if (state == BattleState.PLAYERTWOTURN)
+        else if (state == BattleStateDuo.PLAYERTWOTURN)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -416,12 +488,12 @@ public class BattleSystem : MonoBehaviour
             // Check if enemy is dead
             if (enemyUnit.currentHP <= 0)
             {
-                state = BattleState.WON;
+                state = BattleStateDuo.WON;
                 EndBattle();
             }
             else
             {
-                state = BattleState.ENEMYTURN;
+                state = BattleStateDuo.ENEMYTURN;
                 StartCoroutine(EnemyTurn());
             }
         }
@@ -467,12 +539,12 @@ public class BattleSystem : MonoBehaviour
         // Check if enemy is dead
         if (isDead)
         {
-            state = BattleState.WON;
+            state = BattleStateDuo.WON;
             EndBattle();
         }
         else
         {
-            state = BattleState.ENEMYTURN;
+            state = BattleStateDuo.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
 
@@ -518,12 +590,12 @@ public class BattleSystem : MonoBehaviour
         // Check if enemy is dead
         if (isDead)
         {
-            state = BattleState.WON;
+            state = BattleStateDuo.WON;
             EndBattle();
         }
         else
         {
-            state = BattleState.ENEMYTURN;
+            state = BattleStateDuo.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
     }
@@ -565,7 +637,7 @@ public class BattleSystem : MonoBehaviour
         PlayerIdle.SetActive(true);
         PlayerBuff.SetActive(false);
 
-        state = BattleState.ENEMYTURN;
+        state = BattleStateDuo.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
 
@@ -597,7 +669,7 @@ public class BattleSystem : MonoBehaviour
         PlayerIdle.SetActive(true);
         PlayerBuff.SetActive(false);
 
-        state = BattleState.ENEMYTURN;
+        state = BattleStateDuo.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
 
@@ -620,7 +692,7 @@ public class BattleSystem : MonoBehaviour
         // Destroy the healing particle system
         Destroy(particleSystemGO);
 
-        state = BattleState.ENEMYTURN;
+        state = BattleStateDuo.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
 
@@ -642,7 +714,7 @@ public class BattleSystem : MonoBehaviour
         // Destroy the healing particle system
         Destroy(particleSystemGO);
 
-        state = BattleState.ENEMYTURN;
+        state = BattleStateDuo.ENEMYTURN;
         StartCoroutine(EnemyTurn());
     }
 
@@ -676,12 +748,12 @@ public class BattleSystem : MonoBehaviour
         //Check if enemy is dead
         if (isDead)
         {
-            state = BattleState.WON;
+            state = BattleStateDuo.WON;
             EndBattle();
         }
         else
         {
-            state = BattleState.ENEMYTURN;
+            state = BattleStateDuo.ENEMYTURN;
             StartCoroutine(EnemyTurn());
         }
 
@@ -703,12 +775,12 @@ public class BattleSystem : MonoBehaviour
         //Check if enemy is dead
         if (isDead)
         {
-            state = BattleState.WON;
+            state = BattleStateDuo.WON;
             EndBattle();
         }
         else
         {
-            state = BattleState.ENEMYTURN;
+            state = BattleStateDuo.ENEMYTURN;
             StartCoroutine(EnemyTurn());
             playerUnit.dealDamage = playerUnit.trueDamage;
         }
@@ -729,12 +801,12 @@ public class BattleSystem : MonoBehaviour
         // Check if enemy is dead
         if (isDead)
         {
-            state = BattleState.WON;
+            state = BattleStateDuo.WON;
             EndBattle();
         }
         else
         {
-            state = BattleState.PLAYERTWOTURN;
+            state = BattleStateDuo.PLAYERTWOTURN;
             PlayerTwo();
         }
     }
@@ -755,12 +827,12 @@ public class BattleSystem : MonoBehaviour
 
             if (isDead)
             {
-                state = BattleState.LOST;
+                state = BattleStateDuo.LOST;
                 EndBattle();
             }
             else
             {
-                state = BattleState.PLAYERTURN;
+                state = BattleStateDuo.PLAYERTURN;
                 PlayerTurn();
                 enemyUnit.damage = enemyUnit.trueDamage;
             }
@@ -781,12 +853,12 @@ public class BattleSystem : MonoBehaviour
 
                 if (isDead)
                 {
-                    state = BattleState.LOST;
+                    state = BattleStateDuo.LOST;
                     EndBattle();
                 }
                 else
                 {
-                    state = BattleState.PLAYERTURN;
+                    state = BattleStateDuo.PLAYERTURN;
                     PlayerTurn();
                     enemyUnit.damage = enemyUnit.trueDamage;
                 }
@@ -806,12 +878,12 @@ public class BattleSystem : MonoBehaviour
 
                 if (isDead)
                 {
-                    state = BattleState.LOST;
+                    state = BattleStateDuo.LOST;
                     EndBattle();
                 }
                 else
                 {
-                    state = BattleState.PLAYERTURN;
+                    state = BattleStateDuo.PLAYERTURN;
                     PlayerTurn();
                     enemyUnit.damage = enemyUnit.trueDamage;
                 }
@@ -822,14 +894,14 @@ public class BattleSystem : MonoBehaviour
 
     void EndBattle()
     {
-        if(state == BattleState.WON)
+        if(state == BattleStateDuo.WON)
         {
             dialogText.text = "You won the Battle!";
             earnEXP.GainEXP();
             StartCoroutine(SceneSwitchDelay());
 
         }
-        else if(state == BattleState.LOST)
+        else if(state == BattleStateDuo.LOST)
         {
             dialogText.text = "you have died";
             StartCoroutine(SceneSwitchDelay());
@@ -988,7 +1060,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnFireballButton()
     {
-        if(state == BattleState.PLAYERTURN)
+        if(state == BattleStateDuo.PLAYERTURN)
         {
             meteorShower.interactable = false;
             lightingStrike.interactable = false;
@@ -999,7 +1071,7 @@ public class BattleSystem : MonoBehaviour
             fireBallCD = 0;
             fireBallCDText.text = "(" + fireBallCD + ")";
 
-            if (state != BattleState.PLAYERTURN)
+            if (state != BattleStateDuo.PLAYERTURN)
             {
                 return;
             }
@@ -1010,7 +1082,7 @@ public class BattleSystem : MonoBehaviour
 
             StartCoroutine(PlayerAttackFireball());
         }
-        else if(state == BattleState.PLAYERTWOTURN)
+        else if(state == BattleStateDuo.PLAYERTWOTURN)
         {
             meteorShower.interactable = false;
             lightingStrike.interactable = false;
@@ -1021,7 +1093,7 @@ public class BattleSystem : MonoBehaviour
             fireBallCD = 0;
             fireBallCDText.text = "(" + fireBallCD + ")";
 
-            if (state != BattleState.PLAYERTWOTURN)
+            if (state != BattleStateDuo.PLAYERTWOTURN)
             {
                 return;
             }
@@ -1046,7 +1118,7 @@ public class BattleSystem : MonoBehaviour
         trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
 
 
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1065,7 +1137,7 @@ public class BattleSystem : MonoBehaviour
         meteorShowerCD = 2;
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
 
-        if (state != BattleState.PLAYERTWOTURN)
+        if (state != BattleStateDuo.PLAYERTWOTURN)
         {
             return;
         }
@@ -1081,7 +1153,7 @@ public class BattleSystem : MonoBehaviour
         fireBall.interactable = false;
         healing.interactable = false;
 
-        if (state != BattleState.PLAYERTWOTURN)
+        if (state != BattleStateDuo.PLAYERTWOTURN)
         {
             return;
         }
@@ -1102,7 +1174,7 @@ public class BattleSystem : MonoBehaviour
         healingCD = 4;
         healingCDText.text = "(" + healingCD + ")";
 
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1112,7 +1184,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnRageButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1122,7 +1194,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnBlockButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1132,7 +1204,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnVolleyButton()
     {
-        if(state != BattleState.PLAYERTURN)
+        if(state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1143,7 +1215,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnBullyButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1153,7 +1225,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnHealthStealButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1163,7 +1235,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnMightySlashButton()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }
@@ -1173,7 +1245,7 @@ public class BattleSystem : MonoBehaviour
 
     public void OnSingleShot()
     {
-        if (state != BattleState.PLAYERTURN)
+        if (state != BattleStateDuo.PLAYERTURN)
         {
             return;
         }

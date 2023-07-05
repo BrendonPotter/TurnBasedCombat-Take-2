@@ -8,7 +8,7 @@ using TMPro;
 public enum BattleStateTwo { START, PLAYERTURN, ENEMYONETURN, ENEMYTWOTURN, WON, LOST }
 
 
-public class TwoEnemyBattleSystem : MonoBehaviour
+public class FailTwoEnemyBattleSystem : MonoBehaviour
 {
 
     public GameObject[] enemyPrefabs;
