@@ -14940,6 +14940,10 @@ PrefabInstance:
       propertyPath: grabKey
       value: 
       objectReference: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
+    - target: {fileID: 8933087793147206974, guid: ec02ba7a27c54d645830718ab2e6ff44, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec02ba7a27c54d645830718ab2e6ff44, type: 3}
 --- !u!23 &1921693806
