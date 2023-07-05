@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: New World State
   m_EditorClassIdentifier: 
   obtainKey: 0
+  contactEnemy1: 0
+  winVsEnemy1: 0
+  contactEnemy2: 0
+  winVsEnemy2: 0
