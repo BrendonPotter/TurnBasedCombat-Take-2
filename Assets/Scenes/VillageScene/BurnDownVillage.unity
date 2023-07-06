@@ -9953,6 +9953,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 4796990449785205995, guid: 83d807b8f8cdf5846892d87bda3c8427, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4796990450688887985, guid: 83d807b8f8cdf5846892d87bda3c8427, type: 3}
       propertyPath: m_text
       value: '(JR)
@@ -14600,6 +14604,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  worldState: {fileID: 0}
+  playerPosition: {fileID: 0}
+  spawnPosition: {fileID: 0}
 --- !u!1001 &1844343045
 PrefabInstance:
   m_ObjectHideFlags: 0

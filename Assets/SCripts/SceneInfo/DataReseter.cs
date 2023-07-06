@@ -7,8 +7,8 @@ public class DataReseter : MonoBehaviour
     [SerializeField] SaveSystem hunterStats;
     [SerializeField] WorldState worldState;
 
-    [SerializeField] Transform playerPosition;
-    [SerializeField] Transform spawnPosition;
+    //[SerializeField] Transform playerPosition;
+    //[SerializeField] Transform spawnPosition;
 
 
 
@@ -16,7 +16,7 @@ public class DataReseter : MonoBehaviour
     void OnApplicationQuit()
     {
         ResetData();
-        ResetMovemtent();
+        //ResetMovemtent();
         ResetWorldState();
     }
 
@@ -31,10 +31,10 @@ public class DataReseter : MonoBehaviour
         hunterStats.dealDamage = 10;
     }
 
-    void ResetMovemtent()
-    {
-        playerPosition.position = transform.position;
-    }
+    //void ResetMovemtent()
+    //{
+    //    playerPosition.position = transform.position;
+    //}
 
     void ResetWorldState()
     {

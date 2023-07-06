@@ -15,6 +15,10 @@ public class WorldState : ScriptableObject
     public bool contactEnemy2;
     public bool winVsEnemy2;
 
+    [Header("Enemy 3")]
+    public bool contactEnemy3;
+    public bool winVsEnemy3;
+
     public bool Value
     {
         get { return obtainKey; }
