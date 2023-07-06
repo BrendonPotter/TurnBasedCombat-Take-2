@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LevelSelect.unity
     guid: e95171261476e584a81e3e3bb573c92e
+  - enabled: 1
+    path: Assets/Scenes/Worship.unity
+    guid: b0298a0bae3505d4599daac14185a782
   m_configObjects: {}
