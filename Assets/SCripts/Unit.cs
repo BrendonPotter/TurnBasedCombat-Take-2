@@ -12,9 +12,24 @@ public class Unit : MonoBehaviour
 
     public int maxHP;
     public int currentHP;
+    public int defaultHealth;
 
-    
 
+    [SerializeField] SaveSystem enemyStats;
+
+    private void Start()
+    {
+        SetEnemyState();
+    }
+    public void SetEnemyState()
+    {
+        unitLevel = Mathf.RoundToInt(enemyStats._levelVar);
+        maxHP = defaultHealth + (100 * unitLevel/2);
+        currentHP = maxHP;
+
+        damage = trueDamage;
+        trueDamage *= unitLevel;
+    }
     public bool TakeDamage(int dmg)
     {
         currentHP -= dmg;

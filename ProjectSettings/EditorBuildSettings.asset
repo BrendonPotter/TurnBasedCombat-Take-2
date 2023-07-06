@@ -15,11 +15,17 @@ EditorBuildSettings:
     path: Assets/Scenes/BattleSceneTwoRat.unity
     guid: 40cdadba37fe4fd40863399ed609ac73
   - enabled: 1
-    path: Assets/Scenes/ExploreTest.unity
-    guid: f04e8917ab73b4d429acc532aaac36b2
-  - enabled: 1
     path: Assets/Scenes/BattleSceneBossTest.unity
     guid: f718ee0dc9b963b4d97246609d8a0669
+  - enabled: 1
+    path: Assets/Scenes/VillageScene/ExploreTest.unity
+    guid: f04e8917ab73b4d429acc532aaac36b2
+  - enabled: 1
+    path: Assets/Scenes/VillageScene/NormalVillage 1.unity
+    guid: d95405bec9030b94d9af6d36fa37fb00
+  - enabled: 1
+    path: Assets/Scenes/VillageScene/BurnDownVillage.unity
+    guid: 321f4503ca4ec4d43a558ac9c36cb981
   - enabled: 0
     path: Assets/Scenes/MainScene.unity
     guid: e26944afac5fb7e4cbe7270f2530faa8
