@@ -114,11 +114,11 @@ public class DuoBattleSystem : MonoBehaviour
         
     }
 
-    public void Update()
-    {
-        CheckDeath();
-        CheckDeath2();
-    }
+    //public void Update()
+    //{
+    //    CheckDeath();
+    //    CheckDeath2();
+    //}
 
     IEnumerator SetupBattle()
     {
