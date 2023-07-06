@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 4796990449785205991}
   - component: {fileID: 4796990449785205992}
   - component: {fileID: 4796990449785205993}
-  - component: {fileID: 4796990449785205994}
   - component: {fileID: 4796990449785205989}
   - component: {fileID: 4796990449785205990}
+  - component: {fileID: 8432854737349272527}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -87,20 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4796990449785205994
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4796990449785205995}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4796990449785205989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +113,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.072154, y: 2, z: 3.2797318}
   m_Center: {x: 0.05071783, y: 0, z: 1.0479145}
+--- !u!65 &8432854737349272527
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4796990449785205995}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.2684574, y: 4.749292, z: 1}
+  m_Center: {x: 0.053048134, y: 1.3746462, z: 0}
 --- !u!1 &4796990450688887987
 GameObject:
   m_ObjectHideFlags: 0

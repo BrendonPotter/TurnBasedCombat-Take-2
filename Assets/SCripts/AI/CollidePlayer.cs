@@ -14,6 +14,7 @@ public class CollidePlayer : MonoBehaviour
         if (assignedNumber == 1)
         {
             worldState.contactEnemy1 = true;
+            SceneManager.LoadScene("BattleSceneOneRat");
         }
         if (assignedNumber == 2)
         {

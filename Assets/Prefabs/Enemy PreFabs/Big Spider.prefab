@@ -118,6 +118,8 @@ MonoBehaviour:
   trueDamage: 10
   maxHP: 100
   currentHP: 100
+  defaultHealth: 100
+  enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &3140662466689855479
 PrefabInstance:
   m_ObjectHideFlags: 0
