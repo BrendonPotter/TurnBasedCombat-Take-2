@@ -30,4 +30,12 @@ public class CollidePlayer : MonoBehaviour
             CheckingNumber();
         }
     }
+
+    private void Update()
+    {
+        if (worldState.contactEnemy1 == true)
+        {
+            Destroy(gameObject);
+        }
+    }
 }
