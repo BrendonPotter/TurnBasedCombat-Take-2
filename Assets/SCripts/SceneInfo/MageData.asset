@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MageData
   m_EditorClassIdentifier: 
   characterType: Mage
-  _levelVar: 6
+  _levelVar: 1
   _expThreshVar: 100
   _earnExpAmount: 0
   hpAmount: 75

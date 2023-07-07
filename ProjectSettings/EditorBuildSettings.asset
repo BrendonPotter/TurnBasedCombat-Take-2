@@ -21,9 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/VillageScene/ExploreTest.unity
     guid: f04e8917ab73b4d429acc532aaac36b2
   - enabled: 1
-    path: Assets/Scenes/VillageScene/NormalVillage 1.unity
+    path: Assets/Scenes/VillageScene/NormalVillage.unity
     guid: d95405bec9030b94d9af6d36fa37fb00
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/VillageScene/BurnDownVillage.unity
     guid: 321f4503ca4ec4d43a558ac9c36cb981
   - enabled: 0
