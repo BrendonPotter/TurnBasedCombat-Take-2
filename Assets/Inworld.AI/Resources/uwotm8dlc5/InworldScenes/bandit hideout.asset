@@ -18,5 +18,6 @@ MonoBehaviour:
   characters:
   - workspaces/default-3sly1cxe_9zferkgjrap5a/characters/john
   - workspaces/default-3sly1cxe_9zferkgjrap5a/characters/james
+  - workspaces/default-3sly1cxe_9zferkgjrap5a/characters/jessica
   triggers: []
   index: 0
