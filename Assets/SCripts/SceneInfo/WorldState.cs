@@ -19,6 +19,11 @@ public class WorldState : ScriptableObject
     public bool contactEnemy3;
     public bool winVsEnemy3;
 
+    [Header("Hide and Seek State")]
+    public bool agreeToPlay;
+    public bool successTask;
+    public bool failTask;
+
     public bool Value
     {
         get { return obtainKey; }

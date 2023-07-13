@@ -39,10 +39,12 @@ public class DataReseter : MonoBehaviour
     void ResetWorldState()
     {
         worldState.obtainKey = false;
+        worldState.agreeToPlay= false;
 
         worldState.contactEnemy1 = false;
         worldState.winVsEnemy1 = false;
         worldState.contactEnemy2 = false;
         worldState.winVsEnemy2 = false;
+
     }
 }

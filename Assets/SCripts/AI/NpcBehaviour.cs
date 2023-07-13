@@ -7,22 +7,20 @@ public class NpcBehaviour : MonoBehaviour, IInteract
 {
     public Transform targetObject;
 
-    [SerializeField] GameObject disableObjects;
     [SerializeField] GameObject askingForHelp;
     [SerializeField] GameObject agreeToHelp;
 
 
     [SerializeField] MoveToWayPoint stopMovement;
+    [SerializeField] WorldState worldState;
     [SerializeField] bool isLooking;
-    [SerializeField] float delayAction;
 
     [SerializeField] private string prompt;
 
     public string InteractionPrompt { get => prompt; }
     public bool Interact(InteractSystem interactor)
     {
-        agreeToHelp.SetActive(true);
-        askingForHelp.SetActive(false);
+        worldState.agreeToPlay = true;
         Debug.Log("Talk to the child");
         return true;
     }
@@ -31,13 +29,14 @@ public class NpcBehaviour : MonoBehaviour, IInteract
     {
         if(isLooking == true)
         {
-            delayAction -= Time.deltaTime;
-            if(delayAction <= 0)
-            {
-                UpdateLookAtRotation();
-                disableObjects.SetActive(false);
-                askingForHelp.SetActive(true);
-            }
+            UpdateLookAtRotation();
+        }
+
+        if(worldState.agreeToPlay == true)
+        {
+            stopMovement.enabled = false;
+            agreeToHelp.SetActive(true);
+            askingForHelp.SetActive(false);
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -53,11 +52,6 @@ public class NpcBehaviour : MonoBehaviour, IInteract
     {
         stopMovement.enabled = true;
         isLooking = false;
-        delayAction = 0.25f;
-
-        disableObjects.SetActive(true);
-        askingForHelp.SetActive(false);
-        agreeToHelp.SetActive(true);
 
     }
 
