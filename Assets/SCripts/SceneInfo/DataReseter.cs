@@ -6,21 +6,15 @@ public class DataReseter : MonoBehaviour
 {
     [SerializeField] SaveSystem hunterStats;
     [SerializeField] WorldState worldState;
+    [SerializeField] Inventory inventory;
 
-    //[SerializeField] Transform playerPosition;
-    //[SerializeField] Transform spawnPosition;
-
-
-
-    // Start is called before the first frame update
     void OnApplicationQuit()
     {
         ResetData();
-        //ResetMovemtent();
         ResetWorldState();
+        RemoveAllItem();
     }
 
-    // Update is called once per frame
     void ResetData()
     {
         hunterStats._levelVar = 1;
@@ -31,11 +25,10 @@ public class DataReseter : MonoBehaviour
         hunterStats.dealDamage = 10;
     }
 
-    //void ResetMovemtent()
-    //{
-    //    playerPosition.position = transform.position;
-    //}
-
+    void RemoveAllItem()
+    {
+        inventory.Items.Clear();
+    }
     void ResetWorldState()
     {
         worldState.obtainKey = false;
