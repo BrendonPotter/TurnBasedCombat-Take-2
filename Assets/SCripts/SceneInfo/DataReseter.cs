@@ -33,6 +33,9 @@ public class DataReseter : MonoBehaviour
     {
         worldState.obtainKey = false;
         worldState.agreeToPlay= false;
+        worldState.successTask = false;
+        worldState.failTask = false;
+        worldState.founded = 0;
 
         worldState.contactEnemy1 = false;
         worldState.winVsEnemy1 = false;

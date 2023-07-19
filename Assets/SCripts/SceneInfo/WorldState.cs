@@ -24,6 +24,8 @@ public class WorldState : ScriptableObject
     public bool successTask;
     public bool failTask;
 
+    public int founded;
+
     public bool Value
     {
         get { return obtainKey; }

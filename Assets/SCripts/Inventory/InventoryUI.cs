@@ -25,22 +25,6 @@ public class InventoryUI : MonoBehaviour
         //UpdateDisplay();
     }
 
-    public void CreateDisplay()
-    {
-        for (int i = 0; i < inventory.Items.Count; i++)
-        {
-            var obj = Instantiate(inventory.Items[i].item.preFab, Vector3.zero, Quaternion.identity, transform);
-            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
-            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Items[i].amounts.ToString("n0");
-            //itemsDisplayed.Add(inventory.Items[i], obj);
-        }
-    }
-
-    public Vector3 GetPosition(int i)
-    {
-        return new Vector3(xStart + (x_Space_Between_Item * (i % numberOfColumn)), yStart - (y_Space_Between_Item * (i / numberOfColumn)), 0f);
-    }
-
     //public void UpdateDisplay()
     //{
     //    for (int i = 0; i < inventory.Items.Count; i++)
@@ -59,4 +43,19 @@ public class InventoryUI : MonoBehaviour
     //    }
     //}
 
+    public void CreateDisplay()
+    {
+        for (int i = 0; i < inventory.Items.Count; i++)
+        {
+            var obj = Instantiate(inventory.Items[i].item.preFab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Items[i].amounts.ToString("n0");
+            //itemsDisplayed.Add(inventory.Items[i], obj);
+        }
+    }
+
+    public Vector3 GetPosition(int i)
+    {
+        return new Vector3(xStart + (x_Space_Between_Item * (i % numberOfColumn)), yStart - (y_Space_Between_Item * (i / numberOfColumn)), 0f);
+    }
 }

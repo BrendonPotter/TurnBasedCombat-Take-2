@@ -9,7 +9,7 @@ public class PlayerSafeguard : MonoBehaviour
 
     private void Start()
     {
-        transform.position = teleportPosition;
+        OnApplicationQuit();
     }
 
     private void Update()
@@ -18,5 +18,10 @@ public class PlayerSafeguard : MonoBehaviour
         {
             transform.position = teleportPosition;
         }
+    }
+
+    private void OnApplicationQuit()
+    {
+        transform.position = teleportPosition;
     }
 }

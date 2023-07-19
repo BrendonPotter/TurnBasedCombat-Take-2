@@ -22,3 +22,4 @@ MonoBehaviour:
   agreeToPlay: 0
   successTask: 0
   failTask: 0
+  founded: 0
