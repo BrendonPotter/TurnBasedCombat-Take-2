@@ -23,10 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/VillageScene/NormalVillage.unity
     guid: d95405bec9030b94d9af6d36fa37fb00
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/VillageScene/BurnDownVillage.unity
     guid: 321f4503ca4ec4d43a558ac9c36cb981
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: e26944afac5fb7e4cbe7270f2530faa8
   - enabled: 1
@@ -44,4 +44,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Worship.unity
     guid: b0298a0bae3505d4599daac14185a782
+  - enabled: 1
+    path: Assets/Scenes/WillAiTest.unity
+    guid: 131b06614289caa4d834c54a6e2e6978
   m_configObjects: {}

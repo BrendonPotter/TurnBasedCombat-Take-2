@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0447596b1a67de49ba5720fda0bdabe, type: 3}
+  m_Name: Cream
+  m_EditorClassIdentifier: 
+  characterName: Cream
+  brain: workspaces/default-3sly1cxe_9zferkgjrap5a/characters/cream
+  avatar: {fileID: 0}
+  workspace: workspaces/default-3sly1cxe_9zferkgjrap5a
+  currentScene: workspaces/default-3sly1cxe_9zferkgjrap5a/characters/cream
+  ownerShip: 0
+  defaultThumbnail: {fileID: 2800000, guid: 0b53477fae533a046b6f4f7756f357b4, type: 3}
+  index: 0
+  triggers: []
+  scenes:
+  - workspaces/default-3sly1cxe_9zferkgjrap5a/scenes/bandit_hideout
+  modelUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_model/a2399cc7-b26f-4e0a-8e99-ef1915003aa4.glb
+  posUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/a2399cc7-b26f-4e0a-8e99-ef1915003aa4_posture.jpg
+  previewImgUri: https://storage.googleapis.com/inworld-ai-usercontent-prod/rpm_image/a2399cc7-b26f-4e0a-8e99-ef1915003aa4_portrait.jpg
+  characterID: 53a2ea79-3781-4e79-8898-ab1fb86c5c84
