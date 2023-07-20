@@ -14,8 +14,9 @@ public class HideAndSeekEvent : MonoBehaviour
 
     [SerializeField] float countDown = 10f;
     [SerializeField] TextMeshProUGUI countDownText;
-    [SerializeField] TextMeshProUGUI completeTask;
+    [SerializeField] GameObject completeTask;
 
+    [SerializeField] bool completed;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,10 +50,15 @@ public class HideAndSeekEvent : MonoBehaviour
             HideAndSeekTaskBegin.SetActive(true);
         }
 
-        if(state.founded >= 2)
+        if(state.founded == 2)
         {
             state.successTask = true;
-            completeTask.enabled= true;
+            completed= true;
+        }
+
+        if (completed == true)
+        {
+            completeTask.SetActive(true);
         }
     }
 }
