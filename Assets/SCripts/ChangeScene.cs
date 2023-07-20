@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
+    [SerializeField] WorldState state;
     [SerializeField] int sceneNumber;
     [SerializeField] SceneLoader sceneNameLoad;
 
@@ -24,6 +25,11 @@ public class ChangeScene : MonoBehaviour
             {
                 //Change scene to burndown village
                 sceneNameLoad.LoadSceneByName("BurnDownVillage");
+            }
+
+            if (state.successTask == false || state.agreeToPlay == true)
+            {
+                state.failTask= true;
             }
         }
     }

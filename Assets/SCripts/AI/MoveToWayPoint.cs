@@ -23,6 +23,11 @@ public class MoveToWayPoint : MonoBehaviour
         if (isMoving)
         {
             MoveToPoint(points[currentPointIndex].position);
+
+            Vector3 lookAtDirection = points[currentPointIndex].position - transform.position;
+            lookAtDirection.y = 0f; // Optional: Lock rotation on the y-axis
+            Quaternion rotation = Quaternion.LookRotation(lookAtDirection);
+            transform.rotation = rotation;
         }
     }
 

@@ -5,23 +5,23 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
-    [SerializeField] private ItemData itemName;
-    [SerializeField] private Iventory iventoryUpdate;
-
+    [SerializeField] private Inventory itemPickup;
+    [SerializeField] Item itemScript;
 
     private void Update()
     {
-        prompt = itemName.name;
+
     }
     public string InteractionPrompt { get => prompt; }
     public bool Interact(InteractSystem interactor)
     {
         Debug.Log("Pick Up " + prompt);
-        bool wasPickUp = iventoryUpdate.AddItem(itemName);
-        if (wasPickUp)
+        var item = GetComponent<Item>();
+        if (item)
         {
-            Destroy(gameObject);
+            itemPickup.AddItem(item.itemObjectScript, 1);
         }
+        Destroy(gameObject);
         return true;
     }
 }

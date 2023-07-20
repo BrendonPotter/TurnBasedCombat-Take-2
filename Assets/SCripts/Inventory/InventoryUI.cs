@@ -1,50 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    public Transform itemsParent;
-    public GameObject inventoryUI;
-    InventorySlot[] slots;
+    public Inventory inventory;
 
-    [SerializeField] Iventory inventory;
-    [SerializeField] GameObject inventoryCanvas;
-    
-    
-    
+    public int xStart;
+    public int yStart;
+    public int x_Space_Between_Item;
+    public int y_Space_Between_Item;
+    public int numberOfColumn;
+    Dictionary<Inventory, GameObject> itemsDisplayed = new Dictionary<Inventory, GameObject>();
     // Start is called before the first frame update
     void Start()
     {
-        inventory.onItemChangeCallBack += UpdateUI;
-        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        CreateDisplay();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        //UpdateDisplay();
+    }
+
+    //public void UpdateDisplay()
+    //{
+    //    for (int i = 0; i < inventory.Items.Count; i++)
+    //    {
+    //        if (itemsDisplayed.ContainsKey(inventory.Items[i]))
+    //        {
+    //            itemsDisplayed[inventory.Items[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.Items[i].amounts.ToString("n0");
+    //        }
+    //        else
+    //        {
+    //            var obj = Instantiate(inventory.Items[i].item.preFab, Vector3.zero, Quaternion.identity, transform);
+    //            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+    //            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Items[i].amounts.ToString("n0");
+    //            itemsDisplayed.Add(inventory.Items[i], obj);
+    //        }
+    //    }
+    //}
+
+    public void CreateDisplay()
+    {
+        for (int i = 0; i < inventory.Items.Count; i++)
         {
-            inventoryUI.SetActive(!inventoryUI.activeSelf);
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            var obj = Instantiate(inventory.Items[i].item.preFab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetPosition(i);
+            obj.GetComponentInChildren<TextMeshProUGUI>().text = inventory.Items[i].amounts.ToString("n0");
+            //itemsDisplayed.Add(inventory.Items[i], obj);
         }
     }
 
-    void UpdateUI()
+    public Vector3 GetPosition(int i)
     {
-        for (int i = 0;i < slots.Length; i++)
-        {
-            if (i < inventory.inventorySpace)
-            {
-                slots[i].AddItem(inventory.items[i]);
-            }
-            else
-            {
-                slots[i].ClearSlot();
-            }
-        }
-        Debug.Log("Updating UI");
+        return new Vector3(xStart + (x_Space_Between_Item * (i % numberOfColumn)), yStart - (y_Space_Between_Item * (i / numberOfColumn)), 0f);
     }
 }

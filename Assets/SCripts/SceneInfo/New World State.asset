@@ -19,3 +19,7 @@ MonoBehaviour:
   winVsEnemy2: 0
   contactEnemy3: 0
   winVsEnemy3: 0
+  agreeToPlay: 0
+  successTask: 0
+  failTask: 0
+  founded: 0
