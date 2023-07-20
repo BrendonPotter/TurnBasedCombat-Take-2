@@ -6,6 +6,7 @@ public class Door : MonoBehaviour, IInteract
 {
     [SerializeField] private string prompt;
     [SerializeField] private WorldState grabKey;
+    [SerializeField] GameObject gateLockTXT;
 
     private bool alreadyInteract;
     public string InteractionPrompt { get => prompt; }
@@ -20,8 +21,19 @@ public class Door : MonoBehaviour, IInteract
         else
         {
             Debug.Log("Gate Locked");
+            gateLockTXT.SetActive(true);
+            StartCoroutine(EnableDisableRoutine());
         }
         return true;
+    }
+
+    private IEnumerator EnableDisableRoutine()
+    {
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Disable the object after waiting
+        gateLockTXT.SetActive(false);
     }
 
     private void Update()

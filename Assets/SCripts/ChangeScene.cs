@@ -27,7 +27,7 @@ public class ChangeScene : MonoBehaviour
                 sceneNameLoad.LoadSceneByName("BurnDownVillage");
             }
 
-            if (state.successTask == false || state.agreeToPlay == true)
+            if (state.successTask == false && state.agreeToPlay == true)
             {
                 state.failTask= true;
             }
