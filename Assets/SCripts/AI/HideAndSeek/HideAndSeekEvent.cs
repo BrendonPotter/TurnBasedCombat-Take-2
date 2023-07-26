@@ -14,6 +14,7 @@ public class HideAndSeekEvent : MonoBehaviour
 
     [SerializeField] float countDown = 10f;
     [SerializeField] TextMeshProUGUI countDownText;
+    [SerializeField] GameObject waitText;
     [SerializeField] GameObject completeTask;
 
     [SerializeField] bool completed;
@@ -32,9 +33,11 @@ public class HideAndSeekEvent : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             countDown -= Time.deltaTime;
+            waitText.SetActive(true);
             if (countDown < 0)
             {
                 childrenGameObject1.SetActive(true);
+                waitText.SetActive(false);
                 countDown = 0;
                 countDownText.enabled= false;
             }
