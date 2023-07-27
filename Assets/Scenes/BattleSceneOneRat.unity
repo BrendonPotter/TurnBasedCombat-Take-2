@@ -590,8 +590,9 @@ MonoBehaviour:
   meteorShower: {fileID: 1476716338}
   lightingStrike: {fileID: 304212048}
   fireBall: {fileID: 971058639}
-  tripleArrow: {fileID: 26727797}
-  healing: {fileID: 331148857}
+  tripleArrow: {fileID: 1621984058}
+  singleShot: {fileID: 26727797}
+  volly: {fileID: 765185129}
   lightingStrikeCDText: {fileID: 1778141747}
   meteorShowerCDText: {fileID: 429432553}
   trippleArrowCDText: {fileID: 1371506290}
@@ -601,7 +602,7 @@ MonoBehaviour:
   meteorShowerCD: 0
   trippleArrowCD: 0
   fireBallCD: 0
-  healingCD: 0
+  singleShotCD: 0
   playerCheck: {fileID: 48444887}
   PlayerIdle: {fileID: 1285614751}
   PlayerFireball: {fileID: 1190880466}

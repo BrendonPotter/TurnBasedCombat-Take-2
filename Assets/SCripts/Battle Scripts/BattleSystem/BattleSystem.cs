@@ -74,7 +74,8 @@ public class BattleSystem : MonoBehaviour
     public Button lightingStrike;
     public Button fireBall;
     public Button tripleArrow;
-    public Button healing;
+    public Button singleShot;
+    public Button volly;
 
     public TextMeshProUGUI lightingStrikeCDText;
     public TextMeshProUGUI meteorShowerCDText;
@@ -86,7 +87,7 @@ public class BattleSystem : MonoBehaviour
     public int meteorShowerCD;
     public int trippleArrowCD;
     public int fireBallCD;
-    public int healingCD;
+    public int singleShotCD;
 
     public CheckCheckpoint playerCheck;
 
@@ -864,9 +865,9 @@ public class BattleSystem : MonoBehaviour
         {
             trippleArrowCD -= 1;
         }
-        if(healingCD != 0)
+        if(singleShotCD != 0)
         {
-            healingCD -= 1;
+            singleShotCD -= 1;
         }
 
         if(lightingStrikeCD == 0)
@@ -892,16 +893,16 @@ public class BattleSystem : MonoBehaviour
             fireBall.interactable = true;
         }
 
-        if(healingCD == 0)
+        if(singleShotCD == 0)
         {
-            healing.interactable = true;
+            singleShot.interactable = true;
         }
 
         lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
         fireBallCDText.text = "(" + fireBallCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        healingCDText.text = "(" + healingCD + ")";
+        healingCDText.text = "(" + singleShotCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -928,9 +929,9 @@ public class BattleSystem : MonoBehaviour
         {
             trippleArrowCD -= 1;
         }
-        if (healingCD != 0)
+        if (singleShotCD != 0)
         {
-            healingCD -= 1;
+            singleShotCD -= 1;
         }
 
         if (lightingStrikeCD == 0)
@@ -956,16 +957,16 @@ public class BattleSystem : MonoBehaviour
             fireBall.interactable = true;
         }
 
-        if (healingCD == 0)
+        if (singleShotCD == 0)
         {
-            healing.interactable = true;
+            singleShot.interactable = true;
         }
 
         lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
         fireBallCDText.text = "(" + fireBallCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        healingCDText.text = "(" + healingCD + ")";
+        healingCDText.text = "(" +singleShotCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -1000,7 +1001,8 @@ public class BattleSystem : MonoBehaviour
             lightingStrike.interactable = false;
             tripleArrow.interactable = false;
             fireBall.interactable = false;
-            healing.interactable = false;
+            singleShot.interactable = false;
+            volly.interactable = false;
 
             fireBallCD = 0;
             fireBallCDText.text = "(" + fireBallCD + ")";
@@ -1022,7 +1024,8 @@ public class BattleSystem : MonoBehaviour
             lightingStrike.interactable = false;
             tripleArrow.interactable = false;
             fireBall.interactable = false;
-            healing.interactable = false;
+            singleShot.interactable = false;
+            volly.interactable = false;
 
             fireBallCD = 0;
             fireBallCDText.text = "(" + fireBallCD + ")";
@@ -1046,7 +1049,8 @@ public class BattleSystem : MonoBehaviour
         lightingStrike.interactable = false;
         tripleArrow.interactable = false;
         fireBall.interactable = false;
-        healing.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
 
         trippleArrowCD = 4;
         trippleArrowCDText.text = "(" + lightingStrikeCD + ")";
@@ -1066,7 +1070,8 @@ public class BattleSystem : MonoBehaviour
         lightingStrike.interactable = false;
         tripleArrow.interactable = false;
         fireBall.interactable = false;
-        healing.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
 
         meteorShowerCD = 2;
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
@@ -1085,7 +1090,8 @@ public class BattleSystem : MonoBehaviour
         lightingStrike.interactable = false;
         tripleArrow.interactable = false;
         fireBall.interactable = false;
-        healing.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
 
         if (state != BattleState.PLAYERTWOTURN)
         {
@@ -1103,10 +1109,8 @@ public class BattleSystem : MonoBehaviour
         lightingStrike.interactable = false;
         tripleArrow.interactable = false;
         fireBall.interactable = false;
-        healing.interactable = false;
-
-        healingCD = 4;
-        healingCDText.text = "(" + healingCD + ")";
+        singleShot.interactable = false;
+        volly.interactable = false;
 
         if (state != BattleState.PLAYERTURN)
         {
@@ -1118,6 +1122,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnRageButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -1128,6 +1139,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnBlockButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -1138,7 +1156,14 @@ public class BattleSystem : MonoBehaviour
 
     public void OnVolleyButton()
     {
-        if(state != BattleState.PLAYERTURN)
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
+        if (state != BattleState.PLAYERTURN)
         {
             return;
         }
@@ -1149,6 +1174,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnBullyButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -1159,6 +1191,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnHealthStealButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -1169,6 +1208,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnMightySlashButton()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;
@@ -1179,6 +1225,13 @@ public class BattleSystem : MonoBehaviour
 
     public void OnSingleShot()
     {
+        meteorShower.interactable = false;
+        lightingStrike.interactable = false;
+        tripleArrow.interactable = false;
+        fireBall.interactable = false;
+        singleShot.interactable = false;
+        volly.interactable = false;
+
         if (state != BattleState.PLAYERTURN)
         {
             return;

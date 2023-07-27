@@ -23881,6 +23881,7 @@ GameObject:
   - component: {fileID: 1843219076}
   - component: {fileID: 1843219075}
   - component: {fileID: 1843219078}
+  - component: {fileID: 1843219079}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -23952,6 +23953,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   worldState: {fileID: 0}
+  inventory: {fileID: 0}
+--- !u!114 &1843219079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843219074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c89d5fb13f494b4a84d9e33a1e93178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
+  sceneNumber: 3
 --- !u!1001 &1844343045
 PrefabInstance:
   m_ObjectHideFlags: 0

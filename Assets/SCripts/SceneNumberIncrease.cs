@@ -5,11 +5,12 @@ using UnityEngine;
 public class SceneNumberIncrease : MonoBehaviour
 {
     [SerializeField] WorldState state;
+    [SerializeField] int sceneNumber;
 
     // Start is called before the first frame update
     void Start()
     {
-        state.sceneNumber = 1; 
+        state.sceneNumber = sceneNumber; 
     }
 
 }
