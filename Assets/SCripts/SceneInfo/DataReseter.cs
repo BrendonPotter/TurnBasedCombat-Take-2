@@ -23,6 +23,7 @@ public class DataReseter : MonoBehaviour
         hunterStats.hpAmount = 100;
         hunterStats.maxHPAmount = 100;
         hunterStats.dealDamage = 10;
+        hunterStats.checkPoint = 0;
     }
 
     void RemoveAllItem()
