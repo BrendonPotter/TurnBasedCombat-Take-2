@@ -26,6 +26,10 @@ public class WorldState : ScriptableObject
 
     public int founded;
 
+    public int sceneNumber;
+
+    public bool bossDead;
+
     public bool Value
     {
         get { return obtainKey; }

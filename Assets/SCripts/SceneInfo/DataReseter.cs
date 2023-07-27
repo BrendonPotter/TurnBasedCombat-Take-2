@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class DataReseter : MonoBehaviour
@@ -44,6 +45,7 @@ public class DataReseter : MonoBehaviour
         worldState.winVsEnemy2 = false;
         worldState.contactEnemy3 = false;
         worldState.winVsEnemy3 = false;
+        worldState.sceneNumber = 0;
 
     }
 }

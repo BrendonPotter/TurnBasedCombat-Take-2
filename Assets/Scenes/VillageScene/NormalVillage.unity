@@ -27452,7 +27452,6 @@ GameObject:
   - component: {fileID: 2009592419}
   - component: {fileID: 2009592418}
   - component: {fileID: 2009592420}
-  - component: {fileID: 2009592421}
   m_Layer: 0
   m_Name: ToTheForestScene
   m_TagString: Untagged
@@ -27501,20 +27500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
-  sceneNumber: 2
-  sceneNameLoad: {fileID: 2009592421}
---- !u!114 &2009592421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009592417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45857c43b0c62c42820a4367cd2321a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  nextScene: ForestLevel
 --- !u!1 &2022254394
 GameObject:
   m_ObjectHideFlags: 0
@@ -31725,6 +31711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb49f0650f1b7548a9734f95c5b908f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6982812146807953497
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,3 +23,5 @@ MonoBehaviour:
   successTask: 0
   failTask: 0
   founded: 0
+  sceneNumber: 0
+  bossDead: 0

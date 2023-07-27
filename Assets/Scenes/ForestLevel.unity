@@ -1035,7 +1035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teleportPosition: {x: 4.17, y: 0.21, z: 855.71}
-  fallingDepth: -100
+  fallingDepth: -50
 --- !u!114 &287946332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1066,7 +1066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb49f0650f1b7548a9734f95c5b908f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 4.17, y: 0.21, z: 855.71}
 --- !u!114 &287946334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,6 +1693,7 @@ GameObject:
   - component: {fileID: 409089436}
   - component: {fileID: 409089435}
   - component: {fileID: 409089438}
+  - component: {fileID: 409089439}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1766,6 +1766,19 @@ MonoBehaviour:
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   worldState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
   inventory: {fileID: 11400000, guid: 35e97651c2aec2046900d59b24988be5, type: 2}
+--- !u!114 &409089439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409089434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c89d5fb13f494b4a84d9e33a1e93178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!1 &426165385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5813,7 +5826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b4ffa7746d754449b8021d1c9e75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleScene1: BattleSystem
+  battleScene1: BattleSceneOneRat
   battleScene2: DuoBattleSystem
   encounterText: {fileID: 0}
   screenFadeImage: {fileID: 0}

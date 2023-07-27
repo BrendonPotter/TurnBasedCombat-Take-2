@@ -97,6 +97,12 @@ public class BattleSystem : MonoBehaviour
     public GameObject PlayerMeteor;
     public GameObject PlayerTripleArrow;
 
+    //SceneList
+    [SerializeField] string forestLevel;
+    [SerializeField] string burningVillage;
+    [SerializeField] string banditHideout;
+
+    [SerializeField] WorldState worldState;
 
 
     // Start is called before the first frame update
@@ -1194,7 +1200,18 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene(explorationScene);
+        if(worldState.sceneNumber == 1)
+        {
+            SceneManager.LoadScene(forestLevel);
+        }
+        if (worldState.sceneNumber == 2)
+        {
+            SceneManager.LoadScene(burningVillage);
+        }
+        if (worldState.sceneNumber == 3)
+        {
+            SceneManager.LoadScene(banditHideout);
+        }
     }
 
 }

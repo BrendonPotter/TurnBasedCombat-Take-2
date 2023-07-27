@@ -608,6 +608,10 @@ MonoBehaviour:
   PlayerBuff: {fileID: 1571907195}
   PlayerMeteor: {fileID: 287010362}
   PlayerTripleArrow: {fileID: 1191397416}
+  forestLevel: ForestLevel
+  burningVillage: ExploreTest
+  banditHideout: BanditHideout
+  worldState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!4 &40940196
 Transform:
   m_ObjectHideFlags: 0
