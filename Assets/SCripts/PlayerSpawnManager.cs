@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerSpawnManager : MonoBehaviour
 {
 
     private const string PlayerPositionKey = "PlayerPosition";
+    [SerializeField] Vector3 startPosition;
 
     private Transform playerTransform;
 
@@ -17,6 +19,12 @@ public class PlayerSpawnManager : MonoBehaviour
     private void Update()
     {
         SavePlayerPosition();
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("P has been pressed");
+            transform.position = startPosition;
+        }
     }
 
     private void SavePlayerPosition()

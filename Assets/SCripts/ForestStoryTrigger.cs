@@ -6,6 +6,22 @@ public class ForestStoryTrigger : MonoBehaviour
 {
     public GameObject targetGameObject;
     public MonoBehaviour targetScript;
+    [SerializeField] GameObject mage;
+    [SerializeField] GameObject storyCollider;
+
+    private void Update()
+    {
+        if (targetGameObject.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                targetGameObject.SetActive(false);
+                targetScript.enabled = true;
+                storyCollider.SetActive(false);
+
+            }
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +35,14 @@ public class ForestStoryTrigger : MonoBehaviour
             // Enable the target game object
             if (targetGameObject != null)
                 targetGameObject.SetActive(true);
+
+            if(mage != null)
+            {
+                mage.SetActive(true);
+
+            }
         }
     }
+
+
 }
