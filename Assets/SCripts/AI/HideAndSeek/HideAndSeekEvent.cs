@@ -13,12 +13,13 @@ public class HideAndSeekEvent : MonoBehaviour
 
 
     [SerializeField] float countDown = 10f;
+    [SerializeField] float disableTask = 5f;
+
     [SerializeField] TextMeshProUGUI countDownText;
     [SerializeField] GameObject waitText;
     [SerializeField] GameObject completeTask;
 
     [SerializeField] bool completed;
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -62,6 +63,12 @@ public class HideAndSeekEvent : MonoBehaviour
         if (completed == true)
         {
             completeTask.SetActive(true);
+            disableTask -= Time.deltaTime;
+            if(disableTask <= 0)
+            {
+                HideAndSeekTaskBegin.SetActive(false);
+                disableTask = 0f;
+            }
         }
     }
 }

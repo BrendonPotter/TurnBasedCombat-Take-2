@@ -8,6 +8,7 @@ public class FailTaskUI : MonoBehaviour
     [SerializeField] GameObject taskFail;
     [SerializeField] GameObject hideAdnSeekTask;
 
+    [SerializeField] float disableTask = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,12 @@ public class FailTaskUI : MonoBehaviour
             if (state.failTask == true)
             {
                 taskFail.SetActive(true);
+                disableTask -= Time.deltaTime;
+                if(disableTask <= 0)
+                {
+                    hideAdnSeekTask.SetActive(false);
+                    disableTask = 0f;
+                }
             }
         }
     }

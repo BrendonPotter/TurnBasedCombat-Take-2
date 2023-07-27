@@ -6,13 +6,14 @@ public class TaskUI : MonoBehaviour
 {
     [SerializeField] WorldState state;
 
-    [SerializeField] GameObject HideAndSeekTaskBegin;
+    [SerializeField] GameObject taskBegin;
     // Update is called once per frame
     void Update()
     {
+        //hide and seek task
         if(state.agreeToPlay == true)
         {
-            HideAndSeekTaskBegin.SetActive(true);
+            taskBegin.SetActive(true);
         }
     }
 }
