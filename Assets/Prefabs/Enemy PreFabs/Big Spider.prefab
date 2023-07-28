@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Spider
-  unitLevel: 14
+  unitLevel: 1
   damage: 10
   trueDamage: 10
   maxHP: 100

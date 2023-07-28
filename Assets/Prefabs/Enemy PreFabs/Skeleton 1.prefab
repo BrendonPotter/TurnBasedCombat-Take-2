@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Skeleton
-  unitLevel: 17
+  unitLevel: 1
   damage: 20
   trueDamage: 20
   maxHP: 120

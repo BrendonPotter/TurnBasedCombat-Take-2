@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Cursed Mannequin
-  unitLevel: 5
+  unitLevel: 1
   damage: 7
   trueDamage: 7
   maxHP: 80
