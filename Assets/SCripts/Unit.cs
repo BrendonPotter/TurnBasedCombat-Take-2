@@ -27,7 +27,7 @@ public class Unit : MonoBehaviour
         maxHP = defaultHealth + (100 * unitLevel/2);
         currentHP = maxHP;
 
-        damage = trueDamage;
+        damage = trueDamage + (10 * unitLevel/2);
         trueDamage *= unitLevel;
     }
     public bool TakeDamage(int dmg)
