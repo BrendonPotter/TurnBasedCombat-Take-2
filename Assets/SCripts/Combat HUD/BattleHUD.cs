@@ -22,6 +22,6 @@ public class BattleHUD : MonoBehaviour
 
     public void SetHP(int hp)
     {
-        hpSlider.value = hp;
+        hpSlider.value = default;
     }
 }

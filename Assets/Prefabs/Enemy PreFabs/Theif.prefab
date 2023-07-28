@@ -120,6 +120,7 @@ MonoBehaviour:
   currentHP: 70
   defaultHealth: 70
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  _levelVar: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &6234710420253875714
 PrefabInstance:
   m_ObjectHideFlags: 0

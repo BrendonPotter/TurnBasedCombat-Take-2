@@ -8,7 +8,7 @@ public class SaveSystem : ScriptableObject
 {
     public string characterType;
     
-    public float _levelVar = 1;
+    public int _levelVar = 1;
 
     public int _expThreshVar = 100;
     public int _earnExpAmount = 0;
@@ -22,7 +22,7 @@ public class SaveSystem : ScriptableObject
     public int checkPoint;
 
 
-    public float Value
+    public int Value
 	{
 		get { return _levelVar; }
 		set { _levelVar = value; }
