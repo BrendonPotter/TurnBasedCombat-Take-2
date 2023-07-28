@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HunterData
   m_EditorClassIdentifier: 
   characterType: Hunter
-  _levelVar: 1
-  _expThreshVar: 100
+  _levelVar: 5
+  _expThreshVar: 200
   _earnExpAmount: 0
-  hpAmount: 100
-  maxHPAmount: 100
-  dealDamage: 10
+  hpAmount: 185
+  maxHPAmount: 200
+  dealDamage: 30
   trueDamage: 0
   checkPoint: 1
