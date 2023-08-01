@@ -648,9 +648,13 @@ MonoBehaviour:
   mageAttackPanel: {fileID: 2009511995}
   fleeButton: {fileID: 855274775}
   attackButton: {fileID: 295581447}
+  worldState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
   succesfulFlee: {fileID: 1959777769}
   unsuccessfulFlee: {fileID: 1959777769}
   mainScene: ExploreTest
+  forestLevel: ForestLevel
+  burningVillage: ExploreTest
+  banditHideout: BurnDownVillage
 --- !u!1 &48444882
 GameObject:
   m_ObjectHideFlags: 0
