@@ -18,6 +18,6 @@ MonoBehaviour:
   _earnExpAmount: 0
   hpAmount: 100
   maxHPAmount: 100
-  dealDamage: 10
+  dealDamage: 20
   trueDamage: 0
   checkPoint: 0

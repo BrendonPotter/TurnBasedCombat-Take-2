@@ -114,11 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Cursed Mannequin
   unitLevel: 1
-  damage: 7
-  trueDamage: 7
-  maxHP: 80
-  currentHP: 80
-  defaultHealth: 80
+  damage: 3
+  trueDamage: 3
+  maxHP: 65
+  currentHP: 65
+  defaultHealth: 65
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &7699726421600993136
 PrefabInstance:

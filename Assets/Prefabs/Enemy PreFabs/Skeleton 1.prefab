@@ -114,11 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Skeleton
   unitLevel: 1
-  damage: 20
-  trueDamage: 20
-  maxHP: 120
-  currentHP: 120
-  defaultHealth: 120
+  damage: 6
+  trueDamage: 6
+  maxHP: 70
+  currentHP: 70
+  defaultHealth: 70
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &4561541944815205269
 PrefabInstance:
