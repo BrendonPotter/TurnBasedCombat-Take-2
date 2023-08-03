@@ -27,6 +27,10 @@ public class CollidePlayer : MonoBehaviour
         {
             Destroy(thisGameObject);
         }
+        if (worldState.contactEnemy5 == true && assignedNumber == 5)
+        {
+            Destroy(thisGameObject);
+        }
     }
 
     private void CheckingNumber()
@@ -49,6 +53,12 @@ public class CollidePlayer : MonoBehaviour
             SceneManager.LoadScene("BattleSceneOneRat");
         }
         if (assignedNumber == 4)
+        {
+            worldState.contactEnemy3 = true;
+            //SceneManager.LoadScene("BattleSceneTwoRat");
+            SceneManager.LoadScene("BattleSceneOneRat");
+        }
+        if (assignedNumber == 5)
         {
             worldState.contactEnemy3 = true;
             //SceneManager.LoadScene("BattleSceneTwoRat");
