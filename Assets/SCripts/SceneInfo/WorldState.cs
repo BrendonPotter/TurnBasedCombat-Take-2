@@ -19,6 +19,14 @@ public class WorldState : ScriptableObject
     public bool contactEnemy3;
     public bool winVsEnemy3;
 
+    [Header("Enemy 4")]
+    public bool contactEnemy4;
+    public bool winVsEnemy4;
+
+    [Header("Enemy 5")]
+    public bool contactEnemy5;
+    public bool winVsEnemy5;
+
     [Header("Hide and Seek State")]
     public bool agreeToPlay;
     public bool successTask;

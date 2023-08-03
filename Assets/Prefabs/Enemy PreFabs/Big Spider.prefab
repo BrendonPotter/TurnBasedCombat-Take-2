@@ -113,12 +113,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitName: Spider
-  unitLevel: 14
-  damage: 10
-  trueDamage: 10
-  maxHP: 100
-  currentHP: 100
-  defaultHealth: 100
+  unitLevel: 1
+  damage: 5
+  trueDamage: 5
+  maxHP: 85
+  currentHP: 85
+  defaultHealth: 85
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &3140662466689855479
 PrefabInstance:

@@ -16,8 +16,8 @@ MonoBehaviour:
   _levelVar: 5
   _expThreshVar: 200
   _earnExpAmount: 0
-  hpAmount: 185
-  maxHPAmount: 200
-  dealDamage: 30
+  hpAmount: 100
+  maxHPAmount: 100
+  dealDamage: 20
   trueDamage: 0
   checkPoint: 0
