@@ -107,7 +107,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3013973732390395648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae0d492d6860cf647b469cc7b89dead1, type: 3}
   m_Name: 
@@ -118,6 +118,9 @@ MonoBehaviour:
   trueDamage: 10
   maxHP: 100
   currentHP: 100
+  defaultHealth: 0
+  enemyStats: {fileID: 0}
+  _levelVar: {fileID: 0}
 --- !u!1001 &1799978646231010880
 PrefabInstance:
   m_ObjectHideFlags: 0
