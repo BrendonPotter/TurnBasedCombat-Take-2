@@ -23,7 +23,7 @@ public class DataReseter : MonoBehaviour
         hunterStats._expThreshVar = 100;
         hunterStats.hpAmount = 100;
         hunterStats.maxHPAmount = 100;
-        hunterStats.dealDamage = 10;
+        hunterStats.dealDamage = 20;
         hunterStats.checkPoint = 0;
     }
 
