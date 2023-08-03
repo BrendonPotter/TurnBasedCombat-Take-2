@@ -1394,8 +1394,8 @@ GameObject:
   - component: {fileID: 6246531701563506238}
   - component: {fileID: 503861137352526002}
   - component: {fileID: 4201942170482201794}
-  - component: {fileID: 7492776315211142145}
   - component: {fileID: 7492776315211142144}
+  - component: {fileID: 4824019494178524825}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1493,7 +1493,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
   FootstepAudioVolume: 0.3
   JumpHeight: 1.2
-  Gravity: -15
+  Gravity: 0
   JumpTimeout: 0.3
   FallTimeout: 0.15
   Grounded: 1
@@ -1641,18 +1641,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7492776315211142145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4201942170482201806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb49f0650f1b7548a9734f95c5b908f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7492776315211142144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,6 +1659,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   numFound: 0
+--- !u!114 &4824019494178524825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201942170482201806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f5bd413562e0ba4c9b31dcba9b6b928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 4201942170482201806}
 --- !u!1 &4277430465901514269
 GameObject:
   m_ObjectHideFlags: 0

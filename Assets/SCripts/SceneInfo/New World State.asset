@@ -29,3 +29,4 @@ MonoBehaviour:
   founded: 0
   sceneNumber: 0
   bossDead: 0
+  firstTimeEnter: 0
