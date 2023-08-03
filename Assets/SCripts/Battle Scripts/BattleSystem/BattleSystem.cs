@@ -101,6 +101,7 @@ public class BattleSystem : MonoBehaviour
     //SceneList
     [SerializeField] string forestLevel;
     [SerializeField] string burningVillage;
+    [SerializeField] string burnDownVillage;
     [SerializeField] string banditHideout;
 
     [SerializeField] WorldState worldState;
@@ -1260,6 +1261,10 @@ public class BattleSystem : MonoBehaviour
         if (worldState.sceneNumber == 2)
         {
             SceneManager.LoadScene(burningVillage);
+        }
+        if(worldState.bossDead == true && worldState.sceneNumber == 2)
+        {
+            SceneManager.LoadScene(burnDownVillage);
         }
         if (worldState.sceneNumber == 3)
         {
