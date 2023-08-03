@@ -1468,8 +1468,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Hunter
   unitLevel: 1
-  damage: 10
-  trueDamage: 10
+  damage: 20
+  trueDamage: 20
   maxHP: 100
   currentHP: 100
   defaultHealth: 0
