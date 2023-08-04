@@ -22,10 +22,16 @@ public class AttackButton : MonoBehaviour
     public Button fleeButton;
     public Button attackButton;
 
+    [SerializeField] WorldState worldState;
+
     public Text succesfulFlee;
     public Text unsuccessfulFlee;
 
     public string mainScene;
+
+    [SerializeField] string forestLevel;
+    [SerializeField] string burningVillage;
+    [SerializeField] string banditHideout;
 
     private void Awake()
     {
@@ -96,7 +102,18 @@ public class AttackButton : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("ExploreTest");
+        if (worldState.sceneNumber == 1)
+        {
+            SceneManager.LoadScene(forestLevel);
+        }
+        if (worldState.sceneNumber == 2)
+        {
+            SceneManager.LoadScene(burningVillage);
+        }
+        if (worldState.sceneNumber == 3)
+        {
+            SceneManager.LoadScene(banditHideout);
+        }
 
     }
 

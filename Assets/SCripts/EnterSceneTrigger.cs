@@ -8,6 +8,7 @@ public class EnterSceneTrigger : MonoBehaviour
     public TextMeshProUGUI interactText;
     public string sceneName;
 
+    [SerializeField] WorldState worldState;
     private bool canEnter;
 
     private void OnTriggerEnter(Collider other)
@@ -33,6 +34,7 @@ public class EnterSceneTrigger : MonoBehaviour
         if (canEnter && Input.GetKeyDown(KeyCode.E))
         {
             SceneManager.LoadScene(sceneName);
+            worldState.bossDead = true;
         }
     }
 }

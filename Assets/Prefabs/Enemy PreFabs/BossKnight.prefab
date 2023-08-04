@@ -114,12 +114,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: ???
   unitLevel: 20
-  damage: 15
-  trueDamage: 15
-  maxHP: 500
-  currentHP: 500
-  defaultHealth: 500
+  damage: 10
+  trueDamage: 10
+  maxHP: 300
+  currentHP: 300
+  defaultHealth: 300
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
+  _levelVar: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &1535347030226016860
 PrefabInstance:
   m_ObjectHideFlags: 0

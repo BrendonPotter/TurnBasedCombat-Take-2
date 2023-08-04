@@ -5,49 +5,80 @@ using UnityEngine.UIElements;
 
 public class PlayerSpawnManager : MonoBehaviour
 {
-
+    [SerializeField] private GameObject playerPrefab;
     private const string PlayerPositionKey = "PlayerPosition";
     //[SerializeField] Vector3 startPosition;
 
-    private Transform playerTransform;
 
-    private void Awake()
+    [SerializeField] WorldState FirstTimeEnter;
+
+    //private void Awake()
+    //{
+    //    playerTransform = transform; // Assuming this script is attached to the player object
+    //}
+
+    private void Start()
     {
-        playerTransform = transform; // Assuming this script is attached to the player object
+        if(FirstTimeEnter.firstTimeEnter == 0)
+        {
+            return;
+        }
+
+        if (FirstTimeEnter.firstTimeEnter == 1)
+        {
+            LoadPlayerPosition();
+        }
+
     }
 
-    private void Update()
-    {
-        SavePlayerPosition();
+    //private void Update()
+    //{
+    //    SavePlayerPosition();
 
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    Debug.Log("P has been pressed");
-        //    transform.position = startPosition;
-        //}
-    }
+    //    //if (Input.GetKeyDown(KeyCode.P))
+    //    //{
+    //    //    Debug.Log("P has been pressed");
+    //    //    transform.position = startPosition;
+    //    //}
+    //}
 
-    private void SavePlayerPosition()
-    {
-        PlayerPrefs.SetFloat(PlayerPositionKey + "_x", playerTransform.position.x);
-        PlayerPrefs.SetFloat(PlayerPositionKey + "_y", playerTransform.position.y);
-        PlayerPrefs.SetFloat(PlayerPositionKey + "_z", playerTransform.position.z);
-        PlayerPrefs.Save();
-    }
+    //public void SavePlayerPosition()
+    //{
+    //    PlayerPrefs.SetFloat(PlayerPositionKey + "_x", transform.position.x);
+    //    PlayerPrefs.SetFloat(PlayerPositionKey + "_y", transform.position.y);
+    //    PlayerPrefs.SetFloat(PlayerPositionKey + "_z", transform.position.z);
+    //    PlayerPrefs.Save();
+    //    Debug.Log("Saved Position" + PlayerPositionKey);
+    //}
 
     private void LoadPlayerPosition()
     {
         if (PlayerPrefs.HasKey(PlayerPositionKey + "_x"))
         {
+            Debug.LogWarning("LOADING PLAYER POSITION");
             float x = PlayerPrefs.GetFloat(PlayerPositionKey + "_x");
             float y = PlayerPrefs.GetFloat(PlayerPositionKey + "_y");
             float z = PlayerPrefs.GetFloat(PlayerPositionKey + "_z");
-            playerTransform.position = new Vector3(x, y, z);
+            Vector3 loadedPosition = new Vector3(x, y, z);
+
+            
+            SpawnPlayerAtPosition(loadedPosition);
+            Debug.Log("Loaded Position:" + loadedPosition);
         }
     }
 
-    private void Start()
+    private void SpawnPlayerAtPosition(Vector3 spawnPosition)
     {
-        LoadPlayerPosition();
+        if (playerPrefab != null)
+        {
+            GameObject spawnedPlayer = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+
+            spawnedPlayer.transform.parent = transform;
+        }
+        else
+        {
+            Debug.Log("Player Prefab not assigned");
+        }
     }
+
 }

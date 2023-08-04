@@ -52,11 +52,11 @@ public class BattleSystem : MonoBehaviour
     public string explorationScene;
 
     //cameras
-    public Camera mainCamera;
-    public Camera fireballCamera;
-    public Camera buffCamera;
-    public Camera MeteorCamera;
-    public Camera arrowCamera;
+    //public Camera mainCamera;
+    //public Camera fireballCamera;
+    //public Camera buffCamera;
+    //public Camera MeteorCamera;
+    //public Camera arrowCamera;
 
 
     //Other script reference
@@ -81,7 +81,7 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI meteorShowerCDText;
     public TextMeshProUGUI trippleArrowCDText;
     public TextMeshProUGUI fireBallCDText;
-    public TextMeshProUGUI healingCDText;
+    public TextMeshProUGUI singleShotCDText;
 
     public int lightingStrikeCD;
     public int meteorShowerCD;
@@ -92,15 +92,16 @@ public class BattleSystem : MonoBehaviour
     public CheckCheckpoint playerCheck;
 
     //amimations
-    public GameObject PlayerIdle;
-    public GameObject PlayerFireball;
-    public GameObject PlayerBuff;
-    public GameObject PlayerMeteor;
-    public GameObject PlayerTripleArrow;
+    //public GameObject PlayerIdle;
+    //public GameObject PlayerFireball;
+    //public GameObject PlayerBuff;
+    //public GameObject PlayerMeteor;
+    //public GameObject PlayerTripleArrow;
 
     //SceneList
     [SerializeField] string forestLevel;
     [SerializeField] string burningVillage;
+    [SerializeField] string burnDownVillage;
     [SerializeField] string banditHideout;
 
     [SerializeField] WorldState worldState;
@@ -306,10 +307,10 @@ public class BattleSystem : MonoBehaviour
         }
 
         // Switch back to the main camera
-        fireballCamera.enabled = false;
-        mainCamera.enabled = true;
-        PlayerIdle.SetActive(true);
-        PlayerFireball.SetActive(false);
+        //fireballCamera.enabled = false;
+        //mainCamera.enabled = true;
+        //PlayerIdle.SetActive(true);
+        //PlayerFireball.SetActive(false);
     }
 
     IEnumerator PlayerAttackTripleArrow()
@@ -433,18 +434,18 @@ public class BattleSystem : MonoBehaviour
             }
         }
         
-        PlayerIdle.SetActive(true);
-        PlayerTripleArrow.SetActive(false);
-        arrowCamera.enabled = false;
-        mainCamera.enabled = true;
+        //PlayerIdle.SetActive(true);
+        //PlayerTripleArrow.SetActive(false);
+        //arrowCamera.enabled = false;
+        //mainCamera.enabled = true;
     }
 
     IEnumerator PlayerAttackMeteorShower()
     {
-        PlayerIdle.SetActive(false);
-        PlayerMeteor.SetActive(true);
-        MeteorCamera.enabled = true;
-        mainCamera.enabled = false;
+        //PlayerIdle.SetActive(false);
+        //PlayerMeteor.SetActive(true);
+        //MeteorCamera.enabled = true;
+        //mainCamera.enabled = false;
         
 
         for (int i = 0; i < 5; i++)
@@ -483,10 +484,10 @@ public class BattleSystem : MonoBehaviour
             StartCoroutine(EnemyTurn());
         }
 
-        PlayerIdle.SetActive(true);
-        PlayerMeteor.SetActive(false);
-        MeteorCamera.enabled = false;
-        mainCamera.enabled = true;
+        //PlayerIdle.SetActive(true);
+        //PlayerMeteor.SetActive(false);
+        //MeteorCamera.enabled = false;
+        //mainCamera.enabled = true;
 
     }
 
@@ -542,10 +543,10 @@ public class BattleSystem : MonoBehaviour
         // Add 25 to the player's currentHP
         playerUnit.hpAmount += 30;
 
-        PlayerIdle.SetActive(false);
-        PlayerBuff.SetActive(true);
-        buffCamera.enabled = true;
-        mainCamera.enabled = false;
+        //PlayerIdle.SetActive(false);
+        //PlayerBuff.SetActive(true);
+        //buffCamera.enabled = true;
+        //mainCamera.enabled = false;
 
         // Ensure the player's currentHP doesn't exceed the maximumHP
         if (playerUnit.hpAmount > playerUnit.maxHPAmount)
@@ -567,10 +568,10 @@ public class BattleSystem : MonoBehaviour
         Destroy(particleSystemGO);
 
         // Switch back to the main camera
-        buffCamera.enabled = false;
-        mainCamera.enabled = true;
-        PlayerIdle.SetActive(true);
-        PlayerBuff.SetActive(false);
+        //buffCamera.enabled = false;
+        //mainCamera.enabled = true;
+        //PlayerIdle.SetActive(true);
+        //PlayerBuff.SetActive(false);
 
         state = BattleState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
@@ -581,10 +582,10 @@ public class BattleSystem : MonoBehaviour
         // Add 25 to the player's Attack Stat
         playerUnit.dealDamage += 15;
 
-        PlayerIdle.SetActive(false);
-        PlayerBuff.SetActive(true);
-        buffCamera.enabled = true;
-        mainCamera.enabled = false;
+        //PlayerIdle.SetActive(false);
+        //PlayerBuff.SetActive(true);
+        //buffCamera.enabled = true;
+        //mainCamera.enabled = false;
 
         dialogText.text = "You have increased you're testostorne!";
 
@@ -599,10 +600,10 @@ public class BattleSystem : MonoBehaviour
         Destroy(particleSystemGO);
        
         // Switch back to the main camera
-        buffCamera.enabled = false;
-        mainCamera.enabled = true;
-        PlayerIdle.SetActive(true);
-        PlayerBuff.SetActive(false);
+        //buffCamera.enabled = false;
+        //mainCamera.enabled = true;
+        //PlayerIdle.SetActive(true);
+        //PlayerBuff.SetActive(false);
 
         state = BattleState.ENEMYTURN;
         StartCoroutine(EnemyTurn());
@@ -902,7 +903,7 @@ public class BattleSystem : MonoBehaviour
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
         fireBallCDText.text = "(" + fireBallCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        healingCDText.text = "(" + singleShotCD + ")";
+        singleShotCDText.text = "(" + singleShotCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -966,7 +967,7 @@ public class BattleSystem : MonoBehaviour
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
         fireBallCDText.text = "(" + fireBallCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        healingCDText.text = "(" +singleShotCD + ")";
+        singleShotCDText.text = "(" +singleShotCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -1260,6 +1261,10 @@ public class BattleSystem : MonoBehaviour
         if (worldState.sceneNumber == 2)
         {
             SceneManager.LoadScene(burningVillage);
+        }
+        if(worldState.bossDead == true && worldState.sceneNumber == 2)
+        {
+            SceneManager.LoadScene(burnDownVillage);
         }
         if (worldState.sceneNumber == 3)
         {

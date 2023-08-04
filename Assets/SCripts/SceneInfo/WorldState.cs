@@ -34,6 +34,8 @@ public class WorldState : ScriptableObject
 
     public bool bossDead;
 
+    public int firstTimeEnter;
+
     public bool Value
     {
         get { return obtainKey; }
