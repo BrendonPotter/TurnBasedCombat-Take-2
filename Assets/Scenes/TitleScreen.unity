@@ -6113,6 +6113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   worldState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
+  inventory: {fileID: 11400000, guid: 35e97651c2aec2046900d59b24988be5, type: 2}
 --- !u!1 &1591726394
 GameObject:
   m_ObjectHideFlags: 0
