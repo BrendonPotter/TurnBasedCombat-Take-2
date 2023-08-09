@@ -116,9 +116,9 @@ MonoBehaviour:
   unitLevel: 20
   damage: 10
   trueDamage: 10
-  maxHP: 300
-  currentHP: 300
-  defaultHealth: 300
+  maxHP: 200
+  currentHP: 200
+  defaultHealth: 200
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   _levelVar: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &1535347030226016860
