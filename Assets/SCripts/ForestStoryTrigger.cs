@@ -9,6 +9,10 @@ public class ForestStoryTrigger : MonoBehaviour
     [SerializeField] GameObject mage;
     [SerializeField] GameObject storyCollider;
 
+    //Village Scene Manager
+    [SerializeField] GameObject normalVillage;
+    [SerializeField] GameObject burningVillage;
+
     private void Update()
     {
         if (targetGameObject.activeSelf == true)
@@ -31,6 +35,9 @@ public class ForestStoryTrigger : MonoBehaviour
             // Disable the target script
             if (targetScript != null)
                 targetScript.enabled = false;
+
+            normalVillage.SetActive(false);
+            burningVillage.SetActive(true);
 
             // Enable the target game object
             if (targetGameObject != null)
