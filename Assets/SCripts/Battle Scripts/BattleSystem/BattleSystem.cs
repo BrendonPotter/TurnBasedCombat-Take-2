@@ -107,6 +107,8 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] WorldState worldState;
 
 
+    [SerializeField] bool isBossDead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -834,13 +836,27 @@ public class BattleSystem : MonoBehaviour
         {
             dialogText.text = "You won the Battle!";
             earnEXP.GainEXP();
+            if (worldState.bossDead == true)
+            {
+                isBossDead = true;
+            }
             StartCoroutine(SceneSwitchDelay());
-
         }
         else if(state == BattleState.LOST)
         {
             dialogText.text = "you have died";
             StartCoroutine(SceneSwitchDelay());
+
+            playerUnit._levelVar -= 1;
+            playerUnit.maxHPAmount -= 100;
+            playerUnit.dealDamage -= 10;
+            playerUnit.hpAmount = playerUnit.maxHPAmount;
+            playerUnit._expThreshVar-= 100;
+            playerUnit._earnExpAmount = 0;
+            if (worldState.bossDead == true)
+            {
+                SceneManager.LoadScene(burningVillage);
+            }
         }
     }
 
@@ -1262,7 +1278,7 @@ public class BattleSystem : MonoBehaviour
         {
             SceneManager.LoadScene(burningVillage);
         }
-        if(worldState.bossDead == true && worldState.sceneNumber == 2)
+        if(worldState.bossDead == true && isBossDead == true)
         {
             SceneManager.LoadScene(burnDownVillage);
         }
@@ -1271,7 +1287,6 @@ public class BattleSystem : MonoBehaviour
             SceneManager.LoadScene(banditHideout);
         }
     }
-
 }
 
 

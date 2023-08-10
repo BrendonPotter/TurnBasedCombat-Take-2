@@ -14,6 +14,7 @@ public class DataReseter : MonoBehaviour
         ResetData();
         ResetWorldState();
         RemoveAllItem();
+        ResetEnemy();
     }
 
     void ResetData()
@@ -39,14 +40,22 @@ public class DataReseter : MonoBehaviour
         worldState.failTask = false;
         worldState.founded = 0;
 
+        worldState.sceneNumber = 0;
+        worldState.bossDead = false;
+        worldState.firstTimeEnter = 0;
+    }
+
+    void ResetEnemy()
+    {
         worldState.contactEnemy1 = false;
         worldState.winVsEnemy1 = false;
         worldState.contactEnemy2 = false;
         worldState.winVsEnemy2 = false;
         worldState.contactEnemy3 = false;
         worldState.winVsEnemy3 = false;
-        worldState.sceneNumber = 0;
-        worldState.bossDead = false;
-        worldState.firstTimeEnter = 0;
+        worldState.contactEnemy4 = false;
+        worldState.winVsEnemy4 = false;
+        worldState.contactEnemy5 = false;
+        worldState.winVsEnemy5 = false;
     }
 }
