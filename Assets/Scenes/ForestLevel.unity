@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff67931fac4f2f94999d9df923cc49c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4201942170482201806, guid: 91d7ea48f274f504f9dd4708205de143, type: 3}
+  playerPrefab: {fileID: 4331642043471081969, guid: 84482956643df824a83917558b1f2301, type: 3}
   spawnPosition: {x: 4.17, y: 0.21, z: 855.71}
   firstTimeEntering: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!114 &409089441
@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb49f0650f1b7548a9734f95c5b908f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4201942170482201806, guid: 91d7ea48f274f504f9dd4708205de143, type: 3}
+  playerPrefab: {fileID: 4331642043471081969, guid: 84482956643df824a83917558b1f2301, type: 3}
   FirstTimeEnter: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!1 &418887999
 GameObject:

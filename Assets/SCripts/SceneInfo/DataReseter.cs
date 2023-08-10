@@ -47,6 +47,6 @@ public class DataReseter : MonoBehaviour
         worldState.winVsEnemy3 = false;
         worldState.sceneNumber = 0;
         worldState.bossDead = false;
-
+        worldState.firstTimeEnter = 0;
     }
 }
