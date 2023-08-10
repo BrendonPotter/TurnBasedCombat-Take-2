@@ -324,6 +324,7 @@ MonoBehaviour:
   targetScript: {fileID: 0}
   mage: {fileID: 155081725}
   storyCollider: {fileID: 68544291}
+  disableRandomEncounter: {fileID: 1823848687}
   normalVillage: {fileID: 1111522036}
   burningVillage: {fileID: 289979022}
 --- !u!1 &114252582
@@ -576,7 +577,7 @@ RectTransform:
   - {fileID: 2090583401}
   - {fileID: 730199079}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -839,7 +840,7 @@ Transform:
   m_Children:
   - {fileID: 114252583}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &298532494
 GameObject:
@@ -3343,7 +3344,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171675860
 GameObject:
@@ -3680,66 +3681,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341402035}
   m_CullTransparentMesh: 1
---- !u!1 &1364849440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1364849441}
-  - component: {fileID: 1364849443}
-  - component: {fileID: 1364849442}
-  m_Layer: 0
-  m_Name: ToBurningVIllageScene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1364849441
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364849440}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.3, y: 0, z: 854.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 14
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1364849442
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364849440}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.8431996, y: 14.04673, z: 65.8587}
-  m_Center: {x: -0.078399956, y: 6.523366, z: 9.863129}
---- !u!114 &1364849443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364849440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297722a1d424f8643abfb9ab3590ee79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
-  nextScene: ExploreTest
 --- !u!1 &1397692417
 GameObject:
   m_ObjectHideFlags: 0
