@@ -300,14 +300,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68544291}
-  m_LocalRotation: {x: -0, y: -0.2835062, z: -0, w: 0.9589705}
-  m_LocalPosition: {x: 169.76999, y: 0.54, z: 826.54144}
+  m_LocalRotation: {x: -0, y: -0.47907385, z: -0, w: 0.8777746}
+  m_LocalPosition: {x: 181.9, y: 0.54, z: 844.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: -32.939, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -57.25, z: 0}
 --- !u!114 &68544294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetGameObject: {fileID: 260927819}
-  targetScript: {fileID: 0}
+  targetScript: {fileID: 4331642043471081978, guid: 84482956643df824a83917558b1f2301, type: 3}
   mage: {fileID: 155081725}
   storyCollider: {fileID: 68544291}
   disableRandomEncounter: {fileID: 1823848687}
@@ -403,10 +403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2ff2965c45c41478fc880dd775742e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
+  targetObject: {fileID: 3987592024031095627, guid: 84482956643df824a83917558b1f2301, type: 3}
   moveSpeed: 5
   rotationSpeed: 5
-  targetScript: {fileID: 0}
+  targetScript: {fileID: 4331642043471081978, guid: 84482956643df824a83917558b1f2301, type: 3}
   magePanel: {fileID: 897480439}
   mageModel: {fileID: 155081725}
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
@@ -4376,7 +4376,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1823848687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82b4ffa7746d754449b8021d1c9e75ee, type: 3}
   m_Name: 

@@ -46,8 +46,8 @@ public class ForestStoryTrigger : MonoBehaviour
             disableRandomEncounter.SetActive(false);
 
             // Enable the target game object
-            if (targetGameObject != null)
-                targetGameObject.SetActive(true);
+            //if (targetGameObject != null)
+            //    targetGameObject.SetActive(true);
 
             if(mage != null)
             {
