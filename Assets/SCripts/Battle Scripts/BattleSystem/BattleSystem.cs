@@ -104,7 +104,9 @@ public class BattleSystem : MonoBehaviour
     [SerializeField] string burnDownVillage;
     [SerializeField] string banditHideout;
 
+    //Grab other script
     [SerializeField] WorldState worldState;
+    [SerializeField] DataReseter resetData;
 
 
     [SerializeField] bool isBossDead;
@@ -853,6 +855,12 @@ public class BattleSystem : MonoBehaviour
             playerUnit.hpAmount = playerUnit.maxHPAmount;
             playerUnit._expThreshVar-= 100;
             playerUnit._earnExpAmount = 0;
+
+            if(playerUnit._levelVar <= 1)
+            {
+                resetData.ResetData();
+            }
+
             if (worldState.bossDead == true)
             {
                 SceneManager.LoadScene(burningVillage);

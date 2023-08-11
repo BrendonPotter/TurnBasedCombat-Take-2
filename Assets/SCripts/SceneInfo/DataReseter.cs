@@ -17,7 +17,7 @@ public class DataReseter : MonoBehaviour
         ResetEnemy();
     }
 
-    void ResetData()
+    public void ResetData()
     {
         hunterStats._levelVar = 1;
         hunterStats._earnExpAmount = 0;

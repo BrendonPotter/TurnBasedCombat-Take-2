@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc5916de403755408a461c0b1fdf746, type: 3}
   m_Name: New World State
   m_EditorClassIdentifier: 
-  obtainKey: 1
+  obtainKey: 0
   contactEnemy1: 0
   winVsEnemy1: 0
   contactEnemy2: 0

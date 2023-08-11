@@ -19,18 +19,15 @@ public class FailTaskUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(state.agreeToPlay)
+        if(state.agreeToPlay && state.failTask)
         {
             hideAdnSeekTask.SetActive(true);
-            if (state.failTask == true)
+            taskFail.SetActive(true);
+            disableTask -= Time.deltaTime;
+            if (disableTask <= 0)
             {
-                taskFail.SetActive(true);
-                disableTask -= Time.deltaTime;
-                if(disableTask <= 0)
-                {
-                    hideAdnSeekTask.SetActive(false);
-                    disableTask = 0f;
-                }
+                hideAdnSeekTask.SetActive(false);
+                disableTask = 0f;
             }
         }
     }
