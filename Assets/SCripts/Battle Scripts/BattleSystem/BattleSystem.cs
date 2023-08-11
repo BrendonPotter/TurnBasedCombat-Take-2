@@ -80,14 +80,13 @@ public class BattleSystem : MonoBehaviour
     public TextMeshProUGUI lightingStrikeCDText;
     public TextMeshProUGUI meteorShowerCDText;
     public TextMeshProUGUI trippleArrowCDText;
-    public TextMeshProUGUI fireBallCDText;
-    public TextMeshProUGUI singleShotCDText;
+    public TextMeshProUGUI vollyCDText;
+
 
     public int lightingStrikeCD;
     public int meteorShowerCD;
     public int trippleArrowCD;
-    public int fireBallCD;
-    public int singleShotCD;
+    public int vollyCD;
 
     public CheckCheckpoint playerCheck;
 
@@ -736,16 +735,32 @@ public class BattleSystem : MonoBehaviour
         enemyHUD.SetHP(enemyUnit.currentHP);
         dialogText.text = "Volley!";
 
-        // Check if enemy is dead
-        if (isDead)
+        if(hunterSpawnSingleGO.activeSelf == true)
         {
-            state = BattleState.WON;
-            EndBattle();
+            // Check if enemy is dead
+            if (isDead)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.ENEMYTURN;
+                StartCoroutine(EnemyTurn());
+            }
         }
-        else
+        else if(hunterSpawnSingleGO.activeSelf != true)
         {
-            state = BattleState.PLAYERTWOTURN;
-            PlayerTwo();
+            if (isDead)
+            {
+                state = BattleState.WON;
+                EndBattle();
+            }
+            else
+            {
+                state = BattleState.PLAYERTWOTURN;
+                PlayerTwo();
+            }
         }
     }
 
@@ -836,6 +851,12 @@ public class BattleSystem : MonoBehaviour
         {
             dialogText.text = "You won the Battle!";
             earnEXP.GainEXP();
+
+            lightingStrikeCD = 0;
+            meteorShowerCD = 0;
+            vollyCD = 0;
+            trippleArrowCD = 0;
+
             if (worldState.bossDead == true)
             {
                 isBossDead = true;
@@ -845,7 +866,12 @@ public class BattleSystem : MonoBehaviour
         else if(state == BattleState.LOST)
         {
             dialogText.text = "you have died";
+
             StartCoroutine(SceneSwitchDelay());
+            lightingStrikeCD = 0;
+            meteorShowerCD = 0;
+            vollyCD = 0;
+            trippleArrowCD = 0;
 
             playerUnit._levelVar -= 1;
             playerUnit.maxHPAmount -= 100;
@@ -866,25 +892,27 @@ public class BattleSystem : MonoBehaviour
         hunterAbilityPanel.SetActive(false);
         attackFleePanel.SetActive(true);
 
+        fireBall.interactable = (true);
+        singleShot.interactable = (true);
+
         if(lightingStrikeCD != 0)
         {
             lightingStrikeCD -= 1;
         }
+
         if(meteorShowerCD != 0)
         {
             meteorShowerCD -= 1;
         }
-        if (fireBallCD != 0)
+
+        if(vollyCD != 0)
         {
-            fireBallCD -= 1;
+            vollyCD -= 1;
         }
+
         if(trippleArrowCD != 0)
         {
             trippleArrowCD -= 1;
-        }
-        if(singleShotCD != 0)
-        {
-            singleShotCD -= 1;
         }
 
         if(lightingStrikeCD == 0)
@@ -904,22 +932,16 @@ public class BattleSystem : MonoBehaviour
 
             tripleArrow.interactable = true;
         }
-        
-        if(fireBallCD == 0)
-        { 
-            fireBall.interactable = true;
-        }
-
-        if(singleShotCD == 0)
+        if(vollyCD == 0)
         {
-            singleShot.interactable = true;
+            volly.interactable = true;
         }
+        
 
         lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
-        fireBallCDText.text = "(" + fireBallCD + ")";
+        vollyCDText.text = "(" + vollyCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        singleShotCDText.text = "(" + singleShotCD + ")";
 
         dialogText.text = "Choose an action";
     }
@@ -938,18 +960,16 @@ public class BattleSystem : MonoBehaviour
         {
             meteorShowerCD -= 1;
         }
-        if (fireBallCD != 0)
-        {
-            fireBallCD -= 1;
-        }
+
         if (trippleArrowCD != 0)
         {
             trippleArrowCD -= 1;
         }
-        if (singleShotCD != 0)
+        if(vollyCD != 0)
         {
-            singleShotCD -= 1;
+            vollyCD -= 1; 
         }
+
 
         if (lightingStrikeCD == 0)
         {
@@ -968,22 +988,20 @@ public class BattleSystem : MonoBehaviour
 
             tripleArrow.interactable = true;
         }
-
-        if (fireBallCD == 0)
+        if(vollyCD == 0)
         {
-            fireBall.interactable = true;
+            volly.interactable = true;
         }
 
-        if (singleShotCD == 0)
-        {
-            singleShot.interactable = true;
-        }
+
+
+
 
         lightingStrikeCDText.text = "(" + lightingStrikeCD + ")";
         meteorShowerCDText.text = "(" + meteorShowerCD + ")";
-        fireBallCDText.text = "(" + fireBallCD + ")";
+        vollyCDText.text = "(" + vollyCD + ")";
         trippleArrowCDText.text = "(" + trippleArrowCD + ")";
-        singleShotCDText.text = "(" +singleShotCD + ")";
+
 
         dialogText.text = "Choose an action";
     }
@@ -1021,9 +1039,6 @@ public class BattleSystem : MonoBehaviour
             singleShot.interactable = false;
             volly.interactable = false;
 
-            fireBallCD = 0;
-            fireBallCDText.text = "(" + fireBallCD + ")";
-
             if (state != BattleState.PLAYERTURN)
             {
                 return;
@@ -1044,8 +1059,6 @@ public class BattleSystem : MonoBehaviour
             singleShot.interactable = false;
             volly.interactable = false;
 
-            fireBallCD = 0;
-            fireBallCDText.text = "(" + fireBallCD + ")";
 
             if (state != BattleState.PLAYERTWOTURN)
             {
@@ -1179,6 +1192,9 @@ public class BattleSystem : MonoBehaviour
         fireBall.interactable = false;
         singleShot.interactable = false;
         volly.interactable = false;
+
+        vollyCD = 2;
+        vollyCDText.text = "(" + vollyCD + ")";
 
         if (state != BattleState.PLAYERTURN)
         {

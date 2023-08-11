@@ -19,6 +19,10 @@ public class Leveling : MonoBehaviour
     [SerializeField] GameObject trippleArrowUnlock;
     [SerializeField] GameObject lightingStrikeUnlock;
     [SerializeField] GameObject volleyUnlock;
+    [SerializeField] GameObject meteorCDText;
+    [SerializeField] GameObject vollyCDText;
+    [SerializeField] GameObject trippleArrowCDText;
+    [SerializeField] GameObject lightingStrikeCDText;
 
 
     public void Start()
@@ -98,20 +102,24 @@ public class Leveling : MonoBehaviour
         if (levelSave._levelVar >= 2)
         {
             volleyUnlock.SetActive(true);
+            vollyCDText.SetActive(true);
         }
         if (levelSave._levelVar >= 3)
         {
             //Change to tripple arrow
             trippleArrowUnlock.SetActive(true);
+            trippleArrowCDText.SetActive(true);
         }
         //Mage abilities
         if(levelSave._levelVar >= 2)
         {
             meteorUnlock.SetActive(true);
+            meteorCDText.SetActive(true);
         }
         if(levelSave._levelVar >= 3)
         {
             lightingStrikeUnlock.SetActive(true);
+            lightingStrikeCDText.SetActive(true);
         }
     }
 }
