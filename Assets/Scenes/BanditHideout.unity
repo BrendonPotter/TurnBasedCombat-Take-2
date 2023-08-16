@@ -5133,6 +5133,51 @@ Transform:
   m_Father: {fileID: 595426081}
   m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &512057174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512057175}
+  - component: {fileID: 512057176}
+  m_Layer: 0
+  m_Name: Wall
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512057175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512057174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 684969624}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &512057176
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512057174}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.53152114, y: 1, z: 2.4213133}
+  m_Center: {x: -0.23424277, y: 0, z: 0.7106551}
 --- !u!1 &514025050
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,13 +7664,14 @@ GameObject:
   - component: {fileID: 684969622}
   - component: {fileID: 684969621}
   - component: {fileID: 684969620}
+  - component: {fileID: 684969625}
   m_Layer: 0
   m_Name: BossTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &684969620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7639,8 +7685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactText: {fileID: 1158334157}
-  sceneName: BattleSceneBossTest
-  worldState: {fileID: 0}
+  sceneName: CreditScene
+  worldState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!135 &684969621
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7652,8 +7698,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.36474785
+  m_Center: {x: -0.13525216, y: 0, z: 0}
 --- !u!23 &684969622
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7712,13 +7758,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684969619}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 66.8, y: -29.7, z: 177.91}
+  m_LocalPosition: {x: -4.33, y: -29.7, z: 191.8}
   m_LocalScale: {x: 22.912617, y: 22.912617, z: 22.912617}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 512057175}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &684969625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 684969619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aeb091eda38d8f4581a9d52768a4ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  badEnding: 0
+  endingState: {fileID: 11400000, guid: 9d5c10781436153428cf59a385105a5d, type: 2}
 --- !u!1 &688215636
 GameObject:
   m_ObjectHideFlags: 0

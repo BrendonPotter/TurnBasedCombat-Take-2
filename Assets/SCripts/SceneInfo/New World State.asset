@@ -27,6 +27,8 @@ MonoBehaviour:
   successTask: 0
   failTask: 0
   founded: 0
+  goodEnding: 0
+  badEnding: 0
   sceneNumber: 0
   bossDead: 0
   firstTimeEnter: 0
