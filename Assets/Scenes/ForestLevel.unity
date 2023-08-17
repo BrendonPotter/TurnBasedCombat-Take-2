@@ -321,7 +321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetGameObject: {fileID: 260927819}
-  targetScript: {fileID: 4331642043471081978, guid: 84482956643df824a83917558b1f2301, type: 3}
   mage: {fileID: 155081725}
   storyCollider: {fileID: 68544291}
   disableRandomEncounter: {fileID: 1823848687}
@@ -403,10 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2ff2965c45c41478fc880dd775742e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 3987592024031095627, guid: 84482956643df824a83917558b1f2301, type: 3}
   moveSpeed: 5
   rotationSpeed: 5
-  targetScript: {fileID: 4331642043471081978, guid: 84482956643df824a83917558b1f2301, type: 3}
   magePanel: {fileID: 897480439}
   mageModel: {fileID: 155081725}
   hunterStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
@@ -5023,6 +5020,10 @@ MonoBehaviour:
   trippleArrowUnlock: {fileID: 0}
   lightingStrikeUnlock: {fileID: 0}
   volleyUnlock: {fileID: 0}
+  meteorCDText: {fileID: 0}
+  vollyCDText: {fileID: 0}
+  trippleArrowCDText: {fileID: 0}
+  lightingStrikeCDText: {fileID: 0}
 --- !u!1 &2109661678
 GameObject:
   m_ObjectHideFlags: 0

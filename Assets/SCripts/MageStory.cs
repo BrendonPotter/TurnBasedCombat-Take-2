@@ -4,87 +4,79 @@ using UnityEngine;
 
 public class MageStory : MonoBehaviour
 {
-    // The target object to move towards
-    public Transform targetObject;
-
     // The speed at which the object moves towards the target
     public float moveSpeed = 5f;
-
-    // The rotation speed to rotate the object towards the target
     public float rotationSpeed = 5f;
 
-    // Whether the object is currently moving towards the target
     private bool isMoving = false;
-
-    public MonoBehaviour targetScript;
+    private bool hasTriggered = false;
 
     [SerializeField] GameObject magePanel;
-
     [SerializeField] GameObject mageModel;
-
     [SerializeField] SaveSystem hunterStats;
 
-    // Update is called once per frame
+    private GameObject playerCharacter; // Reference to the player character
+
+    private void Start()
+    {
+        // Find the player character dynamically based on its tag
+        playerCharacter = GameObject.FindGameObjectWithTag("Player");
+
+        if (playerCharacter != null)
+        {
+            isMoving = false; // Make sure it isnt moving towards the player character
+        }
+        else
+        {
+            Debug.LogError("Player character not found with tag 'Player'");
+        }
+    }
+
     private void Update()
     {
-        // Check if the object is currently moving and hasn't reached its destination
-        if (isMoving)
+        if (isMoving == true)
         {
-            // Move and rotate the object towards the target
             MoveAndRotateTowardsTarget();
         }
 
-        if(isMoving == false)
+        if (isMoving == false && hasTriggered == true)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
                 magePanel.SetActive(false);
-                targetScript.enabled = true;
                 mageModel.SetActive(false);
                 hunterStats.checkPoint = 1;
             }
         }
     }
 
-    // Called when the object enters a trigger collider
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the trigger's tag matches the target object's tag
-        if (other.CompareTag(targetObject.tag))
+        if (other.CompareTag("Player"))
         {
-            if (targetScript != null)
-            {
-                targetScript.enabled = false;
-            }
-
-            // Start moving towards the target object
             isMoving = true;
         }
     }
 
-    // Move and rotate the object towards the target
     private void MoveAndRotateTowardsTarget()
     {
-        // Calculate the direction towards the target (only consider x and z axes)
-        Vector3 direction = new Vector3(targetObject.position.x - transform.position.x, 0f, targetObject.position.z - transform.position.z).normalized;
 
-        // Calculate the rotation to look at the target
+        Vector3 direction = (playerCharacter.transform.position - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-        //// Smoothly rotate the object towards the target
         //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        // Move the object towards the target (only along x and z axes)
-        transform.position += direction * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = transform.position + new Vector3(direction.x, 0f, direction.z) * moveSpeed * Time.deltaTime;
+        newPosition.y = transform.position.y;
 
-        // Check if the object has reached the target
-        float distanceToTarget = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(targetObject.position.x, targetObject.position.z));
+        transform.position = newPosition;
+
+        float distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0f, transform.position.z), new Vector3(playerCharacter.transform.position.x, 0f, playerCharacter.transform.position.z));
         float stoppingDistance = 2f;
         if (distanceToTarget <= stoppingDistance)
         {
-            // Mark the object as having reached its destination
             isMoving = false;
-          
+            hasTriggered = true;
+
             magePanel.SetActive(true);
             Debug.Log("we working");
         }

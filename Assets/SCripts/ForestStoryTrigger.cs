@@ -5,7 +5,6 @@ using UnityEngine;
 public class ForestStoryTrigger : MonoBehaviour
 {
     public GameObject targetGameObject;
-    public MonoBehaviour targetScript;
     [SerializeField] GameObject mage;
     [SerializeField] GameObject storyCollider;
 
@@ -24,8 +23,14 @@ public class ForestStoryTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 targetGameObject.SetActive(false);
-                targetScript.enabled = true;
                 storyCollider.SetActive(false);
+                this.enabled = false;
+
+                if (mage != null)
+                {
+                    mage.SetActive(true);
+
+                }
 
             }
         }
@@ -36,9 +41,6 @@ public class ForestStoryTrigger : MonoBehaviour
         // Check if the player entered the box collider
         if (other.CompareTag("Player"))
         {
-            // Disable the target script
-            if (targetScript != null)
-                targetScript.enabled = false;
 
             normalVillage.SetActive(false);
             burningVillage.SetActive(true);
@@ -46,13 +48,9 @@ public class ForestStoryTrigger : MonoBehaviour
             disableRandomEncounter.SetActive(false);
 
             // Enable the target game object
-            //if (targetGameObject != null)
-            //    targetGameObject.SetActive(true);
-
-            if(mage != null)
+            if (targetGameObject != null)
             {
-                mage.SetActive(true);
-
+                targetGameObject.SetActive(true);
             }
         }
     }
