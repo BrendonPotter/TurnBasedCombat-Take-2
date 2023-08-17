@@ -35,11 +35,20 @@ public class WorldState : ScriptableObject
 
     public int founded;
 
+    [Header("Credit Scene")]
+
+    public bool goodEnding;
+    public bool badEnding;
+
+    [Header("Other")]
+
     public int sceneNumber;
 
     public bool bossDead;
 
     public int firstTimeEnter;
+
+    public int amountOfDeadEnemy;
 
     public bool Value
     {

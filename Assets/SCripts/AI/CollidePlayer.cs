@@ -65,6 +65,12 @@ public class CollidePlayer : MonoBehaviour
             SceneManager.LoadScene("BattleSceneOneRat");
         }
     }
+
+    private void AmountOfEnemyDie()
+    {
+
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
