@@ -15,13 +15,18 @@ public class BattleHUD : MonoBehaviour
     {
         nameText.text = unit.unitName;
         hpSlider.maxValue = unit.maxHP;
-        hpSlider.value = unit.currentHP;
+        hpSlider.value = (unit.currentHP/unit.maxHP) * 100;
         levelText.text = unit.unitLevel.ToString();
     }
 
-
-    public void SetHP(int hp)
+    public void SetHP(int currentHP)
     {
-        hpSlider.value = default;
+        // AG NOTE: This won't do anything now! We want to call SetHP(Unit unit) instead. :)
+        hpSlider.value = currentHP;
     }
+
+    //public void SetHP(Unit unit)
+    //{
+    //    hpSlider.value = (unit.currentHP / unit.maxHP) * 100;
+    //}
 }
