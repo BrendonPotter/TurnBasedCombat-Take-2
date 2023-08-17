@@ -1891,21 +1891,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 50
+    m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 5
-    m_MaxSize: 50
+    m_MaxSize: 61
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Thank you for sticking with us through out this trimester
-
-    This mean
-    a lot as our team has learn a lot over the course of 13 weeks.'
+  m_Text: Special thanks to all of YOU for playtest our game and survive...
 --- !u!222 &1330338140
 CanvasRenderer:
   m_ObjectHideFlags: 0
