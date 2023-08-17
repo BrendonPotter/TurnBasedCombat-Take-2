@@ -57,5 +57,7 @@ public class DataReseter : MonoBehaviour
         worldState.winVsEnemy4 = false;
         worldState.contactEnemy5 = false;
         worldState.winVsEnemy5 = false;
+
+        worldState.amountOfDeadEnemy = 0;
     }
 }
