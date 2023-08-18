@@ -32,7 +32,7 @@ public class DataReseter : MonoBehaviour
     {
         inventory.Items.Clear();
     }
-    void ResetWorldState()
+    public void ResetWorldState()
     {
         worldState.obtainKey = false;
         worldState.agreeToPlay= false;
