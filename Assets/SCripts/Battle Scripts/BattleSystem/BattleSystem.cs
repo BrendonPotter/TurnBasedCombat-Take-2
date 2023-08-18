@@ -875,16 +875,21 @@ public class BattleSystem : MonoBehaviour
             vollyCD = 0;
             trippleArrowCD = 0;
 
-            playerUnit._levelVar -= 1;
-            playerUnit.maxHPAmount -= 100;
-            playerUnit.dealDamage -= 10;
-            playerUnit.hpAmount = playerUnit.maxHPAmount;
-            playerUnit._expThreshVar-= 100;
-            playerUnit._earnExpAmount = 0;
-
-            if(playerUnit._levelVar <= 1)
+            if(playerUnit._levelVar >= 2)
             {
-                resetData.ResetData();
+                playerUnit._levelVar -= 1;
+                playerUnit.maxHPAmount -= 100;
+                playerUnit.dealDamage -= 10;
+                playerUnit.hpAmount = playerUnit.maxHPAmount;
+                playerUnit._expThreshVar -= 100;
+                playerUnit._earnExpAmount = 0;
+            }
+
+            else if(playerUnit._levelVar == 1)
+            {
+                playerUnit.hpAmount = 100;
+                playerUnit.dealDamage = 20;
+
             }
 
             if (worldState.bossDead == true)

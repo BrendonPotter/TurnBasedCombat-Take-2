@@ -32,3 +32,4 @@ MonoBehaviour:
   sceneNumber: 0
   bossDead: 0
   firstTimeEnter: 0
+  amountOfDeadEnemy: 0
