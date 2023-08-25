@@ -114,11 +114,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Spooky Skeleton
   unitLevel: 1
-  damage: 8
-  trueDamage: 8
-  maxHP: 100
-  currentHP: 100
-  defaultHealth: 100
+  damage: 9
+  trueDamage: 9
+  maxHP: 70
+  currentHP: 70
+  defaultHealth: 70
   enemyStats: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
   _levelVar: {fileID: 11400000, guid: c558da020d724614bb0e919aed6979cf, type: 2}
 --- !u!1001 &2498501597465970407

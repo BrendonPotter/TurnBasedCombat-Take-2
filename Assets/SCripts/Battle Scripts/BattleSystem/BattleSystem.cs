@@ -965,6 +965,8 @@ public class BattleSystem : MonoBehaviour
         mageAbilityPanel.SetActive(false);
         attackFleePanel.SetActive(true);
 
+        fireBall.interactable = (true);
+
         if (lightingStrikeCD != 0)
         {
             lightingStrikeCD -= 1;
